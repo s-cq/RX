@@ -1,0 +1,7 @@
+/build/
+/config/
+/dist/
+/bower_components/
+/node_modules/
+/static
+# /src/element-rx/

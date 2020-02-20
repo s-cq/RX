@@ -1,0 +1,40 @@
+// 认证图标
+.authenInfo img{
+    position: relative;
+    top: 5px;
+}
+.h80{
+    height: 80px;
+}
+// 标准字的样式
+.standardStyle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 2px 6px;
+}
+.sceneStyle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 4px;
+    background: rgba(249, 7, 7, 0.63);
+    color: #fff;
+    padding: 2px 6px;
+}
+// 订单显示文字样式
+.analyItemflex {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding-right: 5px;
+}
+.analyItemflex.hasResult {
+    padding-right: 30px;
+}
+.el-checkbox__input .el-checkbox__inner {
+    border: 1px solid #409EFF;
+}

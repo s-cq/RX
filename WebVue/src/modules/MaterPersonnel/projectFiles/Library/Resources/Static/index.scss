@@ -1,0 +1,8 @@
+.analyItem {
+  .el-button--small, .el-button--small.is-round {
+    padding:5px;
+  }
+  .el-button+.el-button {
+    margin-left:0px;
+  }
+}

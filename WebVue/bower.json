@@ -1,0 +1,17 @@
+{
+  "name": "platform-manager",
+  "description": "瑞祥集团项目",
+  "main": "",
+  "authors": [
+    "haiweilian <haiweilian@foxmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
