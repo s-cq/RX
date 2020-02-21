@@ -222,6 +222,7 @@ export default {
             getStayStayProcessDetail({
                 user_card_no: this.leftInfo.cardNo
             }).then(results => {
+                this.countSum = 0
                 _this.orderList = results.data.Body.StayStayProcessDetail
                 this.orderMoney = results.data.Body.orderMoney
                 for (var i = 0; i < _this.orderList.length; i++) {

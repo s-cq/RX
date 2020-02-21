@@ -171,7 +171,7 @@ export default {
                     this.userLevelStandard = result.data.Body.userLevelStandard
                     this.userLevelStandardDetail = result.data.Body.userLevelStandardDetail
                 } else {
-                    this.userLevelStandardDetail = JSON.parse(JSON.stringify(this.warehouseinfo))
+                    this.userLevelStandardDetail = this.warehouseinfo
                     for (const key in this.userLevelStandardDetail) {
                         if (this.userLevelStandardDetail.hasOwnProperty(key)) {
                             this.userLevelStandardDetail[key] = 0

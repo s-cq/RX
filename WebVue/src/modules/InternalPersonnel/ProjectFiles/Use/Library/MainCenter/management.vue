@@ -9,19 +9,19 @@
             </div>
         </div>
         <div v-if="grade>13 && grade<21" class="thinScroll pr10" v-scrollHeight="10">
-            <router-link tag="div" :to="{name:'resultCompletionUse',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor" active-class="anItemBor-active">
+            <router-link tag="div" :to="{name:'managemenCompletionUse',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">竣工</p>
                 <div class="analyItemCon">
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{userLevelStandardDetail.greatMore}}万/月</span></div>
                 </div>
             </router-link>
-            <router-link tag="div" :to="{name:'resultPenaltyUse',params:{userLevelStandardDetail: userLevelStandardDetail2}}" class="analyItem anItemBor" active-class="anItemBor-active">
+            <router-link tag="div" :to="{name:'managementPenalty',params:{userLevelStandardDetail: userLevelStandardDetail2}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">罚款</p>
                 <div class="analyItemCon">
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{userLevelStandardDetail2.greatMore}}万/月</span></div>
                 </div>
             </router-link>
-            <router-link tag="div" :to="{name:'resultAddItemUse',params:{userLevelStandardDetail: userLevelStandardDetail3}}" class="analyItem anItemBor" active-class="anItemBor-active">
+            <router-link tag="div" :to="{name:'managementAddItem',params:{userLevelStandardDetail: userLevelStandardDetail3}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">增项</p>
                 <div class="analyItemCon">
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{userLevelStandardDetail3.greatMore}}万/月</span></div>
