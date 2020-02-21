@@ -35,5 +35,16 @@ export function GetShopItemsToFinanceByRwdID (params) {
 export function getOrderWorkTypeWagesList (params) {
     return Request.http.get('/worker/workerFinance/getOrderWorkTypeWagesList', params, 26)
 }
+/** ******************  查询人工二段数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-01-20
+ * 参数: rwdID 项目单号
+ * 描述: 查询人工二段数据
+ */
+export function GetProInfoMoneyStatisticsToFinanceByRwdID (params) {
+    return Request.http.get('/MAT/api/ProInfoMaterialVTwo/GetProInfoMoneyStatisticsToFinanceByRwdID', params, 22)
+}
+
 
 

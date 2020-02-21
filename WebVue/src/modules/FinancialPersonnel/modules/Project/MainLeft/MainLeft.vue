@@ -71,7 +71,7 @@
                         <td width="15%">{{stageFilter(item.AfterMarketState)}}</td>
                         <td width="15%" class="cPurple">--</td>
                         <td width="15%" class="cRed">--</td>
-                        <td width="15%" class="cRed">-999</td>
+                        <td width="15%" :class="item.timeout>0 ? 'cGreen' : 'cRed'" >{{item.timeout}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -160,7 +160,8 @@ export default {
             this.loading = true
             let param = {
                 afterMarketState: this.stageValue,
-                keyWord: this.searcValue
+                keyWord: this.searcValue,
+                logUserNo: '01011826'
             }
             getWorkorderList(param).then(results => {
                 this.leftListData = this.leftListDataClone = results.data.Body.workorderList

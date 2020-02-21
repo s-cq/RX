@@ -25,5 +25,8 @@
     "svn.ignoreMissingSvnWarning": true,
     "editor.fontSize": 16,
     "editor.lineHeight": 25,
-    "debug.console.fontSize": 25
+    "debug.console.fontSize": 25,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
 }

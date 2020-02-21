@@ -3,7 +3,17 @@
     <div class="pr10">
         <div class="analyItem">
             <p class="analyItemTit tx-center">状态</p>
-            <div class="analyItemCon" v-if="leftInfo.AfterMarketState === 1">
+            <div class="analyItemCon">
+                <p class="col-md-12">
+                    <span class="pr8 cLightGray">--</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 1">
+        <!-- <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">合计</p>
+            <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">预人</span>
                     <span class="cGreen">{{totalNeedPerson}}个</span>
@@ -17,65 +27,195 @@
                     <span class="cGreen">{{totalmoney.toFixed(2)}}元</span>
                 </p>
             </div>
-            <div class="analyItemCon" v-else>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">应选</span>
-                    <span>{{selectNumber}}</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">实际</span>
-                    <span class="cGreen">{{actualNumber}}</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">未选</span>
-                    <span class="cRed">{{noSelectNumber}}</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">超出</span>
-                    <span class="cRed">{{overSelectNumber}}</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="cLightGray">选工人占比</span>
-                    <span class="cRed">{{worekerScale}}%</span>
-                </p>
-                <span><span class="circlemark circlemark-lightRed">差</span></span>
-            </div>
-        </div>
-    </div>
-    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 1">
+        </router-link> -->
          <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">人数</span>
+                    <span class="pr8 cLightGray">人数</span><br>
                     <span class="cGreen">{{item.workerNumber}}个</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">工时</span>
+                    <span class="pr8 cLightGray">工时</span><br>
                     <span class="cGreen">{{item.workingDay}}天</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">计划</span>
+                    <span class="pr8 cLightGray">计划</span><br>
                     <span class="cGreen">{{item.planMoney}}元</span>
                 </p>
             </div>
         </router-link>
     </div>
-    <div class="thinScroll pr10" v-scrollHeight="84" v-else>
-         <router-link tag="div" exact :to="routerPath('workerDetailOtherThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerList" :key="index">
+    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 2">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
-                    <span class="pr8 cLightGray">人数</span> <br>
-                    <span>{{item.workerNumber}}</span>人
+                    <span class="cLightGray pr8">预/实人</span><br>
+                    <span class="cGreen">{{item.workerNumber}}/{{item.workerActiveNumber}}</span>
                 </p>
                 <p class="col-md-2">
-                    <span class="pr8 cLightGray">工时</span> <br>
-                    <span class="cGreen">{{item.workingDay}}</span>人
+                    <span class="cLightGray pr8">工时</span><br>
+                    <span class="cGreen">{{item.workingDay.toFixed(2)}}天</span>
                 </p>
-                <p class="col-md-2" >
-                    <span class="pr8 cLightGray">计划</span> <br>
-                    <span class="cRed">{{item.planMoney}}</span>人
+                <p class="col-md-3">
+                    <span class="cLightGray pr8">计划</span><br>
+                    <span class="cGreen">{{item.planMoney.toFixed(2)}}元</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="cLightGray pr8">实际</span><br>
+                    <span class="cGreen">{{item.projectMoney.toFixed(2)}}元</span>
+                </p>
+                <p class="col-md-3">
+                    <span class="cLightGray pr8">剩余</span><br>
+                    <span class="cGreen">{{(item.planMoney-item.projectMoney).toFixed(2)}}元</span>
+                </p>
+            </div>
+        </router-link>
+    </div>
+    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 3">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+            <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
+            <div class="analyItemCon">
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">可用</span><br>
+                    <span class="cGreen">--</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">预/实人</span><br>
+                    <span class="cGreen">{{item.workerNumber}}/{{item.workerActiveNumber}}</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">工时</span><br>
+                    <span class="cGreen">{{item.workingDay.toFixed(2)}}天</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">计划</span><br>
+                    <span class="cGreen">{{item.planMoney.toFixed(2)}}元</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">实际</span><br>
+                    <span class="cGreen">{{item.projectMoney.toFixed(2)}}元</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">剩余</span><br>
+                    <span class="cGreen">{{(item.planMoney-item.projectMoney).toFixed(2)}}元</span>
+                </p>
+            </div>
+        </router-link>
+    </div>
+    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 4">
+        <!-- <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">合计</p>
+            <div class="analyItemCon">
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">实人</span>
+                    <span class="cGreen">{{totalWorker}}个</span>
+                </p>
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">应付</span>
+                    <span class="cGreen">{{totalProjectMoney}}元</span>
+                </p>
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">已付</span>
+                    <span class="cGreen">{{totalPayMoney}}元</span>
+                </p>
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">未付</span>
+                    <span class="cGreen">{{totalNoPayMoney}}元</span>
+                </p>
+            </div>
+        </router-link> -->
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+            <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
+            <div class="analyItemCon">
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">实人</span><br>
+                    <span class="cGreen">{{item.workerActiveNumber}}</span>
+                </p>
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">应付</span><br>
+                    <span class="cGreen">{{item.projectMoney}}元</span>
+                </p>
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">已付</span><br>
+                    <span class="cGreen">{{item.payMoney}}元</span>
+                </p>
+                <p class="col-md-3">
+                    <span class="pr8 cLightGray">未付</span><br>
+                    <span class="cGreen">{{(item.projectMoney-item.payMoney).toFixed(2)}}元</span>
+                </p>
+            </div>
+        </router-link>
+    </div>
+    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 5">
+        <!-- <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">合计</p>
+            <div class="analyItemCon">
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">应付</span>
+                    <span class="cGreen">{{totalProjectMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">已付</span>
+                    <span class="cGreen">{{totalPayMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">未付</span>
+                    <span class="cGreen">{{totalNoPayMoney}}元</span>
+                </p>
+            </div>
+        </router-link> -->
+        <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+            <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
+            <div class="analyItemCon">
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">应付</span><br>
+                    <span class="cGreen">{{item.projectMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">已付</span><br>
+                    <span class="cGreen">{{item.payMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">未付</span><br>
+                    <span class="cGreen">{{(item.projectMoney-item.payMoney).toFixed(2)}}元</span>
+                </p>
+             </div>
+        </router-link>
+    </div>
+    <div class="thinScroll pr10" v-scrollHeight="84" v-else>
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">合计</p>
+            <div class="analyItemCon">
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">应付</span><br>
+                    <span class="cGreen">{{totalProjectMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">已付</span><br>
+                    <span class="cGreen">{{totalPayMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">未付</span><br>
+                    <span class="cGreen">{{totalNoPayMoney}}元</span>
+                </p>
+            </div>
+        </router-link>
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+            <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
+            <div class="analyItemCon">
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">应付</span><br>
+                    <span class="cGreen">{{item.projectMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">已付</span><br>
+                    <span class="cGreen">{{item.payMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">未付</span><br>
+                    <span class="cGreen">{{item.projectMoney-item.payMoney}}元</span>
                 </p>
             </div>
         </router-link>
@@ -85,16 +225,116 @@
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">工种</span>
-                    <span class="cGreen">{{workerList.length}}个</span>
+                    <span class="pr8 cLightGray">预人</span><br>
+                    <span class="cGreen">{{totalNeedPerson}}个</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">天数</span>
+                    <span class="pr8 cLightGray">工时</span><br>
                     <span class="cGreen">{{totalDays}}天</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">总成本</span>
-                    <span class="cGreen">{{totalmoneys}}元</span>
+                    <span class="pr8 cLightGray">计划</span><br>
+                    <span class="cGreen">{{totalmoney}}元</span>
+                </p>
+            </div>
+        </router-link>
+    </div>
+    <div class="pr10" v-if="leftInfo.AfterMarketState === 2">
+        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+            <p class="analyItemTit tx-center">处理</p>
+            <div class="analyItemCon">
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">预/实人</span><br>
+                    <span class="cGreen">{{totalNeedPerson}}/{{totalWorker}}</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">工时</span><br>
+                    <span class="cGreen">{{totalDays}}天</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">计划</span><br>
+                    <span class="cGreen">{{totalmoney}}元</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">实际</span><br>
+                    <span class="cGreen">{{totalPayMoney}}元</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">剩余</span><br>
+                    <span class="cGreen">{{(totalmoney-totalPayMoney).toFixed(2)}}元</span>
+                </p>
+            </div>
+        </router-link>
+    </div>
+    <div class="pr10" v-if="leftInfo.AfterMarketState === 3">
+        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+            <p class="analyItemTit tx-center">处理</p>
+            <div class="analyItemCon">
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">可用</span><br>
+                    <span class="cGreen">--</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">预/实人</span><br>
+                    <span class="cGreen">{{totalNeedPerson}}/{{totalWorker}}</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">工时</span><br>
+                    <span class="cGreen">{{totalDays}}天</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">计划</span><br>
+                    <span class="cGreen">{{totalmoney}}元</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">实际</span><br>
+                    <span class="cGreen">{{totalPayMoney}}元</span>
+                </p>
+                <p class="col-md-2">
+                    <span class="pr8 cLightGray">剩余</span><br>
+                    <span class="cGreen">{{(totalmoney-totalPayMoney).toFixed(2)}}元</span>
+                </p>
+            </div>
+        </router-link>
+    </div>
+    <div class="pr10" v-if="leftInfo.AfterMarketState === 4">
+            <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+                <p class="analyItemTit tx-center">处理</p>
+                <div class="analyItemCon">
+                    <p class="col-md-3">
+                        <span class="pr8 cLightGray">实人</span><br>
+                        <span class="cGreen">{{totalWorker}}个</span>
+                    </p>
+                    <p class="col-md-3">
+                        <span class="pr8 cLightGray">应付</span><br>
+                        <span class="cGreen">{{totalProjectMoney}}元</span>
+                    </p>
+                    <p class="col-md-3">
+                        <span class="pr8 cLightGray">已付</span><br>
+                        <span class="cGreen">{{totalPayMoney}}元</span>
+                    </p>
+                    <p class="col-md-3">
+                        <span class="pr8 cLightGray">未付</span><br>
+                        <span class="cGreen">{{totalNoPayMoney}}元</span>
+                    </p>
+                </div>
+            </router-link>
+    </div>
+    <div class="pr10" v-if="leftInfo.AfterMarketState === 5">
+        <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">处理</p>
+            <div class="analyItemCon">
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">应付</span><br>
+                    <span class="cGreen">{{totalProjectMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">已付</span><br>
+                    <span class="cGreen">{{totalPayMoney}}元</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">未付</span><br>
+                    <span class="cGreen">{{totalNoPayMoney}}元</span>
                 </p>
             </div>
         </router-link>
@@ -103,21 +343,17 @@
         <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">应选</span>
-                    <span>{{selectNumber}}</span>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8">应付</span><br>
+                    <span class="cGreen">{{totalProjectMoney}}元</span>
                 </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">实际</span>
-                    <span class="cGreen">{{actualNumber}}</span>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8">已付</span><br>
+                    <span class="cGreen">{{totalPayMoney}}元</span>
                 </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">未选</span>
-                    <span class="cRed">{{noSelectNumber}}</span>
-                </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">超出</span>
-                    <span class="cRed">{{overSelectNumber}}</span>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8">未付</span><br>
+                    <span class="cGreen">{{totalNoPayMoney}}元</span>
                 </p>
             </div>
         </router-link>
@@ -159,28 +395,47 @@ export default {
             this.workerOtherList.forEach(item => {
                 sum += item.planMoney
             })
-            return sum
+            return sum.toFixed(2)
         },
+        // 计算实际总工时
         totalDays () {
             let day = 0
-            this.workerList.forEach(item => {
+            this.workerOtherList.forEach(item => {
                 day += item.workingDay
             })
-            return day
+            return day.toFixed(2)
         },
-        totaloffers () {
-            let offer = 0
-            this.workerList.forEach(item => {
-                offer += item.offer
+        // 计算总实际人数
+        totalWorker () {
+            let count = 0
+            this.workerOtherList.forEach(item => {
+                count += item.workerActiveNumber
             })
-            return offer
+            return count
         },
-        totalmoneys () {
+        // 计算总应付
+        totalProjectMoney () {
             let money = 0
-            this.workerList.forEach(item => {
-                money += item.money
+            this.workerOtherList.forEach(item => {
+                money += item.projectMoney
             })
-            return money
+            return money.toFixed(2)
+        },
+        // 计算总实际付
+        totalPayMoney () {
+            let money = 0
+            this.workerOtherList.forEach(item => {
+                money += item.payMoney
+            })
+            return money.toFixed(2)
+        },
+        // 计算总未付
+        totalNoPayMoney () {
+            let money = 0
+            this.workerOtherList.forEach(item => {
+                money += (item.projectMoney - item.payMoney)
+            })
+            return money.toFixed(2)
         },
         // 应选
         selectNumber () {

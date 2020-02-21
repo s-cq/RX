@@ -8,23 +8,6 @@
         </div>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84">
-         <div class="analyItem statusCha">
-            <p class="analyItemTit tx-center">合计</p>
-            <div class="analyItemCon">
-                <p class="col-md-4">
-                    <span class="cLightGray pr8">预留</span><br>
-                    <span class="cGreen">0</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="cLightGray pr8">预留</span><br>
-                    <span class="cGreen">0</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="cLightGray pr8">预留</span><br>
-                    <span class="cGreen">0</span>
-                </p>
-            </div>
-         </div>
         <router-link tag="div" exact :to="routerPath('marStageThree?index='+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item,index) in qualityList" :key="index">
             <p class="analyItemTit tx-center">{{item.shopName | truncate(4)}}</p>
             <div class="analyItemCon">
@@ -70,62 +53,121 @@
         </router-link>
     </div>
     <div class="pr10">
-        <router-link tag="div" :to="routerPath('marStageThreeHander')" class="analyItem anItemBor" active-class="anItemBor-active">
+        <router-link tag="div" :to="routerPath('marStageThreeHander')" class="analyItem anItemBor" active-class="anItemBor-active" v-if="leftInfo.AfterMarketState === 1 || leftInfo.AfterMarketState === 2">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title=" 可用=当人工可用> 项目可用时， 人工可用=项目可用 <br/>材料款可用资金： <br/>1、当人工可用为负数时：项目可用资金 + 人工款可用资金 ，  <br/>2、人工可用为正数时： 项目可用资金 - 人工款可用资金">可用</span><br>
-                    <span class="cGreen clkymoney">0.00</span>
+                    <span class="cLightGray pr8" >店铺</span><br>
+                    <span class="cGreen clkymoney">{{this.shopCount}}</span>
                  </p>
                  <p class="col-md-4">
-                    <span class="cLightGray pr8">可批</span><br>
-                    <span class="cGreen clkymoney">0.00</span>
+                    <span class="cLightGray pr8">计划金额</span><br>
+                    <span class="cGreen clkymoney">{{this.planMoney}}</span>
                  </p>
-                 <span class="circlemark circlemark-lightRed">问</span>
+                 <!-- <span class="circlemark circlemark-lightRed">问</span> -->
             </div>
         </router-link>
+        <router-link tag="div" :to="routerPath('marStageThreeHander')" class="analyItem anItemBor" active-class="anItemBor-active" v-if="leftInfo.AfterMarketState === 3">
+            <p class="analyItemTit tx-center">处理</p>
+            <div class="analyItemCon">
+                <p class="col-md-3">
+                    <span class="cLightGray pr8" >计划</span><br>
+                    <span class="cGreen clkymoney">{{this.planMoney}}</span>
+                 </p>
+                 <p class="col-md-3">
+                    <span class="cLightGray pr8">实际</span><br>
+                    <span class="cGreen clkymoney">{{this.totalMoneys}}</span>
+                 </p>
+                 <p class="col-md-3">
+                    <span class="cLightGray pr8">已付</span><br>
+                    <span class="cGreen clkymoney">{{this.paidMoney}}</span>
+                 </p>
+                 <p class="col-md-3">
+                    <span class="cLightGray pr8">未用</span><br>
+                    <span class="cGreen clkymoney">{{this.unusedMoney}}</span>
+                 </p>
+                 <!-- <span class="circlemark circlemark-lightRed">问</span> -->
+            </div>
+        </router-link>
+        <router-link tag="div" :to="routerPath('marStageThreeHander')" class="analyItem anItemBor" active-class="anItemBor-active" v-if="leftInfo.AfterMarketState === 4">
+            <p class="analyItemTit tx-center">处理</p>
+            <div class="analyItemCon">
+                <p class="col-md-3">
+                    <span class="cLightGray pr8" >应付</span><br>
+                    <span class="cGreen clkymoney">{{this.totalMoneys}}</span>
+                 </p>
+                 <p class="col-md-3">
+                    <span class="cLightGray pr8">已付</span><br>
+                    <span class="cGreen clkymoney">{{this.paidMoney}}</span>
+                 </p>
+                 <p class="col-md-3">
+                    <span class="cLightGray pr8">未付</span><br>
+                    <span class="cGreen clkymoney">{{this.notPaidMoney}}</span>
+                 </p>
+                 <p class="col-md-3">
+                    <span class="cLightGray pr8">未用</span><br>
+                    <span class="cGreen clkymoney">{{this.unusedMoney}}</span>
+                 </p>
+                 <!-- <span class="circlemark circlemark-lightRed">问</span> -->
+            </div>
+        </router-link>
+        <router-link tag="div" :to="routerPath('marStageThreeHander')" class="analyItem anItemBor" active-class="anItemBor-active" v-if="leftInfo.AfterMarketState === 5">
+            <p class="analyItemTit tx-center">处理</p>
+            <div class="analyItemCon">
+                <p class="col-md-4">
+                    <span class="cLightGray pr8" >应付</span><br>
+                    <span class="cGreen clkymoney">{{this.totalMoneys}}</span>
+                 </p>
+                 <p class="col-md-4">
+                    <span class="cLightGray pr8">已付</span><br>
+                    <span class="cGreen clkymoney">{{this.paidMoney}}</span>
+                 </p>
+                 <p class="col-md-4">
+                    <span class="cLightGray pr8">未付</span><br>
+                    <span class="cGreen clkymoney">{{this.notPaidMoney}}</span>
+                 </p>
+                 <!-- <span class="circlemark circlemark-lightRed">问</span> -->
+            </div>
+        </router-link>
+        <router-link tag="div" :to="routerPath('marStageThreeHander')" class="analyItem anItemBor" active-class="anItemBor-active" v-else>
+            <p class="analyItemTit tx-center">处理</p>
+            <div class="analyItemCon">
+                <p class="col-md-4">
+                    <span class="cLightGray pr8" >应付</span><br>
+                    <span class="cGreen clkymoney">{{this.totalMoneys}}</span>
+                 </p>
+                 <p class="col-md-4">
+                    <span class="cLightGray pr8">已付</span><br>
+                    <span class="cGreen clkymoney">{{this.paidMoney}}</span>
+                 </p>
+                 <p class="col-md-4">
+                    <span class="cLightGray pr8">未付</span><br>
+                    <span class="cGreen clkymoney">{{this.notPaidMoney}}</span>
+                 </p>
+                 <!-- <span class="circlemark circlemark-lightRed">问</span> -->
+            </div>
+        </router-link>
+        
     </div>
 </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { GetShopItemsToFinanceByRwdID } from '../Resources/Api'
+import { GetShopItemsToFinanceByRwdID, GetProInfoMoneyStatisticsToFinanceByRwdID } from '../Resources/Api'
 export default {
     data () {
         return {
-            qualityList: [],
-            materialList: [{
-                name: '主材订单',
-                shopNumber: 5,
-                shopMoney: 10290.50
-            },
-            {
-                name: '复尺订单',
-                shopNumber: 3,
-                shopMoney: 9230
-            }, {
-                name: '基础订单',
-                shopNumber: 5,
-                shopMoney: 7228.66
-            }]
+            shopCount: 0, // 店铺个数
+            planMoney: 0.00, // 计划金额
+            totalMoneys: 0.00, // 总金额
+            paidMoney: 0.00, // 支付金额
+            notPaidMoney: 0.00, // 支付金额
+            unusedMoney: 0.00, // 未用金额
+            qualityList: []
         }
     },
     computed: {
-        ...mapGetters(['leftInfo']),
-        shopNumber () {
-            let number = 0
-            this.materialList.forEach(item => {
-                number += item.shopNumber
-            })
-            return number
-        },
-        totalMoney () {
-            let money = 0
-            this.materialList.forEach(item => {
-                money += item.shopMoney
-            })
-            return money.toFixed(2)
-        }
+        ...mapGetters(['leftInfo'])
     },
     created () {
         this.load()
@@ -147,6 +189,15 @@ export default {
             // 查询材料数据
             GetShopItemsToFinanceByRwdID(param).then(results => {
                 this.qualityList = results.data.body.items
+                this.shopCount = results.data.body.shopCount
+                this.planMoney = results.data.body.planMoney
+            }).catch(() => {})
+            // 查询金额信息
+            GetProInfoMoneyStatisticsToFinanceByRwdID(param).then(results => {
+                this.totalMoneys = results.data.body.totalMoney
+                this.paidMoney = results.data.body.paidMoney
+                this.notPaidMoney = results.data.body.notPaidMoney
+                this.unusedMoney = results.data.body.unusedMoney
             }).catch(() => {})
         }
     },
