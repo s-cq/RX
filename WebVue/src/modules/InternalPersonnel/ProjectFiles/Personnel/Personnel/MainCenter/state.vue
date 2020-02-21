@@ -31,12 +31,13 @@
             <div class="analyItemCon">
                     <p class="col-md-4 ">
                         <span class="cLightGray pr8">总个数</span>
-                        <span>{{totalNumber}}</span>
+                        <span>{{totalNumber()}}</span>
                     </p>
                     <p class="col-md-4 ">
                         <span class="cLightGray pr8">总金额</span>
                         <span>{{Number(orderMoney)+Number(workerMoney.worker_money*workerSum)}}</span>
                     </p>
+                     <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
             </div>
         </div>
         <div class="analyItem">
@@ -133,7 +134,9 @@ export default {
             workerMoney: {},
             workerDetails: {},
             serverNameList: [], // 二段增值名称
-            serverAllData: [] // 所有数据
+            serverAllData: [], // 所有数据
+            stageName: '', // 状态名称
+            stageNum: 0 // 状态值
         }
     },
     computed: {
@@ -155,9 +158,26 @@ export default {
         this.GetByRoleOrderListFn()
         this.getWorkerDetailsFn()
         this.getValueAddServicesBySupervisionCard()
+        this.getProcessExcellentGoodModeratePoor()
     },
     methods: {
         // ============================过程开始
+        // 获取状态中的按钮
+        getProcessExcellentGoodModeratePoor () {
+            getExcellentGoodModeratePoor({
+                user_card_no: this.leftInfo.cardNo,
+                standard: 0,
+                abilityLevel: this.leftInfo.abilityLevel,
+                abilityType: 22
+            }).then(results => {
+                if (results.data.StatusCode === 0) {
+                    this.stageName = results.data.Body.standardName
+                    this.stageNum = results.data.Body.userGoodBad
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         GetByRoleOrderListFn () {
             this.anQuan = 0
             this.xingXiang = 0
@@ -167,6 +187,7 @@ export default {
             getStayStayProcessDetail({
                 user_card_no: this.leftInfo.cardNo
             }).then(results => {
+                this.countSum = 0
                 _this.orderList = results.data.Body.StayStayProcessDetail
                 this.orderMoney = results.data.Body.orderMoney
                 for (var i = 0; i < _this.orderList.length; i++) {
@@ -318,6 +339,22 @@ export default {
             this.$router.push(this.$route.matched[1].path + '/' + path)
         }
     },
+    filters: {
+        stageColor (str) {
+            switch (Number(str)) {
+            case 1:
+                return 'circlemark-green'
+            case 2:
+                return 'circlemark-lightGreen'
+            case 3:
+                return 'circlemark-yellow'
+            case 4:
+                return 'circlemark-lightRed'
+            case 5:
+                return 'circlemark-purple'
+            }
+        }
+    },
     watch: {
         leftInfo () {
             // ==结果
@@ -335,6 +372,7 @@ export default {
             // ==================过程开始
             this.GetByRoleOrderListFn()
             this.getValueAddServicesBySupervisionCard()
+            this.getProcessExcellentGoodModeratePoor()
         }
     }
 }
