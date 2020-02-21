@@ -3,22 +3,18 @@
     <div class="pr10">
         <div class="analyItem">
             <p class="analyItemTit tx-center">状态</p>
-            <div class="analyItemCon" v-if="leftInfo.stage === '审计'">
-                <p class="col-md-2">
-                    <span class="pr8 cLightGray">工种</span>
-                    <span class="cGreen">{{workerList.length}}个</span>
-                </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">天数</span>
-                    <span class="cGreen">{{totalDays}}天</span>
+            <div class="analyItemCon" v-if="leftInfo.AfterMarketState === 1">
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">预人</span>
+                    <span class="cGreen">{{totalNeedPerson}}个</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">总成本</span>
-                    <span class="cGreen">{{totalmoneys}}元</span>
+                    <span class="pr8 cLightGray">工时</span>
+                    <span class="cGreen">{{totalTimes.toFixed(2)}}天</span>
                 </p>
-                <p class="col-md-3">
-                    <span class="cLightGray">总报价</span>
-                    <span class="cGreen">{{totaloffers}}</span>
+                <p class="col-md-4">
+                    <span class="pr8 cLightGray">计划</span>
+                    <span class="cGreen">{{totalmoney.toFixed(2)}}元</span>
                 </p>
             </div>
             <div class="analyItemCon" v-else>
@@ -46,57 +42,45 @@
             </div>
         </div>
     </div>
-    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.stage === '审计'">
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerList" :key="index">
-            <p class="analyItemTit tx-center">{{item.workerType}}</p>
+    <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 1">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+            <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">天数</span>
-                    <span class="cGreen">{{item.days}}天</span>
+                    <span class="pr8 cLightGray">人数</span>
+                    <span class="cGreen">{{item.workerNumber}}个</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">成本</span>
-                    <span class="cGreen">{{item.money.toFixed(2)}}元</span>
+                    <span class="pr8 cLightGray">工时</span>
+                    <span class="cGreen">{{item.workingDay}}天</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">报价</span>
-                    <span class="cGreen">{{item.offer}}</span>
+                    <span class="pr8 cLightGray">计划</span>
+                    <span class="cGreen">{{item.planMoney}}元</span>
                 </p>
             </div>
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-else>
-         <router-link tag="div" exact :to="routerPath('workerDetailOtherThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
-            <p class="analyItemTit tx-center">{{item.workerType}}</p>
+         <router-link tag="div" exact :to="routerPath('workerDetailOtherThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerList" :key="index">
+            <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
-                    <span class="pr8 cLightGray">应选</span> <br>
-                    <span>{{item.totalNumber}}</span>人
+                    <span class="pr8 cLightGray">人数</span> <br>
+                    <span>{{item.workerNumber}}</span>人
                 </p>
                 <p class="col-md-2">
-                    <span class="pr8 cLightGray">实际</span> <br>
-                    <span class="cGreen">{{item.planNumber}}</span>人
+                    <span class="pr8 cLightGray">工时</span> <br>
+                    <span class="cGreen">{{item.workingDay}}</span>人
                 </p>
-                <p class="col-md-2" v-if="item.planNumber<=item.totalNumber">
-                    <span class="pr8 cLightGray">未选</span> <br>
-                    <span class="cRed">{{item.totalNumber - item.planNumber}}</span>人
-                </p>
-                <p class="col-md-2" v-else>
-                    <span class="pr8 cLightGray">超出</span> <br>
-                    <span class="cRed">{{item.planNumber - item.totalNumber}}</span>人
-                </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">计划金额</span> <br>
-                    <span class="cGreen">{{item.money.toFixed(2)}}</span>元
-                </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">项目订单金额</span> <br>
-                    <span class="cGreen">{{item.projectMoney.toFixed(2)}}</span>元
+                <p class="col-md-2" >
+                    <span class="pr8 cLightGray">计划</span> <br>
+                    <span class="cRed">{{item.planMoney}}</span>人
                 </p>
             </div>
         </router-link>
     </div>
-    <div class="pr10" v-if="leftInfo.stage === '审计'">
+    <div class="pr10" v-if="leftInfo.AfterMarketState === 1">
         <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
@@ -142,112 +126,45 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { getOrderWorkTypeWagesList } from '../Resources/Api'
 export default {
     name: '',
     data () {
         return {
-            workerList: [
-                {
-                    workerType: '木工',
-                    days: 6.26,
-                    money: 1440,
-                    offer: 1
-                },
-                {
-                    workerType: '瓦工',
-                    days: 3.76,
-                    money: 1015,
-                    offer: 1
-                },
-                {
-                    workerType: '油工',
-                    days: 17.37,
-                    money: 3822,
-                    offer: 1
-                },
-                {
-                    workerType: '电工',
-                    days: 46.82,
-                    money: 11235.8,
-                    offer: 2
-                },
-                {
-                    workerType: '水暖工',
-                    days: 1.27,
-                    money: 304,
-                    offer: 1
-                },
-                {
-                    workerType: '壮工',
-                    days: 16.79,
-                    money: 3357.2,
-                    offer: 1
-                },
-                {
-                    workerType: '拆除工',
-                    days: 3.1,
-                    money: 806.46,
-                    offer: 1
-                }
-            ],
-            workerOtherList: [
-                {
-                    workerType: '木工',
-                    totalNumber: 1,
-                    planNumber: 0,
-                    getNumber: 1,
-                    money: 3989.63,
-                    projectMoney: 0
-                },
-                {
-                    workerType: '瓦工',
-                    totalNumber: 2,
-                    planNumber: 0,
-                    getNumber: 2,
-                    money: 10764.8,
-                    projectMoney: 0
-                },
-                {
-                    workerType: '油工',
-                    totalNumber: 1,
-                    planNumber: 1,
-                    getNumber: 0,
-                    money: 3914.84,
-                    projectMoney: 1
-                },
-                {
-                    workerType: '电工',
-                    totalNumber: 1,
-                    planNumber: 2,
-                    getNumber: 1,
-                    money: 3989.63,
-                    projectMoney: 0
-                },
-                {
-                    workerType: '水暖工',
-                    totalNumber: 1,
-                    planNumber: 0,
-                    getNumber: 1,
-                    money: 849.6,
-                    projectMoney: 0
-                },
-                {
-                    workerType: '壮工',
-                    totalNumber: 1,
-                    planNumber: 0,
-                    getNumber: 1,
-                    money: 849.6,
-                    projectMoney: 0
-                }
-            ]
+            workerList: [],
+            workerOtherList: []
         }
     },
     computed: {
         ...mapGetters(['leftInfo']),
+        // 计算总预计人数
+        totalNeedPerson () {
+            let count = 0
+            this.workerOtherList.forEach(item => {
+                count += item.workerNumber
+            }) 
+            return count
+        },
+        // 计算总工时
+        totalTimes () {
+            let times = 0
+            this.workerOtherList.forEach(item => {
+                times += item.workingDay
+            })
+            return times
+        },
+        // 计算总计划金额
+        totalmoney () {
+            let sum = 0
+            this.workerOtherList.forEach(item => {
+                sum += item.planMoney
+            })
+            return sum
+        },
         totalDays () {
             let day = 0
             this.workerList.forEach(item => {
-                day += item.days
+                day += item.workingDay
             })
             return day
         },
@@ -256,20 +173,20 @@ export default {
             this.workerList.forEach(item => {
                 offer += item.offer
             })
-            return offer.toFixed(2)
+            return offer
         },
         totalmoneys () {
             let money = 0
             this.workerList.forEach(item => {
                 money += item.money
             })
-            return money.toFixed(2)
+            return money
         },
         // 应选
         selectNumber () {
             let number = 0
             this.workerOtherList.forEach(item => {
-                number += item.totalNumber
+                number += item.workerNumber
             })
             return number
         },
@@ -277,7 +194,7 @@ export default {
         actualNumber () {
             let number = 0
             this.workerOtherList.forEach(item => {
-                number += item.planNumber
+                number += item.workerActiveNumber
             })
             return number
         },
@@ -309,8 +226,12 @@ export default {
                 number2 += item.planNumber
                 number1 += item.totalNumber
             })
-            return ((number2 / number1) * 100).toFixed(2)
+            return ((number2 / number1) * 100)
         }
+    },
+    created () {
+        console.info(this.leftInfo)
+        this.load()
     },
     methods: {
         // 路由跳转路径拼接
@@ -320,10 +241,21 @@ export default {
         // 直接进行路由跳转路径
         routerPush (path) {
             this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        // 默认加载
+        load () {
+            let param = {
+                orderNo: this.leftInfo.orderno
+            }
+            // 查询材料数据
+            getOrderWorkTypeWagesList(param).then(results => {
+                this.workerOtherList = results.data.Body
+            }).catch(() => {})
         }
     },
     watch: {
         leftInfo () {
+            this.load()
             console.log('111')
         }
     }

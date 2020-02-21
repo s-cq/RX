@@ -13,3 +13,27 @@ import Request from '@rx/config/api-config'
 export function getWorkorderList (params) {
     return Request.http.post('/pro/getWorkorderList', params, 102, {dataType: 'json'})
 }
+
+/** ******************  查询材料二段店铺数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-01-20
+ * 参数: rwdID 项目单号
+ * 描述: 查询材料二段店铺数据
+ */
+export function GetShopItemsToFinanceByRwdID (params) {
+    return Request.http.get('/MAT/api/ProInfoMaterialVTwo/GetShopItemsToFinanceByRwdID', params, 22)
+}
+
+/** ******************  查询人工二段数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-01-20
+ * 参数: orderNo 项目单号
+ * 描述: 查询人工二段数据
+ */
+export function getOrderWorkTypeWagesList (params) {
+    return Request.http.get('/worker/workerFinance/getOrderWorkTypeWagesList', params, 26)
+}
+
+
