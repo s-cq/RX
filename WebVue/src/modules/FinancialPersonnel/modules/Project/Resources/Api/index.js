@@ -24,6 +24,16 @@ export function getWorkorderList (params) {
 export function GetShopItemsToFinanceByRwdID (params) {
     return Request.http.get('/MAT/api/ProInfoMaterialVTwo/GetShopItemsToFinanceByRwdID', params, 22)
 }
+/** ******************  查询材料三段数据【审计阶段】  ********************/
+/**
+ * 创建: scq
+ * 时间: 2020-02-22
+ * 参数: rwdID=12-542212项目单号  &  shopId=9a696791-a588-45dc-b498-01913dd86d05店铺id
+ * 描述: 查询材料二段店铺数据
+ */
+export function GetProductDetailItemsToFinanceByShopID (params) {
+    return Request.http.get('/MAT/api/ProInfoMaterialVTwo/GetProductDetailItemsToFinanceByShopID', params, 22)
+}
 
 /** ******************  查询人工二段数据  ********************/
 /**
@@ -45,6 +55,13 @@ export function getOrderWorkTypeWagesList (params) {
 export function GetProInfoMoneyStatisticsToFinanceByRwdID (params) {
     return Request.http.get('/MAT/api/ProInfoMaterialVTwo/GetProInfoMoneyStatisticsToFinanceByRwdID', params, 22)
 }
-
-
-
+/** ******************  查询人工三段数据  ********************/
+/**
+ * 创建: scq
+ * 时间: 2020-01-222
+ * 参数:  orderNo=78-2439&workTypeId=4
+ * 描述: 查询人工三段段数据
+ */
+export function getWorkerQCOrderByCondition (params) {
+    return Request.http.get('/project/projectWorkerOrder/getWorkerQCOrderByCondition', params, 26)
+}

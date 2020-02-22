@@ -28,7 +28,7 @@
                 </p>
             </div>
         </router-link> -->
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -47,7 +47,7 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 2">
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
@@ -74,7 +74,7 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 3">
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
@@ -126,7 +126,7 @@
                 </p>
             </div>
         </router-link> -->
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-3">
@@ -166,7 +166,7 @@
                 </p>
             </div>
         </router-link> -->
-        <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+        <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -202,7 +202,7 @@
                 </p>
             </div>
         </router-link>
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerTypeId= '+item.workerTypeId+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -378,7 +378,7 @@ export default {
             let count = 0
             this.workerOtherList.forEach(item => {
                 count += item.workerNumber
-            }) 
+            })
             return count
         },
         // 计算总工时
@@ -500,7 +500,7 @@ export default {
         // 默认加载
         load () {
             let param = {
-                orderNo: this.leftInfo.orderno
+                orderNo: this.leftInfo.orderno // 11-241545
             }
             // 查询材料数据
             getOrderWorkTypeWagesList(param).then(results => {
