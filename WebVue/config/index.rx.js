@@ -38,7 +38,7 @@ var rootMain = {
     cst: '/VueConProject/Construction/',
     mps: '/VueMatProject/MaterPersonnel/',
     inper: '/VueInterProject/InternalPersonnel/',
-    finper: '/Financial/FinancialPersonnel/'
+    finper: '/Financial/FinancialDepartment/'
 
 }
 
