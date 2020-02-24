@@ -5,34 +5,34 @@
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <!-- 审计 -->
         <div v-if="leftInfo.AfterMarketState==1" class="analyItem anItemBor" v-for="(item, index) in marStageThree.items" :key="index" @click="clickFourShow(0)">
-            <p class="analyItemTit tx-center">订单{{index + 1}}</p>
+            <p class="analyItemTit tx-center">{{item.productData.matName | truncate(4)}}</p>
             <div class="analyItemCon">
                 <div class="col-md-3 materImgParent">
-                        <rx-viewer :images="item.shopPhoto">
+                        <rx-viewer :images="item.productData.imgList[0]">
                             <div class="clearfix mt10">
                                 <div class="fl relative">
-                                    <img :src="item.shopPhoto | smallImg(100, 100)">
+                                    <img :src="item.productData.imgList[0] | smallImg(100, 100)">
                                 </div>
                             </div>
                         </rx-viewer>
                 </div>
                 <div class="col-md-9 rialsTab">
-                    <p><span class="tx-fb fz14 mr10 materName">不锈钢线条</span> <span class="materBrand">地方品牌</span></p>
+                    <p><span class="tx-fb fz14 mr10 materName">{{item.productData.matName}}</span> <span class="materBrand">{{item.productData.brandName}}</span></p>
                     <div class="clearfix matSpec">
-                        <p class="cLightGray fl">规格：</p> <p style="margin: 3px;">镜面本色宽度≤22mm </p>
+                        <p class="cLightGray fl">规格：</p> <p style="margin: 3px;">{{item.productData.matSpec}} </p>
                     </div>
                     <div class="clearfix choiceParameter">
-                        <p class="cLightGray fl">型号：</p>
-                        <p style="width: auto;">201</p>
+                        <p class="cLightGray fl">{{item.productData.valueList.paraName}}：</p>
+                        <p style="width: auto;">{{item.productData.valueList.paraValue}}</p>
                     </div>
                 </div>
                 <p style="color: red;font-size: 18px; font-weight: 700;position: absolute;right: 10px;top: 4px;">
                     <span>￥</span>
-                    <span class="fz16 matPrice product">15.00</span> <span>元/m</span>
+                    <span class="fz16 matPrice product">{{item.proPrice}}</span> <span>元/{{item.productData.unitName}}</span>
                 </p>
                 <p style="color: red; font-weight: 700; position: absolute; right: 10px; bottom: 5px;">
                     <span>总量/已用量：</span>
-                    <span class="fz16">67.9/0</span>
+                    <span class="fz16">{{item.totalCount}}/{{item.alreadyCount}}</span>
                 </p>
             </div>
         </div>
@@ -70,15 +70,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8">总金额</span>
-                    <span>预留元</span>
+                    <span>{{totalMoney}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">产品数</span>
-                    <span>预留</span>
+                    <span>{{marStageThree.items.length?marStageThree.items.length:0}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">材料商数</span>
-                    <span>预留</span>
+                    <span>{{marStageThree.matCount}}</span>
                 </p>
                 <span><span class="circlemark circlemark-lightRed">预留</span></span>
             </div>
@@ -116,11 +116,14 @@ export default {
         return {
             qualityListItem: {}, // 二段信息
             marStageThree: {}, // 三段信息
+            totalMoney: {}, // 二段获取的总金额
             fourIndex: undefined
         }
     },
     created () {
         this.qualityListItem = this.$route.query.qualityListItem
+        this.totalMoney = this.$route.query.totalMoney
+        this.GetProductDetailItemsToFinanceByShopID()
         console.log(this.$route)
     },
     computed: {
@@ -137,6 +140,7 @@ export default {
                 }
             }).catch(() => {})
         },
+        // 标题
         stageFilter (stage) {
             var stageName = ''
             switch (stage) {

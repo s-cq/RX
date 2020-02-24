@@ -21,21 +21,19 @@
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">类型</span>
-                    <span>预留</span>
-                </p>
-                <p class="fl col-md-4">
-                    <span class="cLightGray pr8">打卡</span>
-                    <span>预留</span>
+                    <span v-if="item.workType == 1">分包</span>
+                    <span v-if="item.workType == 2">日工</span>
+                    <span v-if="item.workType == 3">整包</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">计划</span>
-                    <span class="cGreen">{{workerTypeIdTwo.planMoney.toFixed(2)}}元</span>
+                    <span class="cGreen">{{item.workMoney.toFixed(2)}}元</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">实际</span>
-                    <span class="cGreen">{{workerTypeIdTwo.projectMoney.toFixed(2)}}元</span>
+                    <span class="cGreen">{{item.activeWorkMoney.toFixed(2)}}元</span>
                 </p>
-                <span class="circlemarkment cGreen">预留</span>
+                <span class="circlemarkment cGreen">{{pressmentdu(item.orderStage)}}</span>
             </div>
         </div>
         <!-- 记录 -->
@@ -52,17 +50,13 @@
                     <span class="pr8 cLightGray">订单</span>
                     <span>{{workerListThree.length?workerListThree.length:0}}笔</span>
                 </p>
-                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">工时</span>
-                    <span>预留</span>
-                </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">计划总额</span>
-                    <span>预留</span>
+                    <span>{{totalmoney}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">实际总额</span>
-                    <span>预留</span>
+                    <span>{{totalPayMoney}}</span>
                 </p>
             </div>
             <!-- 预留 -->
@@ -71,15 +65,12 @@
                     <span class="pr8 cLightGray">详情</span>
                     <span>预留 笔</span>
                 </p>
-                 <p class="col-md-4">
-                    <span class="pr8 cLightGray">打卡</span>
-                    <span>预留</span>
-                </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">金额</span>
                     <span>预留</span>
                 </p>
                 <span class="circlemark circlemark-lightRed" title="预留说明">预留</span>
+
             </div>
         </div>
     </div>
@@ -101,6 +92,7 @@ export default {
     },
     created () {
         this.workerTypeIdTwo = this.$route.query.workerOtherList
+        this.getWorkerQCOrderByCondition()
     },
     methods: {
         // 查询工人三段数据
@@ -114,6 +106,23 @@ export default {
                 }
             }).catch(() => {})
         },
+        // 计算总计划金额
+        totalmoney () {
+            let sum = 0
+            this.workerOtherList.forEach(item => {
+                sum += item.workMoney
+            })
+            return sum.toFixed(2)
+        },
+        // 计算总实际
+        totalPayMoney () {
+            let money = 0
+            this.workerOtherList.forEach(item => {
+                money += item.activeWorkMoney
+            })
+            return money.toFixed(2)
+        },
+        // 标题
         stageFilter (stage) {
             var stageName = ''
             switch (stage) {
@@ -137,6 +146,28 @@ export default {
                 break
             }
             return stageName
+        },
+        // 阶段
+        pressmentdu (stage) {
+            var prssName = ''
+            switch (stage) {
+            case 3:
+                prssName = '施工'
+                break
+            case 4:
+                prssName = '竣工'
+                break
+            case 6:
+                prssName = '结算'
+                break
+            case 7:
+                prssName = '评价'
+                break
+            case 8:
+                prssName = '历史'
+                break
+            }
+            return prssName
         }
     },
 
