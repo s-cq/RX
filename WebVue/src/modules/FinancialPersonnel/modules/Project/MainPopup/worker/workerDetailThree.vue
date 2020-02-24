@@ -100,13 +100,14 @@ export default {
         ...mapGetters(['leftInfo'])
     },
     created () {
+        this.getWorkerQCOrderByCondition()
         this.workerTypeIdTwo = this.$route.query.workerOtherList
     },
     methods: {
         // 查询工人三段数据
         getWorkerQCOrderByCondition () {
             getWorkerQCOrderByCondition({
-                orderNo: this.leftInfo.orderNo, // 78-2439
+                orderNo: 'this.leftInfo.orderNo', // 78-2439
                 workTypeId: this.workerTypeIdTwo.workerTypeId
             }).then(results => {
                 if (Number(results.data.StatusCode) === 1) {

@@ -23,7 +23,6 @@ var manyMain = {
     mps: './src/modules/MaterPersonnel/main.js', // 材料人事
     inper: './src/modules/InternalPersonnel/main.js', // 内部人事
     finper: './src/modules/FinancialPersonnel/main.js' // 财务系统
-
 }
 
 /**
@@ -38,7 +37,7 @@ var rootMain = {
     cst: '/VueConProject/Construction/',
     mps: '/VueMatProject/MaterPersonnel/',
     inper: '/VueInterProject/InternalPersonnel/',
-    finper: '/Financial/FinancialDepartment/'
+    finper: '/'
 
 }
 

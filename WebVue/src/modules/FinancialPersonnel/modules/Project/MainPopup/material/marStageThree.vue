@@ -120,6 +120,7 @@ export default {
         }
     },
     created () {
+        this.GetProductDetailItemsToFinanceByShopID()
         this.qualityListItem = this.$route.query.qualityListItem
         console.log(this.$route)
     },
