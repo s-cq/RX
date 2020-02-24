@@ -1,15 +1,17 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【'+stageFilter(leftInfo.AfterMarketState)+'在施阶段_'+workerTypeIdTwo.workerTypeName+'】详情'}"></three-title>
+    <three-title :title="{name:'【'+stageFilter(leftInfo.AfterMarketState)+'阶段_'+workerTypeIdTwo.workerTypeName+'】详情'}"></three-title>
     <div class="stay-nav spread-top plr10 pb10">
-        <ul class="clearfix uiTab3 rgpkList">
+        <ul class="clearfix uiTab3 rgpkList" >
             <li :class="{'uiTab3-active':flg==0}" @click="flg = 0"><a href="javascript:">待办</a></li>
             <li :class="{'uiTab3-active':flg==1}"><a @click="flg = 1" href="javascript:" >记录</a></li>
         </ul>
     </div>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
+
         <!-- 代办 -->
-        <div v-if="flg==0" class="analyItem"  v-for="(item,index) in workerListThree " :key="index">
+        <div v-if="flg == 0" class="analyItem"  v-for="(item,index) in workerListThree " :key="index">
+            <p class="analyItemTit tx-center">综合</p>
             <div class="analyItemCon">
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">订单{{index+1}}</span>
@@ -93,13 +95,12 @@ export default {
     created () {
         this.getWorkerQCOrderByCondition()
         this.workerTypeIdTwo = this.$route.query.workerOtherList
-        this.getWorkerQCOrderByCondition()
     },
     methods: {
         // 查询工人三段数据
         getWorkerQCOrderByCondition () {
             getWorkerQCOrderByCondition({
-                orderNo: 'this.leftInfo.orderNo', // 78-2439
+                orderNo: this.leftInfo.orderno, // 78-2439
                 workTypeId: this.workerTypeIdTwo.workerTypeId
             }).then(results => {
                 if (Number(results.data.StatusCode) === 1) {
@@ -174,6 +175,9 @@ export default {
 
     watch: {
         $route () {
+            console.log(this.leftInfo)
+            this.workerTypeIdTwo = this.$route.query.workerOtherList
+            this.getWorkerQCOrderByCondition()
             this.flg = 0
         }
     }

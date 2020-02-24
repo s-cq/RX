@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84">
-        <router-link tag="div" exact :to="routerPath('marStageThree?qualityListItem='+item+'&'+item.totalMoney)" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item,index) in qualityList" :key="index">
+        <router-link tag="div" exact :to="{path:routerPath('marStageThree'), query:{qualityListItem:item,index:index,totalMoney: item.totalMoney}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item,index) in qualityList" :key="index">
             <p class="analyItemTit tx-center">{{item.shopName | truncate(4)}}</p>
             <div class="analyItemCon">
                 <div class="col-md-4">

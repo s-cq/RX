@@ -1,13 +1,13 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
     <!-- <three-title :title="{name:$route.query.name}"></three-title> -->
-    <three-title :title="{name:'【'+stageFilter(leftInfo.AfterMarketState)+'阶段_'+qualityListItem.shopName+'】详情'}"></three-title>
+    <three-title :title="{name:'【'+stageFilter(AfterMarketState)+'阶段_'+qualityListItem.shopName+'】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <!-- 审计 -->
-        <div v-if="leftInfo.AfterMarketState==1" class="analyItem anItemBor" v-for="(item, index) in marStageThree.items" :key="index" @click="clickFourShow(0)">
+        <div class="analyItem anItemBor" v-for="(item, index) in marStageThree.items" :key="index" @click="clickFourShow(0)">
             <p class="analyItemTit tx-center">{{item.productData.matName | truncate(4)}}</p>
             <div class="analyItemCon">
-                <div class="col-md-3 materImgParent">
+                <div class="col-md-3 materImgParent" v-if="item.productData.imgList !== null">
                         <rx-viewer :images="item.productData.imgList[0]">
                             <div class="clearfix mt10">
                                 <div class="fl relative">
@@ -21,8 +21,8 @@
                     <div class="clearfix matSpec">
                         <p class="cLightGray fl">规格：</p> <p style="margin: 3px;">{{item.productData.matSpec}} </p>
                     </div>
-                    <div class="clearfix choiceParameter">
-                        <p class="cLightGray fl">{{item.productData.valueList.paraName}}：</p>
+                    <div class="clearfix choiceParameter" v-if="item.productData.valueList !== null">
+                        <p class="cLightGray fl">{{item.productData.valueList.paraName}}</p>
                         <p style="width: auto;">{{item.productData.valueList.paraValue}}</p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                 </p>
             </div>
         </div>
-        <div v-else class="analyItem anItemBor" v-for="(item, index) in marStageThree.items" :key="index" @click="clickFourShow(0)">
+        <!-- <div  v-else class="analyItem anItemBor" v-for="(item, index) in marStageThree.items" :key="index" @click="clickFourShow(0)">
             <p class="analyItemTit tx-center">订单{{index + 1}}</p>
             <div class="analyItemCon">
                 <p class="fl col-md-3">
@@ -61,7 +61,7 @@
                 </p>
                     <span class="circlemark circlemark-Green layerui-title" data-title="已结清">预留</span>
              </div>
-        </div>
+        </div> -->
     </div>
     <div class="layerRtb-footer">
         <!-- 审计 -->
@@ -74,7 +74,7 @@
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">产品数</span>
-                    <span>{{marStageThree.items.length?marStageThree.items.length:0}}</span>
+                    <!-- <span>{{marStageThree.items.length?marStageThree.items.length:0}}</span> -->
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">材料商数</span>
@@ -117,15 +117,15 @@ export default {
             qualityListItem: {}, // 二段信息
             marStageThree: {}, // 三段信息
             totalMoney: {}, // 二段获取的总金额
-            fourIndex: undefined
+            fourIndex: undefined,
+            AfterMarketState: ''
         }
     },
     created () {
         this.GetProductDetailItemsToFinanceByShopID()
         this.qualityListItem = this.$route.query.qualityListItem
         this.totalMoney = this.$route.query.totalMoney
-        this.GetProductDetailItemsToFinanceByShopID()
-        console.log(this.$route)
+        console.log(this.leftInfo)
     },
     computed: {
         ...mapGetters(['leftInfo'])
@@ -137,7 +137,8 @@ export default {
                 shopId: this.qualityListItem.shopId// 店铺id
             }).then(results => {
                 if (Number(results.data.statusCode) === 1) {
-                    this.marStageThree = results.data.Body
+                    this.marStageThree = results.data.body
+                    console.log(this.marStageThree)
                 }
             }).catch(() => {})
         },
@@ -169,6 +170,15 @@ export default {
         clickFourShow (index) {
             this.fourIndex = index
         }
+    },
+    watch: {
+        $route () {
+            this.AfterMarketState = this.leftInfo.AfterMarketState
+            this.GetProductDetailItemsToFinanceByShopID()
+            this.qualityListItem = this.$route.query.qualityListItem
+            this.totalMoney = this.$route.query.totalMoney
+        }
+
     }
 
 }

@@ -28,7 +28,8 @@
                 </p>
             </div>
         </router-link> -->
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <!-- <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList='+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index"> -->
+         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -47,7 +48,7 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 2">
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
@@ -74,7 +75,7 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 3">
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
@@ -126,7 +127,7 @@
                 </p>
             </div>
         </router-link> -->
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+        <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-3">
@@ -166,7 +167,7 @@
                 </p>
             </div>
         </router-link> -->
-        <router-link tag="div" exact :to="routerPath('workerDetailThree?workerOtherList= '+item+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+        <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -185,7 +186,7 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-else>
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">合计</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -202,7 +203,7 @@
                 </p>
             </div>
         </router-link>
-         <router-link tag="div" exact :to="routerPath('workerDetailThree?workerTypeId= '+item.workerTypeId+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -221,7 +222,7 @@
         </router-link>
     </div>
     <div class="pr10" v-if="leftInfo.AfterMarketState === 1">
-        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -240,7 +241,7 @@
         </router-link>
     </div>
     <div class="pr10" v-if="leftInfo.AfterMarketState === 2">
-        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index=1')" class="analyItem anItemBor" active-class="anItemBor-active" >
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
@@ -267,7 +268,7 @@
         </router-link>
     </div>
     <div class="pr10" v-if="leftInfo.AfterMarketState === 3">
-        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
                 <p class="col-md-2">
@@ -298,7 +299,7 @@
         </router-link>
     </div>
     <div class="pr10" v-if="leftInfo.AfterMarketState === 4">
-            <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <router-link tag="div" exact :to="routerPath('workerDetailThree?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">处理</p>
                 <div class="analyItemCon">
                     <p class="col-md-3">
@@ -321,7 +322,7 @@
             </router-link>
     </div>
     <div class="pr10" v-if="leftInfo.AfterMarketState === 5">
-        <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+        <router-link tag="div" exact :to="routerPath('workerDetailThree?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -340,7 +341,7 @@
         </router-link>
     </div>
     <div class="pr10" v-else>
-        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
+        <router-link tag="div" exact :to="routerPath('workerDetailThreeHandle?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
