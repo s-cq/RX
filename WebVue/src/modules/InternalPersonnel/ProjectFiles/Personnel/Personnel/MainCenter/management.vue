@@ -4,7 +4,7 @@
             <div class="analyItem">
                 <p class="analyItemTit tx-center">状态</p>
                 <div class="analyItemCon">
-                     <p class="col-md-4 ">
+                    <p class="col-md-4 ">
                         <span class="cLightGray pr8">项目总数</span>
                         <span>{{projectSum}}</span>
                     </p>
@@ -21,7 +21,12 @@
                         <span class="cLightGray pr8">绩效总金额</span>
                         <span>{{Number(fine_money+completion_money+negotiate_profit).toFixed(2)}}</span>
                     </p> -->
-                    <span class="circlemark" :class="stayCompleteState | evaluateColor">{{stayCompleteState | evaluate}}</span>
+
+                    <span class="circlemark circlemark-green" v-if="(junQuanzhong)>=100">优</span>
+                    <span class="circlemark circlemark-lightGreen" v-else-if="(junQuanzhong)>=75">良</span>
+                    <span class="circlemark circlemark-yellow" v-else-if="(junQuanzhong)>=50">中</span>
+                    <span class="circlemark circlemark-lightRed" v-else>差</span>
+
                 </div>
             </div>
         </div>
@@ -41,7 +46,7 @@
                         <span class="cLightGray pr8">提成</span>
                         <span>{{comprehensive_completion.toFixed(2)}}</span>
                     </p>
-                    <span class="circlemark" :class="stayCompleteState | evaluateColor">{{stayCompleteState | evaluate}}</span>
+                    <span class="circlemark" :class="junStateObject.hasOwnProperty('stageName') && junStateObject.stageNum !== null ? junStateObject.stageNum : 0 | stageColor">{{junStateObject.hasOwnProperty('stageName') && junStateObject.stageName !== null ? junStateObject.stageName : '' }}</span>
                 </div>
             </router-link>
             <router-link tag="div" :to="{name:'managementFine1',params:{completionList:completionList}}" class="analyItem anItemBor" active-class="anItemBor-active">
@@ -59,7 +64,7 @@
                         <span class="cLightGray pr8">提成</span>
                         <span>{{comprehensive_fine.toFixed(2)}}</span>
                     </p>
-                    <span class="circlemark" :class="stayCarryState | evaluateColor">{{stayCarryState | evaluate}}</span>
+
                 </div>
             </router-link>
             <router-link tag="div" :to="{name:'managementNegotiation1',params:{completionList:completionList}}" class="analyItem anItemBor" active-class="anItemBor-active">
@@ -77,7 +82,7 @@
                         <span class="cLightGray pr8">提成</span>
                         <span>{{comprehensive_negotiate.toFixed(2)}}</span>
                     </p>
-                    <span class="circlemark" :class="stayDiscussState | evaluateColor">{{stayDiscussState | evaluate}}</span>
+
                 </div>
             </router-link>
             <router-link tag="div" :to="routerPath('achievementThree')" class="analyItem anItemBor" active-class="anItemBor-active">
@@ -118,12 +123,13 @@
             </router-link>
         </div>
     </div>
+
 </template>
 <script>
 import {
     mapGetters
 } from 'vuex'
-import { getStayStayManagementDetail, getStayStayManagementEvaluation, getUserManageMonthEvaluation } from '../Resources/Api'
+import { getStayStayManagementDetail, getStayStayManagementEvaluation, getUserManageMonthEvaluation, getExcellentGoodModeratePoor } from '../Resources/Api'
 export default {
     data () {
         return {
@@ -146,12 +152,24 @@ export default {
             tradeDetail: {},
             stayCompleteState: 5,
             stayCarryState: 5,
-            stayDiscussState: 5
+            stayDiscussState: 5,
+            junStateObject: {}, // 竣工的状态按钮显示
+            fineStateObjdect: {}, // 罚款的状态按钮显示
+            qiaStateObjdect: {}, // 洽商的状态按钮显示
+            junQuanzhong: 0, // 竣工的权重
+            fineQuanzhong: {}, // 罚款的权重
+            qiaQuanzhong: {}, // 洽商的权重
+            jibie: 0
         }
     },
     created () {
         this.stayCompleteDataFn()
         this.GetUserTradeDetailByUserCardFn()
+        // 竣工的按钮
+        const junMoney = this.completion_money / 10000
+        this.getExcellentGoodModeratePoor(junMoney, 1)
+        this.jibie = this.leftInfo.jobLevel
+        console.log('1jibie' + this.jibie)
     },
     methods: {
     // 路由跳转路径拼接
@@ -215,6 +233,44 @@ export default {
             }).catch((error) => {
                 console.log(error)
             })
+        },
+        // 获取状态中的按钮
+        getExcellentGoodModeratePoor (money, flag) {
+            let type = 0
+            if (flag === 1) {
+                type = 5
+            }
+            // else if (flag === 2) {
+            //     type = 9
+            // } else if (flag === 3) {
+            //     type = 10
+            // }
+            getExcellentGoodModeratePoor({
+                user_card_no: this.leftInfo.cardNo,
+                standard: money,
+                abilityLevel: this.leftInfo.manageLevel,
+                abilityType: type
+            }).then(results => {
+                if (results.data.StatusCode === 0) {
+                    if (flag === 1) {
+                        this.junStateObject.stageName = results.data.Body.standardName
+                        this.junStateObject.stageNum = results.data.Body.userGoodBad
+                        this.junQuanzhong = results.data.Body.quanzhong
+                    }
+                    //  else if (flag === 2) {
+                    //     this.fineStateObjdect.stageName = results.data.Body.standardName
+                    //     this.fineStateObjdect.stageNum = results.data.Body.userGoodBad
+                    //     this.fineQuanzhong = results.data.Body.quanzhong
+                    // } else if (flag === 3) {
+                    //     this.qiaStateObjdect.stageName = results.data.Body.standardName
+                    //     this.qiaStateObjdect.stageNum = results.data.Body.userGoodBad
+                    //     this.qiaQuanzhong = results.data.Body.quanzhong
+                    // }
+                    console.log(this.junStateObject)
+                }
+            }).catch(error => {
+                console.log(error)
+            })
         }
     },
     filters: {
@@ -259,6 +315,20 @@ export default {
             case 4:
                 return 'circlemark-lightRed'
             }
+        },
+        stageColor (str) {
+            switch (Number(str)) {
+            case 1:
+                return 'circlemark-green'
+            case 2:
+                return 'circlemark-lightGreen'
+            case 3:
+                return 'circlemark-yellow'
+            case 4:
+                return 'circlemark-lightRed'
+            case 5:
+                return 'circlemark-purple'
+            }
         }
     },
     computed: {
@@ -269,6 +339,17 @@ export default {
             this.stayCompleteDataFn()
             this.GetUserTradeDetailByUserCardFn()
             this.getUserManageMonthEvaluation()
+            // 竣工的按钮
+            const junMoney = (this.negotiate_profit + this.fine_money + this.completion_money) / 10000
+            this.getExcellentGoodModeratePoor(junMoney, 1)
+            this.jibie = this.leftInfo.jobLevel
+            console.log('1jibie' + this.jibie)
+            // // 罚款的按钮
+            // const fineMoney = Number(this.fine_money) / 10000
+            // this.getExcellentGoodModeratePoor(fineMoney, 2)
+            // // 洽商的按钮
+            // const qiaMoney = Number(this.negotiate_profit) / 10000
+            // this.getExcellentGoodModeratePoor(qiaMoney, 3)
         }
     }
 }

@@ -710,6 +710,17 @@ export function submitGainFine (params) {
 export function UseResultgetUseResultMonthReview (params) {
     return Request.http.post('/api/UseResult/getUseResultMonthReview', params, 34, { dataType: 'json' })
 }
+
+/** ******************  人二段级别获取各项数据 ********************/
+/**
+ * 创建: yangkai
+ * 时间: 2019年12月24日13:38:14
+ * 参数: user_card_no 卡号
+ * 描述: 数据获取
+ */
+export function getUsejibie (params) {
+    return Request.http.post('/api/UseResult/getUsejibie', params, 34, { dataType: 'json' })
+}
 /** ******************  人二段阶段获取级别数据 ********************/
 /**
  * 创建: yangkai
@@ -915,7 +926,7 @@ export function getIntegralThreeData (params) {
  * 描述: 获取绩效
  */
 export function getUserManageMonthEvaluation (params) {
-    return Request.http.post('/api/personelPersonel/getUserManageMonthEvaluation', params, 34, {dataType: 'json'})
+    return Request.http.post('/api/personelPersonel/getUserManageMonthEvaluation', params, 34, { dataType: 'json' })
 }
 
 

@@ -1,30 +1,29 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'详情'}"></three-title>
+    <three-title :title="{name:'款项_期数】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
-        <div class="analyItem anItemBor" :key="index" @click="clickFourShow(0)">
-            <p class="analyItemTit tx-center">预留</p>
+        <div class="analyItem">
+            <p class="analyItemTit tx-center">明细 1</p>
             <div class="analyItemCon">
                 <p class="fl col-md-3">
-                    <span class="cLightGray pr8">预留</span>
-                        <span>0</span>
+                    <span class="cLightGray pr8">应收</span>
+                        <span>2020-02-06</span>
                 </p>
                 <p class="fl col-md-3">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">实收</span>
                         <span class="c666">--</span>
                 </p>
                 <p class="fl col-md-3">
-                    <span class="cLightGray pr8">预留</span>
-                    <span class="c666">0</span>
+                    <span class="cLightGray pr8">金额</span>
+                    <span class="c666">0.00</span>
                 </p>
                 <p class="fl col-md-3">
-                    <span class="cLightGray pr8">预留</span>
-                    <span class="c666">0</span>
-                    <!-- <span class="c666"><span style="color:red; font-weight:bolder">-9</span></span> -->
+                    <span class="cLightGray pr8">倒计时</span>
+                    <span class="c666"><span style="color:red; font-weight:bolder">-19</span></span>
                     <span class="circlemark circlemark-lightRed layerui-title" data-title="延期未回款">差</span>
                 </p>
             </div>
-        </div>
+         </div>
     </div>
     <div class="layerRtb-footer">
         <div class="analyItem">

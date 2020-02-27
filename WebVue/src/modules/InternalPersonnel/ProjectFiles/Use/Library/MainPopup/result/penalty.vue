@@ -8,19 +8,19 @@
                     <div class="col-md-2"><span class="cLightGray pr8"></span><span>{{warehouseinfo.abilityLevel}}级</span></div>
                     <div class="col-md-4">
                         <span class="cLightGray pr8">标准</span>
-                        <span v-if="bzedit === 0">{{warehouseinfo.greatMore}}万/月</span>
-                        <span v-else-if="bzedit === 1"><input type="number" step="0.01" v-model="warehouseinfo.greatMore">万/月</span>
+                        <span v-if="bzedit === 0">{{userLevelStandardDetail.greatMore}}万/月</span>
+                        <span v-else-if="bzedit === 1"><input type="number" step="0.01" v-model="userLevelStandardDetail.greatMore">万/月</span>
                     </div>
                     <div class="col-md-4">
                         <span class="cLightGray pr8"> 权重比：</span>
-                        <span v-if="bzedit === 0">{{warehouseinfo.cheatFine}}</span>
-                        <span v-else-if="bzedit === 1"><input type="number" step="0.01" v-model="warehouseinfo.cheatFine"></span>
+                        <span v-if="bzedit === 0">{{userLevelStandardDetail.cheatFine}}</span>
+                        <span v-else-if="bzedit === 1"><input type="number" step="0.01" v-model="userLevelStandardDetail.cheatFine"></span>
                     </div>
                     <div class="analyItemCon" v-if="bzedit === 0">
                         <img src="https://gnr.rxjy.com/hrms/static/modules/cur/images/edit_img.png" title="编辑" width="20" class="fl pointer mr5" @click="bzedit=1">
                     </div>
                     <div class="analyItemCon" v-if="bzedit === 1">
-                        <img src="https://gnr.rxjy.com/hrms/static/modules/cur/images/save_img.png" title="保存" width="20" class="fl pointer mr5" name="update_le_self" @click="UdateStayLevel()">
+                        <img src="https://gnr.rxjy.com/hrms/static/modules/cur/images/save_img.png" title="保存" width="20" class="fl pointer mr5" name="update_le_self" @click="UdateStayLevelYJ()">
                         <img src="https://gnr.rxjy.com/hrms/static/modules/cur/images/goback_img.png" title="返回" width="20" class="fl pointer mr5" @click="bzedit=0">
                     </div>
                 </div>
@@ -222,21 +222,21 @@ export default {
                 console.log(err)
             })
         }
-        // UdateStayLevel () {
-        //     this.$set(this.warehouseinfo, 'abilityLevel', this.leftInfo.grade)
-        //     let params = this.warehouseinfo
-        //     upUserLevelStandard(params).then((result) => {
-        //         if (result.data.StatusCode === 0) {
-        //             this.$message({
-        //                 type: 'info',
-        //                 message: '修改成功'
-        //             })
-        //             this.bzedit = 0
-        //         }
-        //     }).catch((err) => {
-        //         console.log(err)
-        //     })
-        // }
+    // UdateStayLevel () {
+    //     this.$set(this.warehouseinfo, 'abilityLevel', this.leftInfo.grade)
+    //     let params = this.warehouseinfo
+    //     upUserLevelStandard(params).then((result) => {
+    //         if (result.data.StatusCode === 0) {
+    //             this.$message({
+    //                 type: 'info',
+    //                 message: '修改成功'
+    //             })
+    //             this.bzedit = 0
+    //         }
+    //     }).catch((err) => {
+    //         console.log(err)
+    //     })
+    // }
     },
     watch: {
         leftInfo () {

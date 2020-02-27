@@ -65,3 +65,22 @@ export function GetProInfoMoneyStatisticsToFinanceByRwdID (params) {
 export function getWorkerQCOrderByCondition (params) {
     return Request.http.get('/project/projectWorkerOrder/getWorkerQCOrderByCondition', params, 26)
 }
+/** ******************  查询回款二段段数据  ********************/
+/**
+ * 创建: scq
+ * 时间: 2020-01-26
+ * 参数: orderNo=11-199175
+ * 描述: 查询回款二段数据
+ */
+export function getReceiveMoney (params) {
+    return Request.http.get('/pro/getReceiveMoney', params, 26)
+}
+/** ******************  保存回款数据  ********************/
+/**
+ * 创建: scq
+ * 时间: 2020-01-26
+ * 描述: 保存回款数据
+ */
+export function savePaymentDetails (params) {
+    return Request.http.post('/pro/savePaymentDetails', params, 26, {dataType: 'json'})
+}

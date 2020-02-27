@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="grade>13 && grade<21" class="thinScroll pr10" v-scrollHeight="10">
+        <div v-if="grade>12 && grade<22" class="thinScroll pr10" v-scrollHeight="10">
             <router-link tag="div" :to="{name:'managemenCompletionUse',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">竣工</p>
                 <div class="analyItemCon">
@@ -27,14 +27,14 @@
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{userLevelStandardDetail3.greatMore}}万/月</span></div>
                 </div>
             </router-link>
-            <router-link tag="div" :to="{name:'customerReviewss',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor">
+            <!-- <router-link tag="div" :to="{name:'customerReviewss',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor">
                 <p class="analyItemTit tx-center">客户评价</p>
                 <div class="analyItemCon">
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>5个五星/月</span></div>
                 </div>
-            </router-link>
+            </router-link> -->
         </div>
-        <div v-else class="thinScroll pr10" v-scrollHeight="10">
+        <!-- <div v-else class="thinScroll pr10" v-scrollHeight="10">
             <div class="analyItem">
                 <p class="analyItemTit tx-center">竣工</p>
                 <div class="analyItemCon">
@@ -59,7 +59,7 @@
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>5个五星/月</span></div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -86,7 +86,7 @@ export default {
         this.zeng()
     },
     methods: {
-        // 竣工
+    // 竣工
         JunGong () {
             getWarehouseResultDetail({ abilityLevel: this.leftInfo.grade, abilityType: 5 }).then((result) => {
                 if (result.data.Body.userLevelStandardDetail !== null) {

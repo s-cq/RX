@@ -26,7 +26,7 @@
                 </p>
             </div>
         </div>
-                <div class="analyItem " :key="index" >
+        <div class="analyItem " :key="index" >
             <p class="analyItemTit tx-center">预留</p>
             <div class="analyItemCon">
                 <p class="fl col-md-3">

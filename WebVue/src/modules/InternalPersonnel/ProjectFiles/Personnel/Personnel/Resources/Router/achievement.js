@@ -10,5 +10,9 @@ export default [
     {
         path: 'trainThree',
         component: () => import('../../MainPopup/achievement/trainThree.vue')
+    },
+    {
+        path: 'shengjicishu',
+        component: () => import('../../MainPopup/achievement/shengjicishu.vue')
     }
 ]

@@ -14,22 +14,27 @@
                     </div>
                     <div class='lh28'>
                         <span class="fl pr8">标准</span>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <span class="cLightGray pr8">有效竣工额</span>
-                            <p class="cGreen">{{flagIndex === 1 ? levelDate === null  ? 0: levelDate.achieve_standard : nextLevelDate === null  ? '--' : nextLevelDate.achieve_standard}}万</p>
+                            <p class="cGreen">{{ resultMonthStandard}}万</p>
                         </div>
                         <div class="col-md-2">
                             <span class="cLightGray pr8">罚款</span>
-                            <p class="cGreen">{{ flagIndex === 1 ? levelDate === null  ? 0: levelDate.fine_money_standard : nextLevelDate === null  ? 0: nextLevelDate.fine_money_standard}}元</p>
+                            <p class="cGreen">{{  resultMonthStandardfakuan}}元</p>
                         </div>
                         <div class="col-md-2">
                             <span class="cLightGray pr8"> 增项</span>
-                            <p class="cGreen">{{ flagIndex === 1 ? levelDate === null  ? 0: levelDate.increment_money_standard : nextLevelDate === null  ? 0: nextLevelDate.increment_money_standard}}元</p>
+                            <p class="cGreen">{{  resultMonthStandardzengxiang}}元</p>
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                             <span class="cLightGray pr8">增值服务</span>
                             <p class="cGreen">--万</p>
-                        </div>
+                        </div> -->
+
+                        <!-- <span class="circlemark circlemark-green" v-if="(resultResultComplePercentage*0.4+haopingPercentage*0.2+processActual*0.4)>=100">优</span>
+                        <span class="circlemark circlemark-lightGreen" v-else-if="(resultResultComplePercentage*0.4+haopingPercentage*0.2+processActual*0.4)>=75">良</span>
+                        <span class="circlemark circlemark-yellow" v-else-if="(resultResultComplePercentage*0.4+haopingPercentage*0.2+processActual*0.4)>=50">中</span>
+                        <span class="circlemark circlemark-lightRed" v-else>差</span> -->
                     </div>
                 </div>
             </div>
@@ -38,53 +43,53 @@
             <router-link tag="div" :to="{path: routerPath('levelThree'), query: {index:1,stangMoney:userMoneyData === null || userMoneyData.resultMonthStandard == null || userMoneyData.resultMonthStandard.achieve_standard === null ? 0: userMoneyData.resultMonthStandard.achieve_standard}}" exact class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">完工</p>
                 <div class="analyItemCon">
-                    <p class="col-md-5">
+                    <p class="col-md-4">
                         <span class="cLightGray pr8">标准</span>
-                        <span>{{userMoneyData === null || userMoneyData.resultMonthStandard == null || userMoneyData.resultMonthStandard.achieve_standard === null ? 0: userMoneyData.resultMonthStandard.achieve_standard}}万</span>
+                        <span>{{ resultMonthStandard}}万</span>
                     </p>
-                    <p class="col-md-5">
+                    <p class="col-md-4">
                         <span class="cLightGray pr8">实际</span>
-                        <span>{{userMoneyData === null || userMoneyData.resultResultComple == null  || userMoneyData.resultResultComple.resultCompletionMoney === null ? 0 : userMoneyData.resultResultComple.resultCompletionMoney/10000}}万</span>
+                        <span>{{ resultResultComple/10000}}万</span>
                     </p>
                     <p class="col-md-2">
-                        <span class="cGreen tx-fb">{{(Number(userMoneyData === null || userMoneyData.resultResultComple == null  || userMoneyData.resultResultComple.resultCompletionMoney === null ? 0 : userMoneyData.resultResultComple.resultCompletionMoney)
-                            /Number(userMoneyData === null || userMoneyData.resultMonthStandard == null || userMoneyData.resultMonthStandard.achieve_standard === null ? 0: userMoneyData.resultMonthStandard.achieve_standard)/100).toFixed(2)
-
-                            }}%</span>
+                        <span class="cGreen tx-fb">{{resultResultComplePercentage}}%</span>
                     </p>
+                    <!-- <span class="circlemark" :class=" resultExcellent  | stageColor">{{ resultExcellent}}</span> -->
                 </div>
             </router-link>
             <router-link tag="div" :to="{path: routerPath('levelThree'), query: {index: 2}}" exact class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">订单</p>
                 <div class="analyItemCon">
-                    <p class="col-md-5">
+                    <p class="col-md-4">
                         <span class="cLightGray pr8">标准</span>
-                        <span>{{userMoneyData === null || userMoneyData.resultMonthStandard == null  || userMoneyData.resultMonthStandard.orderCompletionRateMonth === null ? 0 : userMoneyData.resultMonthStandard.orderCompletionRateMonth}}%</span>
+                        <span>{{ processStandard}}%</span>
                     </p>
-                    <p class="col-md-5">
+                    <p class="col-md-4">
                         <span class="cLightGray pr8">实际</span>
-                        <span>{{orderScale}}%</span>
+                        <span>{{processPercentage}}%</span>
                         <!-- <span>{{Number(processCount/processSum/100)}}%</span> -->
                     </p>
                     <p class="col-md-2">
-                        <span class="cGreen tx-fb">{{orderScale}}%</span>
+                        <span class="cGreen tx-fb">{{processActual}}%</span>
                     </p>
+                    <!-- <span class="circlemark" :class=" processExcellent  | stageColor">{{ processExcellent}}</span> -->
                 </div>
             </router-link>
             <router-link tag="div" :to="{path: routerPath('levelThree'), query: {index: 3, comEvl: userMoneyData === null || userMoneyData.haoPingSum == null ? 0 : userMoneyData.haoPingSum, stand:userMoneyData === null || userMoneyData.resultMonthStandard == null  || userMoneyData.resultMonthStandard.inspection_bonus === null ? 0 : userMoneyData.resultMonthStandard.inspection_bonus }}" exact class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">好评</p>
                 <div class="analyItemCon">
-                    <p class="col-md-5">
+                    <p class="col-md-4">
                         <span class="cLightGray pr8">标准</span>
-                        <span>{{userMoneyData === null || userMoneyData.resultMonthStandard == null  || userMoneyData.resultMonthStandard.inspection_bonus === null ? 0 : userMoneyData.resultMonthStandard.inspection_bonus}}个</span>
+                        <span>{{haopingbiaozhun}}个</span>
                     </p>
-                    <p class="col-md-5">
+                    <p class="col-md-4">
                         <span class="cLightGray pr8">实际</span>
-                        <span>{{userMoneyData === null || userMoneyData.haoPingSum == null ? 0 : userMoneyData.haoPingSum}}个</span>
+                        <span>{{haoPingSum}}个</span>
                     </p>
                     <p class="col-md-2">
-                        <span class="cGreen tx-fb">{{orderScale}}%</span>
+                        <span class="cGreen tx-fb">{{haopingPercentage}}%</span>
                     </p>
+                    <!-- <span class="circlemark" :class=" haopingExcellent  | stageColor">{{ haopingExcellent}}</span> -->
                 </div>
             </router-link>
         </div>
@@ -107,7 +112,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { UseResultgetUseResultMonthReview } from '../Resources/Api'
+import { getUsejibie } from '../Resources/Api'
 export default {
     data () {
         return {
@@ -118,7 +123,21 @@ export default {
             userMoneyData: {}, // 阶段数据
             comScale: 0, // 完工比例
             orderScale: 0, // 订单比例
-            evalScale: 0 // 好评比例
+            evalScale: 0, // 好评比例
+            resultMonthStandard: 0,
+            resultMonthStandardfakuan: 0,
+            resultMonthStandardzengxiang: 0,
+            resultResultComple: 0,
+            resultResultComplePercentage: 0,
+            resultExcellent: 0,
+            processStandard: 0,
+            processPercentage: 0,
+            processActual: 0,
+            processExcellent: 0,
+            haopingbiaozhun: 0,
+            haoPingSum: 0,
+            haopingPercentage: 0,
+            haopingExcellent: 0
         }
     },
     created () {
@@ -149,9 +168,25 @@ export default {
                 user_card_no: this.leftInfo.cardNo,
                 abilityLevel: level
             }
-            UseResultgetUseResultMonthReview(parm).then((results) => {
+            getUsejibie(parm).then((results) => {
                 if (results.data.StatusCode === 0) {
                     const userMoneyData = results.data.Body
+                    this.resultMonthStandard = this.userMoneyData.resultMonthStandard
+                    this.resultMonthStandardfakuan = this.userMoneyData.resultMonthStandardfakuan
+                    this.resultMonthStandardzengxiang = this.userMoneyData.resultMonthStandardzengxiang
+                    this.resultResultComple = this.userMoneyData.resultResultComple
+                    this.resultResultComplePercentage = this.userMoneyData.resultResultComplePercentage
+                    this.resultExcellent = this.userMoneyData.resultExcellent
+                    this.processStandard = this.userMoneyData.processStandard
+                    this.processPercentage = this.userMoneyData.processPercentage
+                    this.processActual = this.userMoneyData.processActual
+                    this.processExcellent = this.userMoneyData.processExcellent
+                    this.haopingbiaozhun = this.userMoneyData.haopingbiaozhun
+                    this.haoPingSum = this.userMoneyData.haoPingSum
+                    this.haopingPercentage = this.userMoneyData.haopingPercentage
+                    this.haopingExcellent = this.userMoneyData.haopingExcellent
+                    this.resultExcellent = this.userMoneyData.resultExcellent
+                    this.processExcellent = this.userMoneyData.processExcellent
                     // this.resultMonthStandard = results.data.Body.resultMonthStandard
                     // this.resultManageStandard = results.data.Body.resultManageStandard
                     // this.resultResultComple = results.data.Body.resultResultComple
@@ -199,9 +234,9 @@ export default {
                         this.nextLevelDate = currentObject
                     }
                     if (Number(flag) === 1) {
-                    // 完工比例
+                        // 完工比例
                         if (userMoneyData !== null || userMoneyData.resultMonthStandard == null || userMoneyData.resultMonthStandard.achieve_standard === null ||
-            userMoneyData.resultResultComple == null || userMoneyData.resultResultComple.resultCompletionMoney === null || userMoneyData.resultResultComple.resultCompletionMoney === 0) {
+              userMoneyData.resultResultComple == null || userMoneyData.resultResultComple.resultCompletionMoney === null || userMoneyData.resultResultComple.resultCompletionMoney === 0) {
                             this.comScale = 0
                         } else {
                             if (userMoneyData.resultMonthStandard.achieve_standard === 0) {
@@ -235,6 +270,66 @@ export default {
             }).catch((error) => {
                 console.log(error)
             })
+        }
+    },
+    filters: {
+        evaluate: function (str) {
+            switch (Number(str)) {
+            case 1:
+                return '优'
+            case 2:
+                return '良'
+            case 3:
+                return '中'
+            case 4:
+                return '差'
+            case 0:
+                return '待'
+            }
+        },
+        resultColor: function (str) {
+            switch (str) {
+            case '0':
+                return 'cPurple'
+            case '1':
+                return 'cGreen'
+            case '2':
+                return 'cLightGreen'
+            case '3':
+                return 'cYellow'
+            case '4':
+                return 'cRed'
+            default:
+                return 'cRed'
+            }
+        },
+        evaluateColor: function (str) {
+            switch (Number(str)) {
+            case 0:
+                return 'circlemark-purple'
+            case 1:
+                return 'circlemark-green'
+            case 2:
+                return 'circlemark-lightGreen'
+            case 3:
+                return 'circlemark-yellow'
+            case 4:
+                return 'circlemark-lightRed'
+            }
+        },
+        stageColor (str) {
+            switch (Number(str)) {
+            case 1:
+                return 'circlemark-green'
+            case 2:
+                return 'circlemark-lightGreen'
+            case 3:
+                return 'circlemark-yellow'
+            case 4:
+                return 'circlemark-lightRed'
+            case 5:
+                return 'circlemark-purple'
+            }
         }
     },
     watch: {

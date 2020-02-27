@@ -62,6 +62,11 @@ export default [
         path: 'returnDetailThree',
         component: () => import('../../MainPopup/return/returnDetailThree.vue')
     },
+    // 回款批次 洽商 收三段
+    {
+        path: 'returnDetailThreeQS',
+        component: () => import('../../MainPopup/return/returnDetailThreeQS.vue')
+    },
     // 回款批次 收处理三段
     {
         path: 'returnDetailThreeHander',

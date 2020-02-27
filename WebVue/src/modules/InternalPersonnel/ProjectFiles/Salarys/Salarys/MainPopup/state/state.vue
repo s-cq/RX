@@ -221,7 +221,7 @@ export default {
         return {
             trueSalaryTotal: 0.00,
             personCount: 0,
-            userCard: '',
+            user_card_no: '',
             pointTime: '',
             salaryModel: {},
             ordinarySalary: 0,
@@ -237,7 +237,7 @@ export default {
         this.getMonthReviewRecording()
         this.trueSalaryTotal = this.leftInfo.salaryTotal
         this.personCount = this.leftInfo.totalCount
-        this.userCard = this.leftInfo.u_kahao
+        this.user_card_no = this.leftInfo.u_kahao
         if (Number(this.leftInfo.MONTH) < 10) {
             this.pointTime = this.leftInfo.YEAR + '-0' + this.leftInfo.MONTH + '-01'
         } else {
@@ -256,7 +256,7 @@ export default {
         }),
         getInternalSalaryByUserCardFn () {
             getInternalSalaryByUserCard({
-                userCard: this.userCard,
+                user_card_no: this.user_card_no,
                 pointTime: this.pointTime
             }).then(results => {
                 this.salaryModel = results.data.Body.salaryModel
@@ -478,7 +478,7 @@ export default {
     watch: {
         leftInfo () {
             this.getMonthReviewRecording()
-            this.userCard = this.leftInfo.u_kahao
+            this.user_card_no = this.leftInfo.u_kahao
             if (Number(this.leftInfo.MONTH) < 10) {
                 this.pointTime = this.leftInfo.YEAR + '-0' + this.leftInfo.MONTH + '-01'
             } else {
@@ -487,7 +487,7 @@ export default {
             this.getInternalSalaryByUserCardFn()
         },
         updatePlate () {
-            this.userCard = this.leftInfo.u_kahao
+            this.user_card_no = this.leftInfo.u_kahao
             if (Number(this.leftInfo.MONTH) < 10) {
                 this.pointTime = this.leftInfo.YEAR + '-0' + this.leftInfo.MONTH + '-01'
             } else {

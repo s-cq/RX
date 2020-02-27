@@ -12,26 +12,27 @@
             <router-link tag="div" :to="{name:'processOrder',params:{datainfo: datainfo}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">订单</p>
                 <div class="analyItemCon">
-                    <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{datainfo.orderCompletionRate}}%/周</span></div>
-                    <div class="col-md-3"><span class="cLightGray pr8"></span><span>{{datainfo.orderCompletionRateMonth}}%/月</span></div>
+                    <!-- <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{userLevelStandardDetail.orderCompletionRate}}%/周</span></div> -->
+                    <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{userLevelStandardDetail.greatMore}}%/月</span></div>
                 </div>
             </router-link>
-            <router-link tag="div" :to="{name:'cameras',params:{datainfo: datainfo}}" class="analyItem anItemBor" active-class="anItemBor-active">
+            <!-- <router-link tag="div" :to="{name:'cameras',params:{datainfo: datainfo}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">摄像头</p>
-                <div class="analyItemCon">
-                    <!-- <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{datainfo.orderCompletionRate}}%/周</span></div> -->
-                    <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>100%/月</span></div>
+                <div class="analyItemCon"> -->
+            <!-- <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{datainfo.orderCompletionRate}}%/周</span></div> -->
+            <!-- <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>100%/月</span></div>
                 </div>
-            </router-link>
+            </router-link> -->
         </div>
     </div>
 </template>
 <script>
-import { getWarehouseDetail } from '../Resources/Api/index'
+import { getWarehouseResultDetail } from '../Resources/Api/index'
 import { mapGetters } from 'vuex'
 export default {
     data () {
         return {
+            userLevelStandardDetail: {},
             datainfo: []
         }
     },
@@ -43,11 +44,9 @@ export default {
     },
     methods: {
         load () {
-            getWarehouseDetail({ abilityLevel: this.leftInfo.grade }).then((result) => {
-                if (result.data.Body.warehouseDetail !== null) {
-                    this.datainfo = result.data.Body.warehouseDetail
-                } else {
-                    this.datainfo = { completeStandard: '-', getCompleteStandardMonth: '-' }
+            getWarehouseResultDetail({ abilityLevel: this.leftInfo.grade, abilityType: 22 }).then((result) => {
+                if (result.data.Body.userLevelStandardDetail !== null) {
+                    this.userLevelStandardDetail = result.data.Body.userLevelStandardDetail
                 }
             }).catch((err) => {
                 console.log(err)

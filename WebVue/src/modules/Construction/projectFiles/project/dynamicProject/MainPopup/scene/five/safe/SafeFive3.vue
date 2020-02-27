@@ -35,7 +35,7 @@
                     <rx-upload
                         v-if="buttonIsShow"
                         class="fl"
-                        :data="{id: item.id,index: index}" :init="{class: 2, mime: 1}"
+                        :data="{id: 11}" :init="{class: 2, mime: 1}"
                         :elStyle="{width:'90px', height: '80px'}"
                         @success="successUpload">
                         <div class="fl uiImgUpload uiImgUpload-gblock mr10">

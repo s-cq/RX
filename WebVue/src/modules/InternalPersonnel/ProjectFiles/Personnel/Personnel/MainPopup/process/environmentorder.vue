@@ -1,6 +1,15 @@
 <template>
     <div class="layerRtb layerRtb-threecolumn">
         <three-title :title="{name: order_name}"></three-title>
+        <!-- <input id="order"></input> <button type="button">项目筛选</button> -->
+        <div class="">
+            <p class="col-md-4 pl10 pr20 pb20">
+                <el-input v-model="input" clearable></el-input>
+            </p>
+            <p class="col-md-4">
+                <el-button @click="GetByRoleOrderListFn" type="button">项目筛选</el-button>
+            </p>
+        </div>
         <div class="layerRtb-scroll thinScroll" v-scrollHeight="137">
             <div v-if="orderList.length>0">
                 <div class="analyItem" v-for="(item,index) in orderList" :key="index">
@@ -32,9 +41,19 @@
                     </div>
                 </div>
             </div>
+            <div v-else>
+                <div class="analyItem">
+                    <p class="analyItemTit tx-center">暂无数据</p>
+                    <div class="analyItemCon">
+                        <p class="col-md-3">
+                            <span class="cLightGray pr8">暂无数据</span>
 
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="layerRtb-footer">
+        <div class="layerRtb-footer" v-if="orderList.length>0">
             <div v-if="orderList[0].order_type_id!==28" class="analyItem">
                 <p class="analyItemTit tx-center">综合</p>
                 <div class="analyItemCon">
@@ -86,6 +105,7 @@ import {
 export default {
     data () {
         return {
+            input: '', // 输入框
             wanCheng: 0,
             daiWanCheng: 0,
             chaoQi: 0,
@@ -102,6 +122,7 @@ export default {
     },
     created () {
         this.order_type_id = this.$route.query.order_type_id
+
         this.user_card_no = this.$route.query.user_card_no
         this.order_name = this.$route.query.order_name
         // this.priceCount = this.$route.query.priceCount
@@ -109,16 +130,32 @@ export default {
     },
     methods: {
         GetByRoleOrderListFn () {
-            getStayStayProcessOrderTypeDetail({
-                user_card_no: this.user_card_no,
-                order_type_id: this.order_type_id
-            }).then(results => {
+            this.orderList = []
+            let obj = {}
+            if (this.input === undefined || this.input === '') {
+                obj = {
+                    user_card_no: this.user_card_no,
+                    order_type_id: this.order_type_id
+                }
+            } else {
+                obj = {
+                    user_card_no: this.user_card_no,
+                    order_type_id: this.order_type_id,
+                    proname: this.input
+                }
+            }
+            getStayStayProcessOrderTypeDetail(obj).then(result => {
+            // getStayStayProcessOrderTypeDetail({
+            //     user_card_no: this.user_card_no,
+            //     order_type_id: this.order_type_id
+            // }).then(result => {
                 this.orderStatus0 = 0
                 this.orderStatus1 = 0
                 this.orderStatus2 = 0
                 this.orderStatus3 = 0
                 this.priceCount = 0
-                this.orderList = results.data.Body
+                this.orderList = result.data.Body
+                console.log(this.orderList)
                 // 2未开启，1进行中，0已完成，3超期
                 for (var i = 0; i < this.orderList.length; i++) {
                     switch (this.orderList[i].orderStatus) {

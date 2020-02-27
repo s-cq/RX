@@ -232,7 +232,7 @@ export default {
                 this.month = this.leftInfo.MONTH
             }
             getStayStayProcessOrderTypeDetailYearMonth({
-                userCard: this.leftInfo.u_kahao,
+                user_card_no: this.leftInfo.u_kahao,
                 year: this.leftInfo.YEAR,
 
                 month: this.month

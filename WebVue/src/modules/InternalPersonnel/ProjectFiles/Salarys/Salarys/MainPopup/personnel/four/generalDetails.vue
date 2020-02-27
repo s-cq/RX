@@ -75,7 +75,7 @@ export default {
                 manageType: 1, // 普级
                 gradeOld: this.gradeByAbilityLevel.grade, // 用户调整前能力级别
                 oldLevel: this.gradeByAbilityLevel.grade, // 用户调整前能力级别
-                userCard: this.leftInfo.cardNo, // 人员卡号
+                user_card_no: this.leftInfo.cardNo, // 人员卡号
                 remark: '用户升降级原因', // 备注
                 manualGradeFlag: 1, // 手动调级（0自动、1手动）
                 createdBy: this.userInfo.as_cardNo, // 创建者卡号

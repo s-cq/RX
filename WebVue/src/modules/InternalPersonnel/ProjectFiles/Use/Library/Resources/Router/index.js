@@ -5,11 +5,17 @@ import result from './result'
 import process from './process'
 import management from './management'
 
+import level from './level'
+import integral from './integral'
+import achievement from './achievement'
 export default [
     // ...three,
     ...result,
     ...process,
     ...management,
+    ...level,
+    ...integral,
+    ...achievement,
     {
         path: 'list',
         components: {

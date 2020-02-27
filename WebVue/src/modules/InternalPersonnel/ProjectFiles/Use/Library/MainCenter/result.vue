@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <div class="thinScroll pr10" v-scrollHeight="10">
+        <div v-if="leftInfo.grade<13 " class="thinScroll pr10" v-scrollHeight="10">
             <router-link tag="div" :to="{name:'resultCompletionUse',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">竣工</p>
                 <div class="analyItemCon">
@@ -27,12 +27,12 @@
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>{{userLevelStandardDetail3.greatMore}}万/月</span></div>
                 </div>
             </router-link>
-            <router-link tag="div" :to="{name:'customerReviewss',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor">
+            <!-- <router-link tag="div" :to="{name:'customerReviewss',params:{userLevelStandardDetail: userLevelStandardDetail}}" class="analyItem anItemBor">
                 <p class="analyItemTit tx-center">客户评价</p>
                 <div class="analyItemCon">
                     <div class="col-md-3"><span class="cLightGray pr8">标准</span><span>5个五星/月</span></div>
                 </div>
-            </router-link>
+            </router-link> -->
         </div>
     </div>
 </template>
@@ -58,7 +58,7 @@ export default {
         this.zeng()
     },
     methods: {
-        // 竣工
+    // 竣工
         JunGong () {
             getWarehouseResultDetail({ abilityLevel: this.leftInfo.grade, abilityType: 5 }).then((result) => {
                 if (result.data.Body.userLevelStandardDetail !== null) {
@@ -70,11 +70,12 @@ export default {
         },
         // 罚款
         fakuan () {
-            getWarehouseResultDetail({ abilityLevel: this.leftInfo.grade, abilityType: 9 }).then((result) => {
-                if (result.data.Body.userLevelStandardDetail !== null) {
-                    this.userLevelStandardDetail2 = result.data.Body.userLevelStandardDetail
+            getWarehouseResultDetail({ abilityLevel: this.leftInfo.grade, abilityType: 9 }).then((result1) => {
+                if (result1.data.Body.userLevelStandardDetail !== null) {
+                    this.userLevelStandardDetail2 = result1.data.Body.userLevelStandardDetail
                 } else {
                     this.userLevelStandardDetail2 = JSON.parse(JSON.stringify(this.userLevelStandardDetail))
+
                     for (const key in this.userLevelStandardDetail2) {
                         if (this.userLevelStandardDetail2.hasOwnProperty(key)) {
                             this.userLevelStandardDetail2[key] = 0
@@ -87,11 +88,13 @@ export default {
         },
         // 增项
         zeng () {
-            getWarehouseResultDetail({ abilityLevel: this.leftInfo.grade, abilityType: 10 }).then((result) => {
-                if (result.data.Body.userLevelStandardDetail !== null) {
-                    this.userLevelStandardDetail3 = result.data.Body.userLevelStandardDetail
+            getWarehouseResultDetail({ abilityLevel: this.leftInfo.grade, abilityType: 10 }).then((result2) => {
+                if (result2.data.Body.userLevelStandardDetail !== null) {
+                    this.userLevelStandardDetail3 = result2.data.Body.userLevelStandardDetail
                 } else {
                     this.userLevelStandardDetail3 = JSON.parse(JSON.stringify(this.userLevelStandardDetail))
+
+
                     for (const key in this.userLevelStandardDetail3) {
                         if (this.userLevelStandardDetail3.hasOwnProperty(key)) {
                             this.userLevelStandardDetail3[key] = 0

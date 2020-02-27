@@ -258,7 +258,7 @@ export default {
             this.huanJing = 0
             this.xunJian = 0
             getStayStayProcessOrderTypeDetailYearMonth({
-                userCard: this.leftInfo.cardNo
+                user_card_no: this.leftInfo.cardNo
             }).then(results => {
                 this.orderBody = results.data.Body.orderList
 

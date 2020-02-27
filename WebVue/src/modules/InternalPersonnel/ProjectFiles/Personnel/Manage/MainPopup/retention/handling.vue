@@ -1,6 +1,6 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'罚款'}"></three-title>
+    <three-title :title="{name:'处理'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <div class="analyItem">
             <p class="analyItemTit tx-center">预留</p>

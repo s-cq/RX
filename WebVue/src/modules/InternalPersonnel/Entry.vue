@@ -8,9 +8,10 @@
         <rx-main>
             <!-- 固定标题切换 -->
             <div id="components-title">
-                <ul class="clearfix uiTab1 mb5" v-if="(route == '/Engineering/Personnel' || route == '/Engineering/Account')">
+                <ul class="clearfix uiTab1 mb5" v-if="(route == '/Engineering/Personnel' || route == '/Engineering/Account' || route == '/Engineering/Manage')">
                     <router-link tag="li" class="col-md-4 fl" to="/Engineering/Personnel" active-class="uiTab1-active"><a href="javascript:">人</a></router-link>
                     <router-link tag="li" class="col-md-4 fl" to="/Engineering/Account" active-class="uiTab1-active"><a href="javascript:">账</a></router-link>
+                    <router-link tag="li" class="col-md-4 fl" to="/Engineering/Manage" active-class="uiTab1-active"><a href="javascript:">管</a></router-link>
                 </ul>
                 <ul class="clearfix uiTab1 mb5" v-if="(route == '/Engineering/StayLibrary' || route == '/Engineering/Stay')">
                     <router-link tag="li" class="col-md-4 fl" to="/Engineering/StayLibrary" active-class="uiTab1-active"><a href="javascript:">库</a></router-link>

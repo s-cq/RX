@@ -18,16 +18,20 @@
             <div class="analyItem">
                 <p class="analyItemTit tx-center">积分</p>
                 <div class="analyItemCon">
-                    <p class="col-md-6">
+                    <p class="col-md-5">
                         <input type="button" value="普级" :class="['uiBtn-normal', currentInput === 0 ? 'uiBtn-blue' : 'uiBtn-gray']" @click="getIntegralTwoDataFn(1,0)">
                         <span class="cLightGray pr8">积分</span>
                         <span class="cRed">{{userIntegral}}分</span>
                     </p>
-                    <p class="col-md-6">
+                    <p class="col-md-5">
                         <input type="button" value="管级" :class="['uiBtn-normal', currentInput === 1 ? 'uiBtn-blue' : 'uiBtn-gray']" @click="getIntegralTwoDataFn(2,1)">
                         <span class="cLightGray pr8">积分</span>
                         <span class="cGreen">{{guanUserIntegral}}分</span>
                     </p>
+                    <span class="circlemark circlemark-green" v-if="(quanzhong+quanzhong1)>=100">优</span>
+                    <span class="circlemark circlemark-lightGreen" v-else-if="(quanzhong+quanzhong1)>=75">良</span>
+                    <span class="circlemark circlemark-yellow" v-else-if="(quanzhong+quanzhong1)>=50">中</span>
+                    <span class="circlemark circlemark-lightRed" v-else>差</span>
                 </div>
             </div>
             <router-link tag="div" :to="{path:routerPath('inteThree?index'), query: {integralType:item.integralTypeId}}" class="analyItem anItemBor" active-class="anItemBor-active" exact v-for="(item, index) in classification" :key="index">
@@ -106,6 +110,10 @@ export default {
             body: {},
             jiang: 0,
             fa: 0,
+            standardName: '',
+            standardName1: '',
+            quanzhong: 0,
+            quanzhong1: 0,
             classification: []
         }
     },
@@ -136,6 +144,8 @@ export default {
                 if (flag === 1) {
                     this.body = result.data.Body
                     this.userIntegral = result.data.Body.userIntegral
+                    this.standardName = result.data.Body.standardName
+                    this.quanzhong = result.data.Body.quanzhong
                     this.integralStatus = result.data.Body.integralStatus === null ? 0 : result.data.Body.integralStatus
                     this.integralRecording = result.data.Body.integralRecording
                     this.classification = result.data.Body.classification
@@ -154,6 +164,8 @@ export default {
                 if (flag === 2) {
                     this.body = result.data.Body
                     this.guanUserIntegral = result.data.Body.userIntegral
+                    this.standardName1 = result.data.Body.standardName
+                    this.quanzhong1 = result.data.Body.quanzhong
                     this.integralStatus = result.data.Body.integralStatus === null ? 0 : result.data.Body.integralStatus
                     this.integralRecording = result.data.Body.integralRecording
                     this.classification = result.data.Body.classification

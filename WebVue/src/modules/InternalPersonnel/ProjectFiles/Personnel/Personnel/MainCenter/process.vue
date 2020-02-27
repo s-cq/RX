@@ -5,7 +5,11 @@
                 <p class="analyItemTit tx-center">状态</p>
                 <div class="analyItemCon">
                     <p class="col-md-4 ">
-                        <span class="cLightGray pr8">金额</span>
+                        <span class="cLightGray pr8">总个数</span>
+                        <span>{{totalNumber}}</span>
+                    </p>
+                    <p class="col-md-4 ">
+                        <span class="cLightGray pr8">总金额</span>
                         <span>{{Number(orderMoney)+Number(workerMoney.worker_money*workerSum)}}</span>
                     </p>
                     <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
@@ -34,7 +38,7 @@
                             <span class="cLightGray pr8">合计金额</span>
                             <span>-{{item.unit_price * item.orderCount}}</span>
                         </p> -->
-                         <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
+                        <span class="circlemark" :class="(item.standardName) | stageColorStandard">{{ item.standardName }}</span>
                     </div>
                     <div v-if="item.order_type_id==28" class="analyItemCon">
                         <p class="col-md-3">
@@ -53,7 +57,7 @@
                             <span class="cLightGray pr8">合计金额</span>
                             <span>{{item.orderCount * item.finish_price}}</span>
                         </p> -->
-                         <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
+                        <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
                     </div>
                 </router-link>
             </div>
@@ -65,7 +69,7 @@
                             <span class="cLightGray pr8">个数</span>
                             <span>0个</span>
                         </p>
-                         <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
+                        <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
                     </div>
                 </div>
             </div>
@@ -81,22 +85,22 @@
                         <span class="cLightGray pr8">单价</span>
                         <span>{{workerMoney.worker_money}}</span>
                     </p>
-                     <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
+                    <!-- <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span> -->
                     <!-- <p class="col-md-4 ">
                         <span class="cLightGray pr8">总价</span>
                         <span>{{}}</span>
                     </p> -->
                 </div>
             </router-link>
-            <router-link tag="div" :to="{path:routerPath('superServerThree'),query: {data:serverNameList}}" class="analyItem anItemBor" active-class="anItemBor-active">
+            <!-- <router-link tag="div" :to="{path:routerPath('superServerThree'),query: {data:serverNameList}}" class="analyItem anItemBor" active-class="anItemBor-active">
                 <p class="analyItemTit tx-center">增值</p>
                 <div class="analyItemCon">
                     <p class="col-md-4"><span class="cLightGray pr8">个数</span><span>{{allnumber}}</span></p>
                     <p class="col-md-4"><span class="cLightGray pr8">总金额</span><span>{{allmoney}}</span></p>
                     <p class="col-md-4"><span class="cLightGray pr8">实际金额</span><span>{{allactualMoney}}</span></p>
-                    <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
-                </div>
-            </router-link>
+                     <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
+             </div>
+        </router-link> -->
         </div>
         <div class="pr10">
             <router-link tag="div" :to="{name:'handerProcess1'}" class="analyItem anItemBor" active-class="anItemBor-active" exact>
@@ -124,7 +128,7 @@ import { getStayStayProcessDetail, getWorkerDetails, getValueAddServicesBySuperv
 export default {
     data () {
         return {
-            orderListDate: ['现场交底', '摄像头订单', '整改订单', '竣工总检'], // 订单无数据时的数据
+            orderListDate: [], // 订单无数据时的数据 '现场交底', '摄像头订单', '整改订单', '竣工总检'
             orderList: [], // 订单数据
             countSum: 0,
             countMoney: 0.0,
@@ -220,7 +224,8 @@ export default {
             this.xunJian = 0
             let _this = this
             getStayStayProcessDetail({
-                user_card_no: this.leftInfo.cardNo
+                user_card_no: this.leftInfo.cardNo,
+                abilityLevel: this.leftInfo.abilityLevel
             }).then(results => {
                 this.countSum = 0
                 _this.orderList = results.data.Body.StayStayProcessDetail
@@ -307,6 +312,20 @@ export default {
             case 4:
                 return 'circlemark-lightRed'
             case 5:
+                return 'circlemark-purple'
+            }
+        },
+        stageColorStandard (str) {
+            switch (str) {
+            case '优':
+                return 'circlemark-green'
+            case '良':
+                return 'circlemark-lightGreen'
+            case '中':
+                return 'circlemark-yellow'
+            case '差':
+                return 'circlemark-lightRed'
+            case '待':
                 return 'circlemark-purple'
             }
         }

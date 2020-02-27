@@ -16,11 +16,19 @@
                         <span class="cLightGray pr8">总提成</span>
                         <span>{{(comprehensive_negotiate+comprehensive_fine+comprehensive_completion).toFixed(2)}}</span>
                     </p>
-                    <span class="circlemark circlemark-green" v-if="(junQuanzhong+fineQuanzhong+qiaQuanzhong)>=100">优</span>
-                    <span class="circlemark circlemark-lightGreen" v-if="(junQuanzhong+fineQuanzhong+qiaQuanzhong)>=75">良</span>
-                    <span class="circlemark circlemark-yellow" v-if="(junQuanzhong+fineQuanzhong+qiaQuanzhong)>=50">中</span>
+                    <span class="circlemark circlemark-green" v-if="(junQuanzhong)>=100">优</span>
+                    <span class="circlemark circlemark-lightGreen" v-else-if="(junQuanzhong)>=75">良</span>
+                    <span class="circlemark circlemark-yellow" v-else-if="(junQuanzhong)>=50">中</span>
                     <span class="circlemark circlemark-lightRed" v-else>差</span>
-                    <!-- <span class="circlemark" :class="junStateObject.hasOwnProperty('stageNum') && junStateObject.stageNum !== null ? junStateObject.stageNum : 0 | stageColor">{{junStateObject.hasOwnProperty('stageName')  && junStateObject.stageName !== null ? junStateObject.stageName : ''  }}</span> -->
+                    <div class="fixedTrangle"><a href="javascript:" class="fixedtips"></a>
+                        <div class="fixedtipscon pt10 pb10" style="display: none;"><i></i>
+                            <p>优:实际>={{jungongStandard.greatMore}}万</p>
+                            <p>良:{{jungongStandard.goodMore}}万&lt;=实际&lt;{{jungongStandard.greatMore}}万</p>
+                            <p>中:{{jungongStandard.averageMore}}万&lt;=实际&lt;{{jungongStandard.goodMore}}万</p>
+                            <p>差:{{jungongStandard.badMore}}万&lt;=实际&lt;{{jungongStandard.averageMore}}万</p>
+                            <p>待:未进行标准设置或暂无数据</p>
+                        </div>
+                    </div> <!-- <span class="circlemark" :class="junStateObject.hasOwnProperty('stageNum') && junStateObject.stageNum !== null ? junStateObject.stageNum : 0 | stageColor">{{junStateObject.hasOwnProperty('stageName')  && junStateObject.stageName !== null ? junStateObject.stageName : ''  }}</span> -->
                 </div>
             </div>
         </div>
@@ -41,6 +49,15 @@
                         <span>{{comprehensive_completion.toFixed(2)}}</span>
                     </p>
                     <span class="circlemark" :class="junStateObject.hasOwnProperty('stageName') && junStateObject.stageNum !== null ? junStateObject.stageNum : 0 | stageColor">{{junStateObject.hasOwnProperty('stageName') && junStateObject.stageName !== null ? junStateObject.stageName : '' }}</span>
+                    <div class="fixedTrangle"><a href="javascript:" class="fixedtips"></a>
+                        <div class="fixedtipscon pt10 pb10" style="display: none;"><i></i>
+                            <p>优:实际>={{jungongStandard.greatMore}}万</p>
+                            <p>良:{{jungongStandard.goodMore}}万&lt;=实际&lt;{{jungongStandard.greatMore}}万</p>
+                            <p>中:{{jungongStandard.averageMore}}万&lt;=实际&lt;{{jungongStandard.goodMore}}万</p>
+                            <p>差:{{jungongStandard.badMore}}万&lt;=实际&lt;{{jungongStandard.averageMore}}万</p>
+                            <p>待:未进行标准设置或暂无数据</p>
+                        </div>
+                    </div>
                 </div>
             </router-link>
             <router-link tag="div" :to="{name:'resultFine1',params:{completionList:completionList}}" class="analyItem anItemBor" active-class="anItemBor-active">
@@ -58,7 +75,7 @@
                         <span class="cLightGray pr8">提成</span>
                         <span>{{comprehensive_fine.toFixed(2)}}</span>
                     </p>
-                    <span class="circlemark" :class="fineStateObjdect.hasOwnProperty('stageName') && fineStateObjdect.stageNum !== null ? fineStateObjdect.stageNum : 0 | stageColor">{{fineStateObjdect.hasOwnProperty('stageName') && fineStateObjdect.stageName !== null ? fineStateObjdect.stageName : ''  }}</span>
+                    <!-- <span class="circlemark" :class="fineStateObjdect.hasOwnProperty('stageName') && fineStateObjdect.stageNum !== null ? fineStateObjdect.stageNum : 0 | stageColor">{{fineStateObjdect.hasOwnProperty('stageName') && fineStateObjdect.stageName !== null ? fineStateObjdect.stageName : ''  }}</span> -->
                 </div>
             </router-link>
             <router-link tag="div" :to="{name:'resultNegotiation1',params:{completionList:completionList}}" class="analyItem anItemBor" active-class="anItemBor-active">
@@ -76,7 +93,7 @@
                         <span class="cLightGray pr8">提成</span>
                         <span>{{comprehensive_negotiate.toFixed(2)}}</span>
                     </p>
-                     <span class="circlemark" :class="qiaStateObjdect.hasOwnProperty('stageName') && qiaStateObjdect.stageNum !== null ? qiaStateObjdect.stageNum : 0 | stageColor">{{qiaStateObjdect.hasOwnProperty('stageName') && qiaStateObjdect.stageName !== null ? qiaStateObjdect.stageName : ''  }}</span>
+                    <!-- <span class="circlemark" :class="qiaStateObjdect.hasOwnProperty('stageName') && qiaStateObjdect.stageNum !== null ? qiaStateObjdect.stageNum : 0 | stageColor">{{qiaStateObjdect.hasOwnProperty('stageName') && qiaStateObjdect.stageName !== null ? qiaStateObjdect.stageName : ''  }}</span> -->
                 </div>
             </router-link>
         </div>
@@ -120,6 +137,7 @@ export default {
             fine_money: 0,
             // 罚款提成
             comprehensive_fine: 0,
+            jungongStandard: {},
             // 洽商金额
             negotiate_profit: 0,
             // 洽商提成
@@ -140,14 +158,14 @@ export default {
         this.stayCompleteDataFn()
         this.GetUserTradeDetailByUserCardFn()
         // 竣工的按钮
-        const junMoney = (this.negotiate_profit + this.fine_money + this.completion_money) / 10000
+        const junMoney = (this.completion_money) / 10000
         this.getExcellentGoodModeratePoor(junMoney, 1)
-        // 罚款的按钮
-        const fineMoney = Number(this.fine_money) / 10000
-        this.getExcellentGoodModeratePoor(fineMoney, 2)
-        // 洽商的按钮
-        const qiaMoney = Number(this.negotiate_profit) / 10000
-        this.getExcellentGoodModeratePoor(qiaMoney, 3)
+    // // 罚款的按钮
+    // const fineMoney = Number(this.fine_money) / 10000
+    // this.getExcellentGoodModeratePoor(fineMoney, 2)
+    // // 洽商的按钮
+    // const qiaMoney = Number(this.negotiate_profit) / 10000
+    // this.getExcellentGoodModeratePoor(qiaMoney, 3)
     },
     methods: {
     // 路由跳转路径拼接
@@ -203,6 +221,7 @@ export default {
             }).then(results => {
                 if (results.data.StatusCode === 0) {
                     if (flag === 1) {
+                        this.jungongStandard = results.data.Body
                         this.junStateObject.stageName = results.data.Body.standardName
                         this.junStateObject.stageNum = results.data.Body.userGoodBad
                         this.junQuanzhong = results.data.Body.quanzhong
@@ -306,12 +325,12 @@ export default {
             // 竣工的按钮
             const junMoney = (this.negotiate_profit + this.fine_money + this.completion_money) / 10000
             this.getExcellentGoodModeratePoor(junMoney, 1)
-            // 罚款的按钮
-            const fineMoney = Number(this.fine_money) / 10000
-            this.getExcellentGoodModeratePoor(fineMoney, 2)
-            // 洽商的按钮
-            const qiaMoney = Number(this.negotiate_profit) / 10000
-            this.getExcellentGoodModeratePoor(qiaMoney, 3)
+            // // 罚款的按钮
+            // const fineMoney = Number(this.fine_money) / 10000
+            // this.getExcellentGoodModeratePoor(fineMoney, 2)
+            // // 洽商的按钮
+            // const qiaMoney = Number(this.negotiate_profit) / 10000
+            // this.getExcellentGoodModeratePoor(qiaMoney, 3)
         }
     }
 }

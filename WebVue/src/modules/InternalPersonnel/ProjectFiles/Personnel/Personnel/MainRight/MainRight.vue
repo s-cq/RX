@@ -424,7 +424,7 @@ export default {
             var curUserNo = this.userInfo.as_cardNo // 当前登录用户的卡号
             var curUserName = this.userInfo.as_userName // 当前登录用户姓名
             saveUserHandInfo({
-                userCard: this.leftInfo.cardNo, // 用户卡号（唯一性，被处理人员的卡号）
+                user_card_no: this.leftInfo.cardNo, // 用户卡号（唯一性，被处理人员的卡号）
                 hrType: 1, /// /人事类型：1内部人事，2外部人事-材料商,3工程Integer
                 createdBy: curUserNo, // 任务创建者卡号
                 modifyBy: curUserNo, // 修改任务者卡号
