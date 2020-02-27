@@ -937,3 +937,12 @@ export function getUserManageMonthEvaluation (params) {
 // export function getIntegralTwoData (params) {
 //     return Request.http.post('/api/personelPersonel/getIntegralTwoData', params, 34, { dataType: 'json' })
 // }
+/** ******************  人 状态=》状态 优良差 ********************/
+/**
+ * 参数: 传卡号user_card_no
+ * 描述: 获取按钮颜色和文字
+ */
+export function pushChengRenBusiness (params) {
+    return Request.http.post('/api/SalaryScheduledController/pushChengRenBusiness',
+        params, 34, { dataType: 'json' })
+}

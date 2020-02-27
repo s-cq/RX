@@ -33,9 +33,15 @@
                                             <span class="visi-date">
                                                 <span>{{surprvisorWorkLogs1.createtime}}</span>
                                             </span>
-                                            <span v-if="surprvisorWorkLogs1.importance===1" class="cGreen">正常</span>
-                                            <span v-if="surprvisorWorkLogs1.importance===2" class="cOrange">异常</span>
-                                            <span v-if="surprvisorWorkLogs1.importance===3" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===1||surprvisorWorkLogs1.importance===12" class="cGreen">正常</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===6||surprvisorWorkLogs1.importance===13" class="cOrange">异常</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===3" class="cBlue">奖罚</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===14" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===7" class="cBlue">培训</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===28" class="cBlue">调级</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===2" class="cBlue">整改</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===4" class="cBlue">淘汰</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===5" class="cBlue">红包</span>
                                             <!-- <span v-else class="cGreen">正常</span> -->
                                         </div>
                                         <p class="visi-listtxt">{{surprvisorWorkLogs1.logcontent}}</p>
@@ -50,9 +56,15 @@
                                             <span class="visi-date">
                                                 <span>{{surprvisorWorkLogs1.createtime}}</span>
                                             </span>
-                                            <span v-if="surprvisorWorkLogs1.importance===1" class="cGreen">正常</span>
-                                            <span v-if="surprvisorWorkLogs1.importance===2" class="cOrange">异常</span>
-                                            <span v-if="surprvisorWorkLogs1.importance===3" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===1||surprvisorWorkLogs1.importance===12" class="cGreen">正常</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===6||surprvisorWorkLogs1.importance===13" class="cOrange">异常</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===3" class="cBlue">奖罚</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===14" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===7" class="cBlue">培训</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===28" class="cBlue">调级</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===2" class="cBlue">整改</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===4" class="cBlue">淘汰</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===5" class="cBlue">红包</span>
                                             <!-- <span v-else class="cGreen">正常</span> -->
                                         </div>
                                         <p class="visi-listtxt">{{surprvisorWorkLogs1.logcontent}}</p>
@@ -62,9 +74,15 @@
 
                                     <div class="visi-list tx-right">
                                         <div class="visi-listtop">
-                                            <span v-if="surprvisorWorkLogs1.importance===1" class="cGreen">正常</span>
-                                            <span v-if="surprvisorWorkLogs1.importance===2" class="cOrange">异常</span>
-                                            <span v-if="surprvisorWorkLogs1.importance===3" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===1||surprvisorWorkLogs1.importance===12" class="cGreen">正常</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===6||surprvisorWorkLogs1.importance===13" class="cOrange">异常</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===3" class="cBlue">奖罚</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===14" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===7" class="cBlue">培训</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===28" class="cBlue">调级</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===2" class="cBlue">整改</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===4" class="cBlue">淘汰</span>
+                                            <span v-if="surprvisorWorkLogs1.importance===5" class="cBlue">红包</span>
                                             <!-- <span v-else class="cGreen">正常</span> -->
                                             <span class="visi-date">
                                                 <span>{{surprvisorWorkLogs1.createtime}}</span>
@@ -90,9 +108,15 @@
                                                 </span>
                                             </span>
                                             <span class="_evaluateDeailt mr5"></span>
-                                            <span v-if="userHandInfoList1.handType===1" class="cGreen">正常</span>
-                                            <span v-if="userHandInfoList1.handType===2" class="cOrange">异常</span>
-                                            <span v-if="userHandInfoList1.handType===3" class="cRed">问题</span>
+                                            <span v-if="userHandInfoList1.handType===1||userHandInfoList1.handType===12" class="cGreen">正常</span>
+                                            <span v-if="userHandInfoList1.handType===6||userHandInfoList1.handType===13" class="cOrange">异常</span>
+                                            <span v-if="userHandInfoList1.handType===3" class="cBlue">奖罚</span>
+                                            <span v-if="userHandInfoList1.handType===14" class="cRed">问题</span>
+                                            <span v-if="userHandInfoList1.handType===7" class="cBlue">培训</span>
+                                            <span v-if="userHandInfoList1.handType===28" class="cBlue">调级</span>
+                                            <span v-if="userHandInfoList1.handType===2" class="cBlue">整改</span>
+                                             <span v-if="userHandInfoList1.handType===4" class="cBlue">淘汰</span>
+                                            <span v-if="userHandInfoList1.handType===5" class="cBlue">红包</span>
                                             <span class="mr5 ">{{userHandInfoList1.jobLevelName}}</span>
                                             <span class="visi-date mr5">
                                                 <span>{{userHandInfoList1.createTime}}</span>
@@ -112,10 +136,16 @@
                                             <span class="visi-date mr5">
                                                 <span>{{userHandInfoList1.createTime}}</span>
                                             </span>
-                                            <span v-if="userHandInfoList1.handType===1" class="cGreen">正常</span>
-                                            <span v-if="userHandInfoList1.handType===2" class="cOrange">异常</span>
-                                            <span v-if="userHandInfoList1.handType===3" class="cRed">问题</span>
-                                            <span class="cGreen mr5">{{userHandInfoList1.handTypeName}}</span>
+                                            <span v-if="userHandInfoList1.handType===1||userHandInfoList1.handType===12" class="cGreen">正常</span>
+                                            <span v-if="userHandInfoList1.handType===6||userHandInfoList1.handType===13" class="cOrange">异常</span>
+                                            <span v-if="userHandInfoList1.handType===3" class="cBlue">奖罚</span>
+                                            <span v-if="userHandInfoList1.handType===14" class="cRed">问题</span>
+                                            <span v-if="userHandInfoList1.handType===7" class="cBlue">培训</span>
+                                            <span v-if="userHandInfoList1.handType===28" class="cBlue">调级</span>
+                                            <span v-if="userHandInfoList1.handType===2" class="cBlue">整改</span>
+                                            <span v-if="userHandInfoList1.handType===4" class="cBlue">淘汰</span>
+                                            <span v-if="userHandInfoList1.handType===5" class="cBlue">红包</span>
+                                            <!-- <span class="cGreen mr5">{{userHandInfoList1.handTypeName}}</span> -->
                                             <span class="_evaluateDeailt mr5" data-evaluate="0"></span>
                                             <span class="scrollUl img_list">
                                                 <span style="width: 30px; height: 30px;" class="img_list3 relative">
@@ -139,11 +169,15 @@
                                             <span class="visi-date">
                                                 <span>{{surprvisorWorkLogs2.createtime}}</span>
                                             </span>
-                                            <span v-if="surprvisorWorkLogs2.importance===1" class="cGreen">正常</span>
-                                            <span v-if="surprvisorWorkLogs2.importance===2" class="cOrange">异常</span>
-                                            <span v-if="surprvisorWorkLogs2.importance===3" class="cGreen">问题</span>
-                                            <!-- <span v-else class="cGreen">正常</span> -->
-
+                                            <span v-if="surprvisorWorkLogs2.importance===1||surprvisorWorkLogs2.importance===12" class="cGreen">正常</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===6||surprvisorWorkLogs2.importance===13" class="cOrange">异常</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===3" class="cBlue">奖罚</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===14" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===7" class="cBlue">培训</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===28" class="cBlue">调级</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===2" class="cBlue">整改</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===4" class="cBlue">淘汰</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===5" class="cBlue">红包</span>
                                         </div>
                                         <p class="visi-listtxt">{{surprvisorWorkLogs2.logcontent}}</p>
                                     </div>
@@ -157,11 +191,15 @@
                                             <span class="visi-date">
                                                 <span>{{surprvisorWorkLogs2.createtime}}</span>
                                             </span>
-                                            <span v-if="surprvisorWorkLogs2.importance===1" class="cGreen">正常</span>
-                                            <span v-if="surprvisorWorkLogs2.importance===2" class="cOrange">异常</span>
-                                            <span v-if="surprvisorWorkLogs2.importance===3" class="cGreen">问题</span>
-                                            <!-- <span v-else class="cGreen">正常</span> -->
-
+                                            <span v-if="surprvisorWorkLogs2.importance===1||surprvisorWorkLogs2.importance===12" class="cGreen">正常</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===6||surprvisorWorkLogs2.importance===13" class="cOrange">异常</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===3" class="cBlue">奖罚</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===14" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===7" class="cBlue">培训</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===28" class="cBlue">调级</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===2" class="cBlue">整改</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===4" class="cBlue">淘汰</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===5" class="cBlue">红包</span>
                                         </div>
                                         <p class="visi-listtxt">{{surprvisorWorkLogs2.logcontent}}</p>
                                     </div>
@@ -171,11 +209,15 @@
 
                                     <div class="visi-list tx-right">
                                         <div class="visi-listtop">
-                                            <span v-if="surprvisorWorkLogs2.importance===1" class="cGreen">正常</span>
-                                            <span v-if="surprvisorWorkLogs2.importance===2" class="cOrange">异常</span>
-                                            <span v-if="surprvisorWorkLogs2.importance===3" class="cGreen">问题</span>
-                                            <!-- <span v-else class="cGreen">正常</span> -->
-
+                                            <span v-if="surprvisorWorkLogs2.importance===1||surprvisorWorkLogs2.importance===12" class="cGreen">正常</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===6||surprvisorWorkLogs2.importance===13" class="cOrange">异常</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===3" class="cBlue">奖罚</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===14" class="cRed">问题</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===7" class="cBlue">培训</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===28" class="cBlue">调级</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===2" class="cBlue">整改</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===4" class="cBlue">淘汰</span>
+                                            <span v-if="surprvisorWorkLogs2.importance===5" class="cBlue">红包</span>
                                             <span class="visi-date">
                                                 <span>{{surprvisorWorkLogs2.createtime}}</span>
                                             </span>
@@ -192,9 +234,15 @@
 
                                     <div class="visi-list tx-right">
                                         <div class="visi-listtop">
-                                            <span v-if="userHandInfoList2.handType===1" class="cGreen">正常</span>
-                                            <span v-if="userHandInfoList2.handType===2" class="cOrange">异常</span>
-                                            <span v-if="userHandInfoList2.handType===3" class="cRed">问题</span>
+                                            <span v-if="userHandInfoList2.handType===1||userHandInfoList2.handType===12" class="cGreen">正常</span>
+                                            <span v-if="userHandInfoList2.handType===6||userHandInfoList2.handType===13" class="cOrange">异常</span>
+                                            <span v-if="userHandInfoList2.handType===3" class="cBlue">奖罚</span>
+                                            <span v-if="userHandInfoList2.handType===14" class="cRed">问题</span>
+                                            <span v-if="userHandInfoList2.handType===7" class="cBlue">培训</span>
+                                            <span v-if="userHandInfoList2.handType===28" class="cBlue">调级</span>
+                                            <span v-if="userHandInfoList2.handType===2" class="cBlue">整改</span>
+                                             <span v-if="userHandInfoList2.handType===4" class="cBlue">淘汰</span>
+                                            <span v-if="userHandInfoList2.handType===5" class="cBlue">红包</span>
                                             <span class="scrollUl img_list">
                                                 <span style="width: 30px; height: 30px;" class="img_list3 relative">
 

@@ -73,11 +73,15 @@
                         <tr v-for="(item,index) in leftListData" :key="index" :class="{'tractive':index == trIndex}" @click="siderBarTrclick(index,item)">
                             <td width="20%">{{item.regionName}}</td>
                             <td width="20%">{{item.userName}}</td>
-                            <td width="15%" v-if="item.handTypeTop==1 || (item.handTypeTop==2 && item.taskStatus!==2) || item.handTypeTop==3">正常</td>
-                            <td width="15%" v-else-if="(item.handTypeTop==2 && item.taskStatus==2)">整改</td>
-                            <td width="15%" v-else-if="item.handTypeTop==4">淘汰</td>
-                            <td width="15%" v-else-if="item.handTypeTop==6">异常</td>
+                            <td width="15%" v-if="item.handTypeTop==1 ||item.handTypeTop==12">正常</td>
+                            <td width="15%" v-else-if="(item.handTypeTop==2)">整改</td>
+                            <td width="15%" v-else-if="item.handTypeTop==3" class="cBlue">奖罚</td>
+                            <td width="15%" v-else-if="item.handTypeTop==4" class="cRed">淘汰</td>
+                            <td width="15%" v-else-if="item.handTypeTop==5" class="cBlue">红包</td>
+                            <td width="15%" v-else-if="item.handTypeTop==6||item.handTypeTop==13" class="cRed">异常</td>
+                            <td width="15%" v-else-if="item.handTypeTop==14" class="cBlue">问题</td>
                             <td width="15%" v-else-if="item.handTypeTop==7" class="cBlue">培训</td>
+                            <td width="15%" v-else-if="item.handTypeTop==28" class="cBlue">调级</td>
                             <td width="15%" v-else>--</td>
                             <td width="15%">{{item.abilityLevel}}</td>
                             <td width="15%" v-if="item.jobLevel==80" style="color: #99cc00;">良</td>

@@ -4,7 +4,7 @@
             <div class="analyItem">
                 <p class="analyItemTit tx-center">状态</p>
                 <div class="analyItemCon">
-
+                     <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
                 </div>
             </div>
         </div>
@@ -163,7 +163,7 @@
 import {
     mapGetters
 } from 'vuex'
-import { getStayStayResultDetail, getIntegralTwoData, getUsejibie, getExcellentGoodModeratePoor, getStayStayProcessDetail, getStayStayManagementDetail, getWorkerDetails, getValueAddServicesBySupervisionCard, getAllAchievement } from '../Resources/Api'
+import { pushChengRenBusiness, getStayStayResultDetail, getIntegralTwoData, getUsejibie, getExcellentGoodModeratePoor, getStayStayProcessDetail, getStayStayManagementDetail, getWorkerDetails, getValueAddServicesBySupervisionCard, getAllAchievement } from '../Resources/Api'
 export default {
     data () {
         return {
@@ -244,8 +244,8 @@ export default {
         ...mapGetters(['leftInfo'])
     },
     created () {
-    // =================结果
-    // 竣工的按钮
+        // =================结果
+        // 竣工的按钮
         const junMoney = (this.negotiate_profit + this.fine_money + this.completion_money) / 10000
         this.getExcellentGoodModeratePoor(junMoney, 1)
         // 罚款的按钮
@@ -267,6 +267,8 @@ export default {
         this.getExcellentGoodModeratePoor1(qiaMoney1, 3)
         // ===================管理
         // =====================过程开始
+        // 状态
+        this.pushChengRenBusiness()
         this.GetByRoleOrderListFn()
         this.getWorkerDetailsFn()
         this.getValueAddServicesBySupervisionCard()
@@ -277,6 +279,14 @@ export default {
         this.getIntegralTwoDataFn(2, 0)
     },
     methods: {
+        // 状态的优良差
+        pushChengRenBusiness () {
+            pushChengRenBusiness({
+                user_card_no: this.leftInfo.cardNo
+            }).then(res => {
+
+            })
+        },
         getIntegralTwoDataFn (flag, index) {
             // this.quanzhong = 0
             // this.quanzhong1 = 0
@@ -627,6 +637,18 @@ export default {
                 return 'circlemark-lightRed'
             case 5:
                 return 'circlemark-purple'
+            }
+        },
+        stageColorName (str) {
+            switch (str) {
+            case '优':
+                return 'circlemark-green'
+            case '良':
+                return 'circlemark-lightGreen'
+            case '中':
+                return 'circlemark-yellow'
+            case '差':
+                return 'circlemark-lightRed'
             }
         }
     },

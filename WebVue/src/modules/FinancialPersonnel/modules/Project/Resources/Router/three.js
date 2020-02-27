@@ -72,12 +72,42 @@ export default [
         path: 'returnDetailThreeHander',
         component: () => import('../../MainPopup/return/returnDetailThreeHander.vue')
     },
-    // 支款账务 收三段
+    // 支款账务 支三段
     {
         path: 'payDetailThree',
         component: () => import('../../MainPopup/pay/payDetailThree.vue')
     },
-    // 支款账务 收处理三段
+    // 支款账务 支 合计三段
+    {
+        path: 'payDetailThreeHJ',
+        component: () => import('../../MainPopup/pay/payDetailThreeHJ.vue')
+    },
+    // 支款账务 支 人工款三段
+    {
+        path: 'payDetailThreeRG',
+        component: () => import('../../MainPopup/pay/payDetailThreeRG.vue')
+    },
+    // 支款账务 支 材料款三段
+    {
+        path: 'payDetailThreeCL',
+        component: () => import('../../MainPopup/pay/payDetailThreeCL.vue')
+    },
+    // 支款账务 支 增项款三段
+    {
+        path: 'payDetailThreeZX',
+        component: () => import('../../MainPopup/pay/payDetailThreeZX.vue')
+    },
+    // 支款账务 支 结算款三段
+    {
+        path: 'payDetailThreeJS',
+        component: () => import('../../MainPopup/pay/payDetailThreeJS.vue')
+    },
+    // 支款账务 支 增项协调费三段
+    {
+        path: 'payDetailThreeZXX',
+        component: () => import('../../MainPopup/pay/payDetailThreeZXX.vue')
+    },
+    // 支款账务 支处理三段
     {
         path: 'payDetailThreeHander',
         component: () => import('../../MainPopup/pay/payDetailThreeHander.vue')

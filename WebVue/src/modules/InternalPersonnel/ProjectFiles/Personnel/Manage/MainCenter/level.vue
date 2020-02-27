@@ -4,7 +4,7 @@
             <div class="analyItem">
                 <p class="analyItemTit tx-center">状态</p>
                  <div class="analyItemCon">
-                     <p class="col-md-4">
+                     <!-- <p class="col-md-4">
                         <button class="uiBtn-normal " :class="{'uiBtn-blue':flg==2 }"  @click="flg=2">普级</button>
                     </p>
                      <p class="col-md-4">
@@ -12,7 +12,7 @@
                     </p>
                     <p class="col-md-4">
                         <button class="uiBtn-normal " :class="{'uiBtn-blue':flg==1 }"  @click="flg=1">管培级</button>
-                    </p>
+                    </p> -->
                 </div>
             </div>
         </div>

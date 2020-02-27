@@ -50,7 +50,10 @@
                         <span class="cLightGray pr8">级别提成</span>
                         <span title="">{{comprehensive_completion.toFixed(2)}}</span>
                     </p>
+                    <span class="circlemark" :class="junStateObject.hasOwnProperty('stageName') && junStateObject.stageNum !== null ? junStateObject.stageNum : 0 | stageColor">{{junStateObject.hasOwnProperty('stageName') && junStateObject.stageName !== null ? junStateObject.stageName : '' }}</span>
+                    <!-- <span class="circlemark" :class="junStateObject.hasOwnProperty('stageName') && junStateObject.stageNum !== null ? junStateObject.stageNum : 0 | stageColor">{{junStateObject.hasOwnProperty('stageName') && junStateObject.stageName !== null ? junStateObject.stageName : '' }}</span> -->
                 </div>
+
             </div>
             <!-- <div class="tx-center">
                 <input type="button" class="uiBtn-normal uiBtn-blue" value="确定">
@@ -59,7 +62,7 @@
     </div>
 </template>
 <script>
-// import { } from '../Resources/Api'
+import { getExcellentGoodModeratePoor } from '../../Resources/Api'
 import { mapGetters } from 'vuex'
 export default {
     data () {
@@ -67,7 +70,13 @@ export default {
             completionList: {},
             countSum: 0,
             completion_money: 0,
-            comprehensive_completion: 0
+            comprehensive_completion: 0,
+            junStateObject: {}, // 竣工的状态按钮显示
+            fineStateObjdect: {}, // 罚款的状态按钮显示
+            qiaStateObjdect: {}, // 洽商的状态按钮显示
+            junQuanzhong: 0, // 竣工的权重
+            fineQuanzhong: {}, // 罚款的权重
+            qiaQuanzhong: {} // 洽商的权重
         }
     },
     computed: {
@@ -76,9 +85,40 @@ export default {
     created () {
         this.completionList = this.$route.params.completionList
         this.load()
+        const junMoney = (this.completion_money) / 10000
+        this.getExcellentGoodModeratePoor(junMoney, 1)
     },
 
     methods: {
+    // 获取状态中的按钮
+        getExcellentGoodModeratePoor (money, flag) {
+            let type = 0
+            if (flag === 1) {
+                type = 5
+            } else if (flag === 2) {
+                type = 9
+            } else if (flag === 3) {
+                type = 10
+            }
+            getExcellentGoodModeratePoor({
+                user_card_no: this.leftInfo.cardNo,
+                standard: money,
+                abilityLevel: this.leftInfo.abilityLevel,
+                abilityType: type
+            }).then(results => {
+                if (results.data.StatusCode === 0) {
+                    this.jungongStandard = results.data.Body
+                    this.$set(this.junStateObject, 'stageName', results.data.Body.standardName)
+                    this.$set(this.junStateObject, 'stageNum', results.data.Body.userGoodBad)
+                    // this.junStateObject.stageName = results.data.Body.standardName
+                    // this.junStateObject.stageNum = results.data.Body.userGoodBad
+                    this.junQuanzhong = results.data.Body.quanzhong
+                    console.log(this.junStateObject)
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+        },
         load () {
             for (var i = 0; i < this.completionList.length; i++) {
                 this.countSum++
@@ -101,7 +141,22 @@ export default {
             str = str.substring(str.indexOf('（') + 1, str.indexOf('）'))
             console.log(str + 'str')
             return str
+        },
+        stageColor (str) {
+            switch (Number(str)) {
+            case 1:
+                return 'circlemark-green'
+            case 2:
+                return 'circlemark-lightGreen'
+            case 3:
+                return 'circlemark-yellow'
+            case 4:
+                return 'circlemark-lightRed'
+            case 5:
+                return 'circlemark-purple'
+            }
         }
+
     }
 }
 </script>

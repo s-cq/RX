@@ -13,9 +13,9 @@
                         <span class="cLightGray pr8">绩效总金额</span>
                         <span>{{(negotiate_profit+fine_money+completion_money).toFixed(2)}}</span>
                     </p>
-                    <span class="circlemark circlemark-green" v-if="(junQuanzhong+fineQuanzhong+qiaQuanzhong)>=100">优</span>
-                    <span class="circlemark circlemark-lightGreen" v-else-if="(junQuanzhong+fineQuanzhong+qiaQuanzhong)>=75">良</span>
-                    <span class="circlemark circlemark-yellow" v-else-if="(junQuanzhong+fineQuanzhong+qiaQuanzhong)>=50">中</span>
+                    <span class="circlemark circlemark-green" v-if="(junQuanzhong)>=100">优</span>
+                    <span class="circlemark circlemark-lightGreen" v-else-if="(junQuanzhong)>=75">良</span>
+                    <span class="circlemark circlemark-yellow" v-else-if="(junQuanzhong)>=50">中</span>
                     <span class="circlemark circlemark-lightRed" v-else>差</span>
                 </div>
             </div>
@@ -44,9 +44,9 @@
                         <span class="cLightGray pr8">绩效总金额</span>
                         <span>{{(negotiate_profit1+fine_money1+completion_money1).toFixed(2)}}</span>
                     </p>
-                    <span class="circlemark circlemark-green" v-if="(junQuanzhong1+fineQuanzhong1+qiaQuanzhong1)>=100">优</span>
-                    <span class="circlemark circlemark-lightGreen" v-else-if="(junQuanzhong1+fineQuanzhong1+qiaQuanzhong1)>=75">良</span>
-                    <span class="circlemark circlemark-yellow" v-else-if="(junQuanzhong1+fineQuanzhong1+qiaQuanzhong1)>=50">中</span>
+                    <span class="circlemark circlemark-green" v-if="(junQuanzhong1)>=100">优</span>
+                    <span class="circlemark circlemark-lightGreen" v-else-if="(junQuanzhong1)>=75">良</span>
+                    <span class="circlemark circlemark-yellow" v-else-if="(junQuanzhong1)>=50">中</span>
                     <span class="circlemark circlemark-lightRed" v-else>差</span>
                 </div>
             </div>
@@ -295,7 +295,7 @@ export default {
         ...mapGetters(['leftInfo', 'userInfo'])
     },
     created () {
-        const junMoney = (this.negotiate_profit + this.fine_money + this.completion_money) / 10000
+        const junMoney = (this.completion_money) / 10000
         this.getExcellentGoodModeratePoor(junMoney, 1)
         // 罚款的按钮
         const fineMoney = Number(this.fine_money) / 10000
@@ -306,7 +306,7 @@ export default {
         // ===================结果
         // =================管理
         // 竣工的按钮
-        const junMoney1 = (this.negotiate_profit + this.fine_money + this.completion_money) / 10000
+        const junMoney1 = (this.completion_money) / 10000
         this.getExcellentGoodModeratePoor1(junMoney1, 1)
         // 罚款的按钮
         const fineMoney1 = Number(this.fine_money) / 10000
@@ -483,6 +483,9 @@ export default {
                 break
             case 1:
                 this.LaunchEventAndOver()
+                parms.title = '奖罚'
+                parms.handType = 3
+                this.handleSaveUserHandInfo(parms, parms2)
                 break
             case 2:
                 parms.title = '异常'

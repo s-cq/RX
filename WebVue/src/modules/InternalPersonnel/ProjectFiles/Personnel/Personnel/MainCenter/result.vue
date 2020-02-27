@@ -49,7 +49,7 @@
                         <span>{{comprehensive_completion.toFixed(2)}}</span>
                     </p>
                     <span class="circlemark" :class="junStateObject.hasOwnProperty('stageName') && junStateObject.stageNum !== null ? junStateObject.stageNum : 0 | stageColor">{{junStateObject.hasOwnProperty('stageName') && junStateObject.stageName !== null ? junStateObject.stageName : '' }}</span>
-                    <div class="fixedTrangle"><a href="javascript:" class="fixedtips"></a>
+                    <div class="fixedTrangle"><span href="javascript:" class="fixedtips"></span>
                         <div class="fixedtipscon pt10 pb10" style="display: none;"><i></i>
                             <p>优:实际>={{jungongStandard.greatMore}}万</p>
                             <p>良:{{jungongStandard.goodMore}}万&lt;=实际&lt;{{jungongStandard.greatMore}}万</p>
@@ -156,10 +156,11 @@ export default {
     },
     created () {
         this.stayCompleteDataFn()
+
         this.GetUserTradeDetailByUserCardFn()
         // 竣工的按钮
-        const junMoney = (this.completion_money) / 10000
-        this.getExcellentGoodModeratePoor(junMoney, 1)
+
+        this.getExcellentGoodModeratePoor()
     // // 罚款的按钮
     // const fineMoney = Number(this.fine_money) / 10000
     // this.getExcellentGoodModeratePoor(fineMoney, 2)
@@ -184,7 +185,6 @@ export default {
                 this.completionList = results.data.Body
                 this.completion_money = 0
                 this.projectSum = 0
-                this.completion_money = 0
                 this.comprehensive_completion = 0
                 this.fine_money = 0
                 this.comprehensive_fine = 0
@@ -193,6 +193,8 @@ export default {
                 for (var i = 0; i < this.completionList.length; i++) {
                     this.projectSum++
                     this.completion_money += this.completionList[i].completion_money
+
+
                     this.comprehensive_completion += this.completionList[i].comprehensive_completion
                     this.fine_money += this.completionList[i].fine_money
                     this.negotiate_profit += this.completionList[i].negotiate_profit
@@ -204,37 +206,18 @@ export default {
             })
         },
         // 获取状态中的按钮
-        getExcellentGoodModeratePoor (money, flag) {
-            let type = 0
-            if (flag === 1) {
-                type = 5
-            } else if (flag === 2) {
-                type = 9
-            } else if (flag === 3) {
-                type = 10
-            }
+        getExcellentGoodModeratePoor () {
             getExcellentGoodModeratePoor({
                 user_card_no: this.leftInfo.cardNo,
-                standard: money,
+                standard: this.completion_money,
                 abilityLevel: this.leftInfo.abilityLevel,
-                abilityType: type
+                abilityType: 5
             }).then(results => {
                 if (results.data.StatusCode === 0) {
-                    if (flag === 1) {
-                        this.jungongStandard = results.data.Body
-                        this.junStateObject.stageName = results.data.Body.standardName
-                        this.junStateObject.stageNum = results.data.Body.userGoodBad
-                        this.junQuanzhong = results.data.Body.quanzhong
-                    } else if (flag === 2) {
-                        this.fineStateObjdect.stageName = results.data.Body.standardName
-                        this.fineStateObjdect.stageNum = results.data.Body.userGoodBad
-                        this.fineQuanzhong = results.data.Body.quanzhong
-                    } else if (flag === 3) {
-                        this.qiaStateObjdect.stageName = results.data.Body.standardName
-                        this.qiaStateObjdect.stageNum = results.data.Body.userGoodBad
-                        this.qiaQuanzhong = results.data.Body.quanzhong
-                    }
-                    console.log(this.junStateObject)
+                    this.jungongStandard = results.data.Body
+                    this.junStateObject.stageName = results.data.Body.standardName
+                    this.junStateObject.stageNum = results.data.Body.userGoodBad
+                    this.junQuanzhong = results.data.Body.quanzhong
                 }
             }).catch(error => {
                 console.log(error)
@@ -323,8 +306,8 @@ export default {
             this.stayCompleteDataFn()
             this.GetUserTradeDetailByUserCardFn()
             // 竣工的按钮
-            const junMoney = (this.negotiate_profit + this.fine_money + this.completion_money) / 10000
-            this.getExcellentGoodModeratePoor(junMoney, 1)
+
+            this.getExcellentGoodModeratePoor()
             // // 罚款的按钮
             // const fineMoney = Number(this.fine_money) / 10000
             // this.getExcellentGoodModeratePoor(fineMoney, 2)
