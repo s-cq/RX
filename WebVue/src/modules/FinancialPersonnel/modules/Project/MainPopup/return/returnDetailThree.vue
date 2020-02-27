@@ -3,24 +3,24 @@
     <three-title :title="{name:'款项_期数】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <div class="analyItem">
-            <p class="analyItemTit tx-center">明细 1</p>
+            <p class="analyItemTit tx-center">明细</p>
             <div class="analyItemCon">
                 <p class="fl col-md-3">
                     <span class="cLightGray pr8">应收</span>
-                        <span>2020-02-06</span>
+                        <span>{{formatDate($route.query.item.receivable_time)}}</span>
                 </p>
                 <p class="fl col-md-3">
                     <span class="cLightGray pr8">实收</span>
-                        <span class="c666">--</span>
+                        <span class="c666">{{formatDate($route.query.item.received_time)}}</span>
                 </p>
                 <p class="fl col-md-3">
                     <span class="cLightGray pr8">金额</span>
-                    <span class="c666">0.00</span>
+                    <span class="c666">{{$route.query.item.received}}</span>
                 </p>
                 <p class="fl col-md-3">
                     <span class="cLightGray pr8">倒计时</span>
-                    <span class="c666"><span style="color:red; font-weight:bolder">-19</span></span>
-                    <span class="circlemark circlemark-lightRed layerui-title" data-title="延期未回款">差</span>
+                    <span :class="{'cRed':$route.query.item.day<0}" >{{$route.query.item.day}}</span>
+
                 </p>
             </div>
          </div>
@@ -54,6 +54,16 @@ export default {
     methods: {
         clickFourShow (index) {
             this.fourIndex = index
+        },
+        // 时间转换
+        formatDate (value) {
+            let date = new Date(value)
+            let y = date.getFullYear()
+            let MM = date.getMonth() + 1
+            MM = MM < 10 ? ('0' + MM) : MM
+            let d = date.getDate()
+            d = d < 10 ? ('0' + d) : d
+            return y + '-' + MM + '-' + d
         }
     }
 }

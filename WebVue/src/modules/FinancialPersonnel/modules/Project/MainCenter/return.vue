@@ -7,7 +7,7 @@
             <div class="analyItemCon ">
                      <p class="col-md-4 fl">
                         <span class="pr8 c999">应回</span><br>
-                        <span class="pr8 c999">{{getReceive.period}}(<span  style="color:red;">质</span>)</span>
+                        <span class="pr8 c999">{{getReceive.period}}</span>
                      </p>
                      <p class="col-md-4">
                         <span class="c999 pr8">剩余</span><br>
@@ -15,13 +15,13 @@
                      </p>
                      <p class="col-md-4 fl">
                          <span class="c999 pr8">未收</span><br>
-                         <span>{{getReceive.notReceived}}</span>
+                         <span>{{getReceive.notReceived.toFixed(2)}}</span>
                      </p>
                      <span class="circlemark circlemark-lightRed">未</span>
             </div>
         </div>
         <!-- 合计 -->
-        <div class="analyItem">
+        <!-- <div class="analyItem">
                 <p class="analyItemTit tx-center">合计</p>
                 <div class="analyItemCon">
                     <p class="col-md-4">
@@ -37,38 +37,38 @@
                         <span class="cGreen">{{getReceive.notReceived}}</span>
                     </p>
                 </div>
-        </div>
+        </div> -->
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84">
         <!-- 期款 -->
-         <router-link  tag="div" exact :to="routerPath('returnDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item,index) in receiveMoneyList" :key="index">
-            <p class="analyItemTit tx-center">{{stageFilter(index+1)}}期款</p>
+         <router-link  tag="div" exact :to="{path:routerPath('returnDetailThree'), query:{item:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item,index) in receiveMoneyList" :key="index">
+            <p class="analyItemTit tx-center">{{stageFilter(index+1)}}期款<span v-if="item.type === 4" style="color:red;">|质</span></p>
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">应收</span>
-                    <span>{{item.receivable_time | dCreateTime}}</span>
+                    <span>{{formatDate(item.receivable_time)}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">金额</span>
-                    <span>{{item.receivable}}</span>
+                    <span>{{item.receivable.toFixed(2)}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">进度</span>
-                    <span>{{item.chargeback_rate}}</span>
+                    <span>{{item.chargeback_rate}}</span>%
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">实收</span>
-                    <span>{{item.received_time | dCreateTime}}</span>%
+                    <span>{{formatDate(item.received_time)}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">金额</span>
-                    <span>{{item.received}}</span>
+                    <span>{{item.received.toFixed(2)}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">天数</span>
                     <span :class="{'cRed':item.day<0}">{{item.day}}</span>
                 </p>
-                 <span><span class="circlemark" :class="(item.standardName) | stageColorStandard">{{item.statusName}}</span></span>
+                 <span><span class="circlemark" :class="stageColorStandard(item.statusName)">{{item.statusName}}</span></span>
             </div>
         </router-link>
         <!-- 洽商 -->
@@ -83,7 +83,7 @@
                         <span class="cLightGray pr8" data-title="洽商提成 = 监理增项总提成 + 工程经理增项总提成">洽商提成</span><br>
                         <span class="cGreen">预留</span>
                     </p>
-                    <span class="circlemark circlemark-lightRed">预留</span>
+                    <span class="circlemark circlemark-lightRed">差</span>
             </div>
         </router-link>
     </div>
@@ -91,7 +91,18 @@
         <router-link tag="div" :to="routerPath('returnDetailThreeHander')" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
-                 <span class="circlemark circlemark-lightRed">预留</span>
+                 <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title="应收总额 = 所有期数的应收-减项金额 合计">应总</span><br>
+                        <span class="cGreen">{{(getReceive.receivables).toFixed(2)}}</span>
+                    </p>
+                    <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title="已收总额 = 所有期数的已收合计">已总</span><br>
+                        <span class="cGreen">{{(getReceive.sumReceived).toFixed(2)}}</span>
+                    </p>
+                    <p class="fl col-md-4">
+                        <span class="cLightGray pr8" data-title="差额 = 应收总额 - 已收总额">差额 </span><br>
+                        <span class="cGreen">{{(getReceive.notReceived).toFixed(2)}}</span>
+                    </p>
             </div>
         </router-link>
     </div>
@@ -119,13 +130,23 @@ export default {
         // 查询回款二段数据
         getReceiveMoney () {
             getReceiveMoney({
-                orderNo: this.leftInfo.orderNo
+                orderNo: this.leftInfo.orderno
             }).then(results => {
                 if (Number(results.data.StatusCode) === 0) {
                     this.getReceive = results.data.Body
                     this.receiveMoneyList = results.data.Body.receiveMoneyList
                 }
             }).catch(() => {})
+        },
+        // 时间转换
+        formatDate (value) {
+            let date = new Date(value)
+            let y = date.getFullYear()
+            let MM = date.getMonth() + 1
+            MM = MM < 10 ? ('0' + MM) : MM
+            let d = date.getDate()
+            d = d < 10 ? ('0' + d) : d
+            return y + '-' + MM + '-' + d
         },
         // guolv
         stageFilter (stage) {
@@ -158,6 +179,22 @@ export default {
             }
             return stageName
         },
+        // 状态
+        stageColorStandard (str) {
+            let color = ''
+            switch (str) {
+            case '完':
+                color = 'circlemark-green'
+                break
+            case '未':
+                color = 'circlemark-lightRed'
+                break
+            case '差':
+                color = 'circlemark-lightRed'
+                break
+            }
+            return color
+        },
         // 路由跳转路径拼接
         routerPath (path) {
             return this.$route.matched[1].path + '/' + path
@@ -166,6 +203,7 @@ export default {
         routerPush (path) {
             this.$router.push(this.$route.matched[1].path + '/' + path)
         }
+
     },
     filters: {
         dCreateTime (value) {
@@ -179,25 +217,11 @@ export default {
             var df = Y + M + D
             //   var df = Y+M+D+h+m+s;
             return df
-        },
-        stageColorStandard (str) {
-            switch (str) {
-            case '优':
-                return 'circlemark-green'
-            case '良':
-                return 'circlemark-lightGreen'
-            case '中':
-                return 'circlemark-yellow'
-            case '差':
-                return 'circlemark-lightRed'
-            case '待':
-                return 'circlemark-purple'
-            }
         }
     },
     watch: {
         leftInfo () {
-            this.load()
+            this.getReceiveMoney()
             console.log('111')
         }
     }

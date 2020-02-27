@@ -73,7 +73,7 @@ export function getWorkerQCOrderByCondition (params) {
  * 描述: 查询回款二段数据
  */
 export function getReceiveMoney (params) {
-    return Request.http.get('/pro/getReceiveMoney', params, 26)
+    return Request.http.get('/pro/getReceiveMoney', params, 102)
 }
 /** ******************  保存回款数据  ********************/
 /**
