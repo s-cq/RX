@@ -4,7 +4,7 @@
             <div class="analyItem">
                 <p class="analyItemTit tx-center">状态</p>
                 <div class="analyItemCon">
-                     <span class="circlemark" :class="stageNum | stageColor">{{ stageName }}</span>
+                     <span class="circlemark" :class="leftInfo.stayTrade | stageColorName">{{ leftInfo.tradeState }}</span>
                 </div>
             </div>
         </div>
@@ -640,14 +640,14 @@ export default {
             }
         },
         stageColorName (str) {
-            switch (str) {
-            case '优':
+            switch (Number(str)) {
+            case 1:
                 return 'circlemark-green'
-            case '良':
+            case 2:
                 return 'circlemark-lightGreen'
-            case '中':
+            case 3:
                 return 'circlemark-yellow'
-            case '差':
+            case 4:
                 return 'circlemark-lightRed'
             }
         }

@@ -1,34 +1,4 @@
 <template>
-<<<<<<< .mine
-    <div class="layerRtb layerRtb-threecolumn">
-        <three-title :title="{name:params.workerType.workerTypeName}"></three-title>
-        <div class="layerRtb-scroll thinScroll" v-scrollHeight="137">
-            <div class="analyItem" v-for="index in params.workerType.workerNumber" :key="index">
-                <p class="analyItemTit tx-center">{{params.workerType.workerTypeName+index}}</p>
-                <div class="analyItemCon">
-                    <div class="col-md-12" v-if="personList[index-1]!==null&&personList[index-1]!==undefined">
-                        <div class="fl mt5" style="text-align:center;width: 80px">
-                            <img :src="personList[index-1].personImg" alt="" style="height:40px;width:40px;" />
-                            <div><span>{{personList[index-1].workerName}}</span></div>
-                        </div>
-                        <div class="col-md-10 ml20" style="height:62ox;line-height:30px">
-                            <div class="col-md-5"><span class="cLigthGray pr8">级别</span><span>{{personList[index-1].workerLevel}}</span></div>
-                            <div class="col-md-5"><span class="cLigthGray pr8">在施</span><span>{{personList[index-1].buildCount}}</span></div>
-                            <div class="col-md-5"><span class="cLigthGray pr8">星级</span><span>{{personList[index-1].starLevel}}</span></div>
-                            <div class="col-md-5"><span class="cLigthGray pr8">电话</span><span>{{personList[index-1].mobile}}</span></div>
-                        </div>
-||||||| .r73907
-<div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:params.workerType.workerTypeName}"></three-title>
-    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
-        <div class="analyItem" v-for="index in params.workerType.workerNumber" :key="index">
-            <p class="analyItemTit tx-center" >{{params.workerType.workerTypeName+index}}</p>
-            <div class="analyItemCon">
-                <div class="col-md-12" v-if="personList[index-1]!==null&&personList[index-1]!==undefined">
-                    <div class="fl mt5" style="text-align:center;width: 80px">
-                        <img :src="personList[index-1].personImg" alt="" style="height:40px;width:40px;"/>
-                        <div><span>{{personList[index-1].workerName}}</span></div>
-=======
 <div class="layerRtb layerRtb-threecolumn">
     <three-title :title="{name:params.workerType.workerTypeName}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
@@ -39,24 +9,13 @@
                     <div class="mt5" style="text-align:center;width: 80px">
                         <img :src="personList[index-1].personImg" alt="" style="height:40px;width:40px;"/>
                         <div><span>{{personList[index-1].workerName}}</span></div>
->>>>>>> .r75678
                     </div>
-<<<<<<< .mine
-||||||| .r73907
-                    <div class="col-md-10 ml20" style="height:62ox;line-height:30px">
-                        <div class="col-md-5"><span class="cLigthGray pr8">级别</span><span>{{personList[index-1].workerLevel}}</span></div>
-                        <div class="col-md-5"><span class="cLigthGray pr8">在施</span><span>{{personList[index-1].buildCount}}</span></div>
-                        <div class="col-md-5"><span class="cLigthGray pr8">星级</span><span>{{personList[index-1].starLevel}}</span></div>
-                        <div class="col-md-5"><span class="cLigthGray pr8">电话</span><span>{{personList[index-1].mobile}}</span></div>
-                    </div>
-=======
                     <div class="col-md-8" style="height:62ox;line-height:30px">
                         <div class="col-md-6"><span class="cLigthGray pr8">级别</span><span>{{personList[index-1].workerLevel}}</span></div>
                         <div class="col-md-6"><span class="cLigthGray pr8">在施</span><span>{{personList[index-1].buildCount}}</span></div>
                         <div class="col-md-6"><span class="cLigthGray pr8">星级</span><span>{{personList[index-1].starLevel}}</span></div>
                         <div class="col-md-6"><span class="cLigthGray pr8">电话</span><span>{{personList[index-1].mobile}}</span></div>
                     </div>
->>>>>>> .r75678
                 </div>
             </div>
         </div>

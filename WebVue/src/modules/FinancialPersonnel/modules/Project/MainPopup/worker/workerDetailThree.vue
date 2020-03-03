@@ -4,7 +4,7 @@
     <div class="stay-nav spread-top plr10 pb10">
         <ul class="clearfix uiTab3 rgpkList" >
             <li :class="{'uiTab3-active':flg==0}" @click="flg = 0"><a href="javascript:">待办</a></li>
-            <li :class="{'uiTab3-active':flg==1}"><a @click="flg = 1" href="javascript:" >记录</a></li>
+            <!-- <li :class="{'uiTab3-active':flg==1}"><a @click="flg = 1" href="javascript:" >记录</a></li> -->
         </ul>
     </div>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
@@ -54,11 +54,11 @@
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">计划总额</span>
-                    <span>{{totalmoney}}</span>
+                    <span>{{workerOtherList.planMoney.toFixed(2)}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">实际总额</span>
-                    <span>{{totalPayMoney}}</span>
+                    <span>{{workerOtherList.projectMoney.toFixed(2)}}</span>
                 </p>
             </div>
             <!-- 预留 -->

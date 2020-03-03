@@ -23,81 +23,105 @@
                     </p>
                 </div>
                 <div class="clearfix">
-                        <p v-if="flg==1" class="fl col-md-4">
-                            <span class="cLightGray pr8 fl">类别</span>
-                            <select class=" fl select_sm width100" id="lbType">
-                                <option value="1">消防</option>
-                                <option value="2">空调</option>
-                                <option value="3">钢结构</option>
-                                <option value="4">其他分项</option>
-                            </select>
-                        </p>
-                        <div class="col-md-4 hide">
-                            <span class="cLightGray pr8 fl">证据</span>
-                            <div class="fl uiImgUpload uiImgUpload-gblock relative" style="width:50px;height:50px;">
-                                <a href="javascript:">
-                                    <input type="file" value="" class="file filemore" id="uploadify" style="z-index: 2;">
-                                    <em class="bgIcon file-ico"></em>
-                                <div id="html5_1e1bdg9mho1l85v1lg012spfqe28_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px; overflow: hidden; z-index: 1;"><input id="html5_1e1bdg9mho1l85v1lg012spfqe28" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" multiple="" accept=".jpg,.gif,.png,.bmp,.zip,.rar" tabindex="-1"></div></a>
-                            </div>
-                            <div class="zjxuploadimg clearfix hide"></div>
-                        </div>
-                        <div class="col-md-4">
-                          <a href="javascript:" class="jm_table_btn btn_bg999999 uiBtn-normal uiBtn-blue Add_zjx dis-il-block mt10">分账</a>
-
-                        </div>
-
-
+                  <p v-if="flg==3" class="fl col-md-4">
+                      <span class="cLightGray pr8 fl">类别</span>
+                      <select class=" fl select_sm width100" id="lbType">
+                          <option value="1">消防</option>
+                          <option value="2">空调</option>
+                          <option value="3">钢结构</option>
+                          <option value="4">其他分项</option>
+                      </select>
+                  </p>
+                  <div class="col-md-4">
+                    <!-- <span class="cRed">抱歉，审计或准备阶段无法申请增减项，请进入在施操作！</span> -->
+                    <a href="javascript:" class="jm_table_btn btn_bg999999 uiBtn-normal uiBtn-blue Add_zjx dis-il-block mt10">分账</a>
+                  </div>
                 </div>
             </div>
        </div>
        <div class="analyItem">
             <p class="analyItemTit tx-center">乙丙</p>
             <div class="analyItemCon">
-                                    <p class="col-md-4 mb5">
-                                        <span class="cLightGray pr8 fl">类型</span>
-                                        <select class=" fl select_sm width100" id="ybType">
-                                            <option value="1">减项不减利</option>
-                                            <option value="2">减项减利</option>
-                                        </select>
-                                    </p>
-                                    <p class="col-md-4 mb5">
-                                        <span class="cLightGray pr8 fl">金额</span>
-                                        <input type="text" class="jm_tab_inp width100 fbzjMoney fl" placeholder="增减金额">
-                                    </p>
-                                    <p class="col-md-4 mb5">
-                                        <span class="cLightGray pr8 fl">申请日期</span>
-                                        <span class="fl">2020-02-18</span>
-                                    </p>
-                                    <p class="col-md-4">
-                                        <span class="cLightGray pr8 fl">承包</span>
-                                        <span class="fl">107,100.00</span>
-                                    </p>
-                                    <p class="col-md-4">
-                                        <span class="cLightGray pr8 fl">结果</span>
-                                        <span id="zjAllMoney" class="fl">107,100.00</span>
-                                    </p>
-                                    <p class="col-md-4">
-                                                <a href="javascript:" class="jm_table_btn btn_bg999999 uiBtn-normal uiBtn-blue Add_zjx dis-il-block mt10">分账</a>
-                                    </p>
+                <p class="col-md-4 mb5">
+                    <span class="cLightGray pr8 fl">类型</span>
+                    <select class=" fl select_sm width100" id="ybType">
+                        <option value="1">减项不减利</option>
+                        <option value="2">减项减利</option>
+                    </select>
+                </p>
+                <p class="col-md-4 mb5">
+                    <span class="cLightGray pr8 fl">金额</span>
+                    <input type="text" class="jm_tab_inp width100 fbzjMoney fl" placeholder="增减金额">
+                </p>
+                <p class="col-md-4 mb5">
+                    <span class="cLightGray pr8 fl">申请日期</span>
+                    <span class="fl">2020-02-18</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8 fl">承包</span>
+                    <span class="fl">107,100.00</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8 fl">结果</span>
+                    <span id="zjAllMoney" class="fl">107,100.00</span>
+                </p>
+                <p class="col-md-4">
+                    <!-- <span class="cRed">抱歉，审计或准备阶段无法申请增减项，请进入在施操作！</span> -->
+                    <a href="javascript:" class="jm_table_btn btn_bg999999 uiBtn-normal uiBtn-blue Add_zjx dis-il-block mt10">分账</a>
+                </p>
             </div>
         </div>
         <div class="analyItem">
             <p class="analyItemTit tx-center">增减合计</p>
             <div class="analyItemCon">
-                                        <p class="fl col-md-4">
-                                            <span class="cLightGray pr8">增项合同</span>
-                                            <span class="cGreen">0.00</span>
-                                        </p>
-                                        <p class="fl col-md-4">
-                                            <span class="cLightGray pr8">减项合同</span>
-                                            <span class="cRed">0.00</span>
-                                        </p>
-                                        <p class="fl col-md-4">
-                                            <span class="cLightGray pr8">增减项合同</span>
-                                            <span class="cRed">0.00</span>
-                                        </p>
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">增项合同</span>
+                    <span class="cGreen">0.00</span>
+                </p>
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">减项合同</span>
+                    <span class="cRed">0.00</span>
+                </p>
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">增减项合同</span>
+                    <span class="cRed">0.00</span>
+                </p>
             </div>
+        </div>
+        <div class="analyItem" v-if="flg==1">
+                <p class="analyItemTit tx-center">坏账</p>
+                <div class="analyItemCon">
+                    <p class="col-md-4 mb10">
+                        <span class="cLightGray pr8 fl">金额</span>
+                        <input type="text" class="jm_tab_inp width100 qszjMoney fl" placeholder="增减金额">
+                    </p>
+                    <p class="col-md-4 mb10">
+                        <span class="cLightGray pr8 fl">申请日期</span>
+                        <span class="fl">2020-03-02</span>
+                    </p>
+                    <p class="col-md-4 mb10">
+                        <a href="javascript:" class="jm_table_btn btn_bg999999 uiBtn-normal uiBtn-blue Add_zjx dis-il-block mt10">分账</a>
+                    </p>
+                    <p class="col-md-12" >
+                        <rx-upload  :data="{id: 11}" :init="{class: 1, mime: 1}"  class="fl ml10"
+                            :elStyle="{width:'90px', height: '80px'}"
+                            @success="successUpload">
+                            <div class="fl uiImgUpload uiImgUpload-gblock mr10">
+                                <a href="javascript:">
+                                    <span type="file" value="" class="file"></span>
+                                    <em class="bgIcon file-ico"></em>
+                                </a>
+                            </div>
+                        </rx-upload>
+                        <rx-viewer :images="data" class="fl">
+                            <div class="clearfix">
+                                <div class="col-md-4" v-for="(item, index) of imgList" :key="index">
+                                    <img :src="item | smallImg(80, 80)" :alt="index">
+                                </div>
+                            </div>
+                        </rx-viewer>
+                    </p>
+                </div>
         </div>
         <div class="analyItem">
             <p class="analyItemTit tx-center">历史</p>
@@ -115,29 +139,8 @@
                     <span>0.00</span>
                 </p>
                 <p class="fl col-md-3">
-                    <span v-if="flg==3" class="cLightGray pr8"> <a href="javascript:" class="jm_table_btn btn_bg999999 fl uiBtn-normal uiBtn-blue mr10 Add_zjx" style="position: relative; z-index: 1;">分账</a></span>
-                    <span v-else class="cLightGray pr8"> <a href="javascript:" class="jm_table_btn btn_bg999999 fl uiBtn-normal uiBtn-blue mr10 Add_zjx" style="position: relative; z-index: 1;">详细</a></span>
-
-                </p>
-                <p class="col-md-12" v-if="flg==3">
-                    <rx-upload  :data="{id: 11}" :init="{class: 1, mime: 1}"  class="fl ml10"
-                        :elStyle="{width:'90px', height: '80px'}"
-                        @success="successUpload">
-                        <div class="fl uiImgUpload uiImgUpload-gblock mr10">
-                            <a href="javascript:">
-                                <span type="file" value="" class="file"></span>
-                                <em class="bgIcon file-ico"></em>
-                            </a>
-                        </div>
-                    </rx-upload>
-                    <rx-viewer :images="data" class="fl">
-                        <div class="clearfix">
-                            <div class="col-md-4" v-for="(item, index) of imgList" :key="index">
-                                <img :src="item | smallImg(80, 80)" :alt="index">
-                            </div>
-                        </div>
-                    </rx-viewer>
-
+                    <!-- <span class="cLightGray pr8"> <a href="javascript:" class="jm_table_btn btn_bg999999 fl uiBtn-normal uiBtn-blue mr10 Add_zjx" style="position: relative; z-index: 1;">分账</a></span> -->
+                    <span class="cLightGray pr8"> <a @click="detailClick()" href="javascript:" class="jm_table_btn btn_bg999999 fl uiBtn-normal uiBtn-blue mr10 Add_zjx" style="position: relative; z-index: 1;">详细</a></span>
                 </p>
             </div>
         </div>
@@ -169,6 +172,8 @@ export default {
         console.log(this.flg)
     },
     methods: {
+        detailClick () {
+        },
         successUpload (value) {
             this.imgList.push(value.src)
         },

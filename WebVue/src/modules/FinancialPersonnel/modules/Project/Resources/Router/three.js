@@ -47,10 +47,40 @@ export default [
         path: 'marStageThreeHander',
         component: () => import('../../MainPopup/material/marStageThreeHander.vue')
     },
-    // 成本分账 成三段
+    // 成本分账 合同账三段
     {
-        path: 'costDetailThree',
-        component: () => import('../../MainPopup/cost/costDetailThree.vue')
+        path: 'costDetailThreeHT',
+        component: () => import('../../MainPopup/cost/costDetailThreeHT.vue')
+    },
+    // 成本分账 成本账三段
+    {
+        path: 'costDetailThreeCB',
+        component: () => import('../../MainPopup/cost/costDetailThreeCB.vue')
+    },
+    // 成本分账 人工三段
+    {
+        path: 'costDetailThreeRG',
+        component: () => import('../../MainPopup/cost/costDetailThreeRG.vue')
+    },
+    // 成本分账 材料三段
+    {
+        path: 'costDetailThreeCL',
+        component: () => import('../../MainPopup/cost/costDetailThreeCL.vue')
+    },
+    // 成本分账 奖罚三段
+    {
+        path: 'costDetailThreeJF',
+        component: () => import('../../MainPopup/cost/costDetailThreeJF.vue')
+    },
+    // 成本分账 分项三段
+    {
+        path: 'costDetailThreeFX',
+        component: () => import('../../MainPopup/cost/costDetailThreeFX.vue')
+    },
+    // 成本分账 盈余三段
+    {
+        path: 'costDetailThreeYY',
+        component: () => import('../../MainPopup/cost/costDetailThreeYY.vue')
     },
     // 成本分账 成处理三段
     {
