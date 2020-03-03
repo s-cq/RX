@@ -46,7 +46,7 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">应收</span>
-                    <span>{{formatDate(item.receivable_time)}}</span>
+                    <span>{{item.received_time =null ? '--': formatDate(item.receivable_time)}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">金额</span>
@@ -58,7 +58,7 @@
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">实收</span>
-                    <span>{{formatDate(item.received_time)}}</span>
+                    <span>{{item.received_time =null ? '--': formatDate(item.received_time)}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">金额</span>

@@ -501,7 +501,7 @@ export default {
         // 默认加载
         load () {
             let param = {
-                orderNo: this.leftInfo.orderno // 11-241545
+                orderNo: this.leftInfo.orderno // 103-316
             }
             // 查询材料数据
             getOrderWorkTypeWagesList(param).then(results => {

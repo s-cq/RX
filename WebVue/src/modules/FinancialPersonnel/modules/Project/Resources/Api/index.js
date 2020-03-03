@@ -84,3 +84,24 @@ export function getReceiveMoney (params) {
 export function savePaymentDetails (params) {
     return Request.http.post('/pro/savePaymentDetails', params, 26, {dataType: 'json'})
 }
+
+/** ******************  保存回款数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-02-28
+ * 参数: orderNo 项目单号
+ * 描述: 保存回款数据
+ */
+export function getDebitSecond (params) {
+    return Request.http.get('/pro/getDebitSecond', params, 102)
+}
+/** ******************  查询支款记录  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-02-28
+ * 参数: orderNo 项目单号  type 支款类型 合计 0 材料 107 人工 108
+ * 描述: 查询支款记录
+ */
+export function getPaymentRecord (params) {
+    return Request.http.get('/pro/getPaymentRecord', params, 102)
+}
