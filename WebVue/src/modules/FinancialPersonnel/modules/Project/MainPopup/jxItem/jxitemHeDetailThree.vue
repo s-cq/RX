@@ -1,56 +1,41 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'详情'}"></three-title>
+    <three-title :title="{name:'【绩效_合计】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
-        <div class="analyItem">
-            <p class="analyItemTit tx-center">预留</p>
-            <div class="analyItemCon">
-                <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
-                <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
-                 <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
+        <div class="">
+            <div class="analyItem">
+                <p class="analyItemTit tx-center">监理</p>
+                <div class="analyItemCon">
+                    <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title="监理预计提成 = 绩效金额 * 0.002 ">绩效占比</span>
+                        <span class="cGreen">0.2%</span>
+                    </p>
+                    <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title="公式 = 绩效金额 * 0.002">公式</span>
+                        <span class="cGreen">绩效金额 * 0.002 </span>
+                    </p>
+                    <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title=" 监理预计提成 = 绩效金额 * 0.002">预计提成</span>
+                        <span class="cGreen">276.40</span>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="analyItem">
-            <p class="analyItemTit tx-center">预留</p>
-            <div class="analyItemCon">
-                <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
-                <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
-                 <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
-            </div>
-        </div>
-        <div class="analyItem">
-            <p class="analyItemTit tx-center">预留</p>
-            <div class="analyItemCon">
-                <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
-                <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
-                 <p class="col-md-4 cursor" >
-                    <span class="pr8">预留</span><br>
-                    <span>0</span>
-                </p>
+            <div class="analyItem">
+                <p class="analyItemTit tx-center">经理</p>
+                <div class="analyItemCon">
+                    <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title="经理预计提成 = 绩效金额 * 0.0005 ">绩效占比</span>
+                        <span class="cGreen">0.05%</span>
+                    </p>
+                    <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title="公式 = 绩效金额 * 0.0005">公式</span>
+                        <span class="cGreen">绩效金额 * 0.0005 </span>
+                    </p>
+                    <p class="col-md-4">
+                        <span class="cLightGray pr8" data-title=" 经理预计提成 = 绩效金额 * 0.0005">预计提成</span>
+                        <span class="cGreen">69.10</span>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

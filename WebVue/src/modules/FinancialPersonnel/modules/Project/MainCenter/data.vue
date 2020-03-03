@@ -4,104 +4,105 @@
         <div class="analyItem">
             <p class="analyItemTit tx-center">状态</p>
             <div class="analyItemCon">
-                <!-- <p class="col-md-4">
-                    <span class="pr8 cLightGray">点位数量</span>
-                    <span class="cGreen">个</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">使用完成</span>
-                    <span class="cGreen">个</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">异常</span>
-                    <span class="cRed">个</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">正常</span>
-                    <span class="cGreen">个</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">使用中</span>
-                    <span class="cGreen">个</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">未使用</span>
-                    <span class="cRed">个</span>
-                </p> -->
+                <span class="circlemark circlemark-lightRed">未</span>
             </div>
         </div>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84">
-        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
-            <p class="analyItemTit tx-center">预留1</p>
+        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=前期')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">前期</p>
             <div class="analyItemCon">
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">应传</span>
                     <span>0</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">已传</span>
                     <span>0</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
-                    <span>0</span>
+                    <span class="cLightGray pr8">完成度</span>
+                    <span>0</span>%
                 </p>
             </div>
         </router-link>
-        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=2')" class="analyItem anItemBor" active-class="anItemBor-active">
-            <p class="analyItemTit tx-center">预留2</p>
+        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=中期')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">中期</p>
             <div class="analyItemCon">
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">应传</span>
                     <span>0</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">已传</span>
                     <span>0</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
-                    <span>0</span>
+                    <span class="cLightGray pr8">完成度</span>
+                    <span>0</span>%
                 </p>
             </div>
         </router-link>
-        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=3')" class="analyItem anItemBor" active-class="anItemBor-active">
-            <p class="analyItemTit tx-center">预留3</p>
+        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=后期')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">后期</p>
             <div class="analyItemCon">
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">应传</span>
                     <span>0</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">已传</span>
                     <span>0</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">预留</span>
+                    <span class="cLightGray pr8">完成度</span>
+                    <span>0</span>%
+                </p>
+            </div>
+        </router-link>
+        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=其他')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">其他</p>
+            <div class="analyItemCon">
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">应传</span>
                     <span>0</span>
+                </p>
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">已传</span>
+                    <span>0</span>
+                </p>
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">完成度</span>
+                    <span>0</span>%
+                </p>
+            </div>
+        </router-link>
+        <router-link exact tag='div' :to="routerPath('dataDetailThree?index=现场贴纸')" class="analyItem anItemBor" active-class="anItemBor-active">
+            <p class="analyItemTit tx-center">现场贴纸</p>
+            <div class="analyItemCon">
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">应传</span>
+                    <span>0</span>
+                </p>
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">已传</span>
+                    <span>0</span>
+                </p>
+                <p class="fl col-md-4">
+                    <span class="cLightGray pr8">完成度</span>
+                    <span>0</span>%
                 </p>
             </div>
         </router-link>
     </div>
     <div class="pr10">
-        <router-link tag="div" exact :to="routerPath('dataDetailThreeHandel')" class="analyItem anItemBor" active-class="anItemBor-active">
+        <!-- <router-link tag="div" exact :to="routerPath('dataDetailThreeHandel')" class="analyItem anItemBor" active-class="anItemBor-active"> -->
+            <div class="analyItem">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">共有</span>
-                    <span class="cGreen">个</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">使用中</span>
-                    <span class="cGreen">个</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">未使用</span>
-                    <span class="cRed">个</span>
-                </p>
+                <span class="circlemark circlemark-lightRed">未</span>
             </div>
-        </router-link>
+        </div>
     </div>
 </div>
 </template>

@@ -25,15 +25,15 @@
             <p class="analyItemTit tx-center">合同</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增减合同（装饰 +分项）= 与甲方（客户）新签订增减项合同金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增减合同（装饰 +分项）= 与甲方（客户）新签订增减项合同金额">增减合同</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增减发包（装饰 +分项）= 与丙方（项目经理）新签订增减发包金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增减发包（装饰 +分项）= 与丙方（项目经理）新签订增减发包金额">增减发包</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增减利润（装饰 +分项） = （增减合同 - 增减发包 - 增项代购主材 - 增项税金）">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增减利润（装饰 +分项） = （增减合同 - 增减发包 - 增项代购主材 - 增项税金）">增减利润</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
             </div>
@@ -42,15 +42,15 @@
             <p class="analyItemTit tx-center">装饰增减</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="与甲方（客户）新签订增项合同金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="与甲方（客户）新签订增项合同金额">增项合同</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="与甲方（客户）新签订减项合同金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="与甲方（客户）新签订减项合同金额">减项合同</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="与甲方（客户）新签订增减项合同金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="与甲方（客户）新签订增减项合同金额">增减合同</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
             </div>
@@ -59,15 +59,15 @@
             <p class="analyItemTit tx-center">分包</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增项发包（装饰）= 与丙方（项目经理）新签订增项发包金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增项发包（装饰）= 与丙方（项目经理）新签订增项发包金额">增项发包</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="减项发包（装饰）= 与丙方（项目经理）新签订减项发包金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="减项发包（装饰）= 与丙方（项目经理）新签订减项发包金额">减项发包</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增减发包（装饰）= 与丙方（项目经理）新签订增减发包金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增减发包（装饰）= 与丙方（项目经理）新签订增减发包金额">增减发包</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
             </div>
@@ -76,15 +76,15 @@
             <p class="analyItemTit tx-center">分项增减</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增减合同（分项）= 与甲方（客户）新签订增减合同金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增减合同（分项）= 与甲方（客户）新签订增减合同金额">增减合同</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增减发包（分项）= 与丙方（项目经理）新签订增减发包金额">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增减发包（分项）= 与丙方（项目经理）新签订增减发包金额">增减发包</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8" data-title="增减利润（分项）= （增减合同 - 增减发包 - 增项代购主材 - 增项税金）">预留</span><br>
+                    <span class="cLightGray pr8" data-title="增减利润（分项）= （增减合同 - 增减发包 - 增项代购主材 - 增项税金）">增减利润</span><br>
                     <span class="cGreen">0.00</span>
                 </p>
             </div>
@@ -93,14 +93,7 @@
     <div class="pr10">
        <div class="analyItem ">
          <p class="analyItemTit tx-center">处理</p>
-         <div class="analyItemCon">
-             <div class="clearfix">
-                 <p class="fl col-md-3"></p>
-                 <p class="fl col-md-3"></p>
-                 <p class="fl col-md-3"></p>
-                 <p class="fl col-md-3"></p>
-             </div>
-         </div>
+         <div class="analyItemCon"></div>
     </div>
     </div>
 </div>
