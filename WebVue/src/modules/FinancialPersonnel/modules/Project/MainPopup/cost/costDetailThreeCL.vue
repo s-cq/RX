@@ -8,15 +8,15 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="项目总用= 发包已收（来源投资财务交易平台系统分账）* 0.8">项目总用</span>
-                        <span>238,000.00</span>
+                        <span>{{(workorder.packAmount*0.8).toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="项目可用 = 发包已收（来源投资财务交易平台系统分账）* 0.8 - 已付人工款 - 已付材料款 - 待付人工款 - 待付材料款">项目可用</span>
-                        <span>51,790.90</span>
+                        <span>{{workorder.availableMoney.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="计划总材料 = 发包金额 - 计划总人工">计划总材料</span>
-                        <span>267,890.42</span>
+                        <span>{{workorder.materialplanSumMoney.toFixed(2)}}</span>
                     </p>
                 </div>
             </div>
@@ -25,15 +25,15 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="可用额度 = 项目总用 -((发包金额 - 材料计划总额）* 0.7 * 回款比例（不包含增项))">可用额度</span>
-                        <span>42,983.69</span>
+                        <span>--</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="已付材料  = 出纳已支付的材料凭证">已付材料</span>
-                        <span>50,209.10</span>
+                        <span>{{material.materialPayMoney.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="待付人材料 = 出纳待支付的材料凭证">待付材料</span>
-                        <span>0.00</span>
+                        <span>{{material.materialWaitPayMoney.toFixed(2)}}</span>
                     </p>
                 </div>
             </div>
@@ -42,15 +42,15 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="材料计划总额 = 发包金额 - 计划总人工">材料计划总</span>
-                        <span>267,890.42</span>
+                        <span>{{workorder.materialplanSumMoney.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">修改材料</span>
-                        <input type="text" class="jm_tab_inp width100 xgMoney" placeholder="计划材料" data-payable="425000.0000" value="267890.42" data-summoney="267890.42">
+                        <input type="text" class="jm_tab_inp width100 xgMoney" placeholder="计划材料" data-payable="425000.0000" value="267890.42" :data-summoney="workorder.materialplanMoney.toFixed(2)">
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">余额</span>
-                        <span>0.00</span>
+                        <span>{{(workorder.materialplanSumMoney-workorder.materialplanMoney).toFixed(2)}}</span>
                     </p>
                 </div>
             </div>
@@ -59,11 +59,11 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="剩余可用 = 项目可用 - 人工可用">剩余可用</span>
-                        <span>-7,225.41</span>
+                        <span>--</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="剩余材料 = 材料计划总额 - 已付材料 - 待付材料 ">剩余材料</span>
-                        <span>217,681.32</span>
+                        <span>{{workorder.materialplanSumMoney-material.materialPayMoney-material.materialWaitPayMoney.toFixed(2)}}</span>
                     </p>
                 </div>
             </div>
@@ -72,19 +72,19 @@
                     <div class="analyItemCon">
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8" data-title="可用金额 = 材料总可用额度 * 60%">可用金额</span>
-                            <span>25,790.21</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">应付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">已付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">未付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                     </div>
                 </div>
@@ -93,19 +93,19 @@
                     <div class="analyItemCon">
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8" data-title="可用金额 = 材料总可用额度 * 30%">可用金额</span>
-                            <span>12,895.11</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8" data-title="应付金额 = 材料计划总额 * 30%">应付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">已付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">未付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                     </div>
                 </div>
@@ -114,19 +114,19 @@
                     <div class="analyItemCon">
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8" data-title="可用金额 = 材料总可用额度 * 10%">可用金额</span>
-                            <span>4,298.37</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">应付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">已付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                         <p class="fl col-md-3">
                             <span class="cLightGray pr8">未付金额</span>
-                            <span>0.00</span>
+                            <span>--</span>
                         </p>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
             <div class="analyItemCon">
                 <p class="col-md-4 lh28">
                     <span class="cLightGray pr8" data-title="材料可用 = 项目可用 - 人工可用">材料可用</span>
-                    <span>-7,225.41</span>
+                    <span>--</span>
                 </p>
                 <span class="circlemark circlemark-green">完</span>
             </div>
@@ -147,19 +147,66 @@
 </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { getCostSharingThree } from '../../Resources/Api'
 export default {
     data () {
         return {
-            fourIndex: undefined,
-            src: 'https://proj01.oss-cn-beijing.aliyuncs.com/common/1556070802NRnhKTB5GG.png'
+            workorder: null,
+            material: null
         }
     },
+    computed: {
+        ...mapGetters(['leftInfo'])
+    },
     created () {
-        console.log(this.$route)
+        console.info(this.leftInfo)
+        this.load()
     },
     methods: {
-        clickFourShow (index) {
-            this.fourIndex = index
+        // 路由跳转路径拼接
+        routerPath (path) {
+            return this.$route.matched[1].path + '/' + path
+        },
+        // 直接进行路由跳转路径
+        routerPush (path) {
+            this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        // 查询回款二段数据
+        load () {
+            let param = {
+                orderNo: this.leftInfo.orderno, // this.leftInfo.orderno
+                type: 4
+            }
+            getCostSharingThree(param).then(results => {
+                if (Number(results.data.StatusCode) === 0) {
+                    this.workorder = results.data.Body.workorder
+                    this.material = results.data.Body.material
+                }
+            }).catch(() => {})
+        },
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        }
+    },
+    watch: {
+        leftInfo () {
+            this.load()
+        }
+    },
+    filters: {
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
         }
     }
 }

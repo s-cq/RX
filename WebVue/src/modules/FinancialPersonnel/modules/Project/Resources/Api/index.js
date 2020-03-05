@@ -105,3 +105,23 @@ export function getDebitSecond (params) {
 export function getPaymentRecord (params) {
     return Request.http.get('/pro/getPaymentRecord', params, 102)
 }
+/** ******************  查询成本二段接口  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-02-28
+ * 参数: orderNo 项目单号
+ * 描述: 查询成本二段接口
+ */
+export function getCostSharingSecond (params) {
+    return Request.http.get('/pro/getCostSharingSecond', params, 102)
+}
+/** ******************  查询成本三段段接口  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-02-28
+ * 参数: orderNo 项目单号
+ * 描述: 查询成本三段段接口
+ */
+export function getCostSharingThree (params) {
+    return Request.http.get('/pro/getCostSharingThree', params, 102)
+}

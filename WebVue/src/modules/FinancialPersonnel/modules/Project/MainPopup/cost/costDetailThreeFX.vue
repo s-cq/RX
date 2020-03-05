@@ -6,25 +6,25 @@
             <div class="analyItem">
                 <p class="analyItemTit tx-center">空调款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">0.00</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' : workorderSpecial.KT_publish_fee}}</span></p>
                 </div>
             </div>
             <div class="analyItem">
                 <p class="analyItemTit tx-center">消防款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">0.00</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' :workorderSpecial.XF_publish_fee}}</span></p>
                 </div>
             </div>
             <div class="analyItem">
                 <p class="analyItemTit tx-center">钢结构款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">0.00</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' :workorderSpecial.GJG_publish_fee}}</span></p>
                 </div>
             </div>
             <div class="analyItem">
                 <p class="analyItemTit tx-center">客户代购款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">0.00</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' :workorderSpecial.QT_publish_fee}}</span></p>
                 </div>
             </div>
         </div>
@@ -40,19 +40,64 @@
 </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { getCostSharingThree } from '../../Resources/Api'
 export default {
     data () {
         return {
-            fourIndex: undefined,
-            src: 'https://proj01.oss-cn-beijing.aliyuncs.com/common/1556070802NRnhKTB5GG.png'
+            workorderSpecial: null
         }
     },
+    computed: {
+        ...mapGetters(['leftInfo'])
+    },
     created () {
-        console.log(this.$route)
+        console.info(this.leftInfo)
+        this.load()
     },
     methods: {
-        clickFourShow (index) {
-            this.fourIndex = index
+        // 路由跳转路径拼接
+        routerPath (path) {
+            return this.$route.matched[1].path + '/' + path
+        },
+        // 直接进行路由跳转路径
+        routerPush (path) {
+            this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        // 查询回款二段数据
+        load () {
+            let param = {
+                orderNo: this.leftInfo.orderno, // this.leftInfo.orderno
+                type: 6
+            }
+            getCostSharingThree(param).then(results => {
+                if (Number(results.data.StatusCode) === 0) {
+                    this.workorderSpecial = results.data.Body.workorderSpecial
+                }
+            }).catch(() => {})
+        },
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        }
+    },
+    watch: {
+        leftInfo () {
+            this.load()
+        }
+    },
+    filters: {
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
         }
     }
 }

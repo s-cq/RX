@@ -1,22 +1,22 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
     <three-title :title="{name:'【施尾_成本账】详情'}"></three-title>
-    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
+    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137" v-if="workorder !== {}">
         <div class="plr10">
             <div class="analyItem">
                 <p class="analyItemTit tx-center">成本</p>
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="发包金额= 承包给项目经理的总金额">发包金额</span>
-                        <span>425,000.00</span>
+                        <span>{{workorder.actual_publish_money.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">项目经理</span>
-                        <span>黄娟</span>
+                        <span>{{workorder.pm_username}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="项目总用= 发包已收（来源投资财务交易平台系统分账）* 0.8">项目总用</span>
-                        <span>238,000.00</span>
+                        <span>{{(workorder.packAmount*0.8).toFixed(2)}}</span>
                     </p>
                 </div>
             </div>
@@ -25,15 +25,15 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="夜间施工费 = 来源审计报价的夜间施工费">夜间施工费</span><br>
-                        <span>0.00</span>
+                        <span>{{workorder.nightwork_fee.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="远程施工费 = 来源审计报价的远程施工费">远程施工费</span><br>
-                        <span>0.00</span>
+                        <span>{{workorder.distance_fee.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="合计 = 夜间施工费 + 远程施工费">合计</span><br>
-                        <span>0.00</span>
+                        <span>{{(workorder.nightwork_fee+workorder.distance_fee).toFixed(2)}}</span>
                     </p>
                 </div>
             </div>
@@ -42,19 +42,19 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="计划总人工 = 发包金额 - 计划总材料">计划总人工</span><br>
-                        <span>157,109.58</span>
+                        <span>{{workorder.workerPlaneSumMoney.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="核算总人工 = 工种应付金额合计（总工时 / 8 * 每天工资）">核算总人工</span><br>
-                        <span>192,771.65</span>
+                        <span>{{workorder.workerPlaneMoney.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="差额 = 计划总人工 - 核算总人工 - 夜间施工费 - 远程施工费">差额</span><br>
-                        <span>-35,662.07</span>
+                        <span>{{workorder.workerDifference.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="占比 = 核算总人工 / 发包金额">占比</span><br>
-                        <span>45.36%</span>
+                        <span>{{(workorder.workerProportion*100)}}%</span>
                     </p>
                 </div>
             </div>
@@ -63,19 +63,19 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="计划总材料 = 发包金额 - 计划总人工">计划总材料</span><br>
-                        <span>267,890.42</span>
+                        <span>{{workorder.workerPlaneSumMoney.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="核算总材料 = 计划材料总额">核算总材料</span><br>
-                        <span>267,890.42</span>
+                        <span>{{workorder.materialplanMoney.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="差额 = 计划总材料 - 核算总材料">差额</span><br>
-                        <span>0.00</span>
+                        <span>{{workorder.materialDifference.toFixed(2)}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="占比 = 计划总材料 / 发包金额">占比</span><br>
-                        <span>63.03%</span>
+                        <span>{{(workorder.materialProportion*100).toFixed(2)}}%</span>
                     </p>
                 </div>
             </div>
@@ -84,15 +84,15 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="盈余账 = 发包金额 - 核算总人工 - 核算总材料 - 夜间施工费 - 远程施工费">盈余</span>
-                            <span class="cRed layerui-title" data-title="【预警】 = 盈余总额大于10000或者盈余总额小于 -10000都属于问题，否则属于正常">-35,662.07</span>
+                            <span class="cRed layerui-title" data-title="【预警】 = 盈余总额大于10000或者盈余总额小于 -10000都属于问题，否则属于正常">--</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="项目实际发包毛利率">发包毛利率</span>
-                            <span class="cRed" style="font-weight:bolder">10.38%</span>
+                            <span class="cRed" style="font-weight:bolder">{{workorder.decorate_publish_profit_rate}}%</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="发包日期 = 项目实际的发包日期">发包日期</span>
-                        <span>2019-12-25</span>
+                        <span>{{myFormatDate(workorder.publish_time)}}</span>
                     </p>
                 </div>
             </div>
@@ -113,19 +113,64 @@
 </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { getCostSharingThree } from '../../Resources/Api'
 export default {
     data () {
         return {
-            fourIndex: undefined,
-            src: 'https://proj01.oss-cn-beijing.aliyuncs.com/common/1556070802NRnhKTB5GG.png'
+            workorder: {} // 二段数据
         }
     },
+    computed: {
+        ...mapGetters(['leftInfo'])
+    },
     created () {
-        console.log(this.$route)
+        console.info(this.leftInfo)
+        this.load()
     },
     methods: {
-        clickFourShow (index) {
-            this.fourIndex = index
+        // 路由跳转路径拼接
+        routerPath (path) {
+            return this.$route.matched[1].path + '/' + path
+        },
+        // 直接进行路由跳转路径
+        routerPush (path) {
+            this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        // 查询回款二段数据
+        load () {
+            let param = {
+                orderNo: this.leftInfo.orderno, // this.leftInfo.orderno
+                type: 0
+            }
+            getCostSharingThree(param).then(results => {
+                if (Number(results.data.StatusCode) === 0) {
+                    this.workorder = results.data.Body.workorder
+                }
+            }).catch(() => {})
+        },
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        }
+    },
+    watch: {
+        leftInfo () {
+            this.load()
+        }
+    },
+    filters: {
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
         }
     }
 }

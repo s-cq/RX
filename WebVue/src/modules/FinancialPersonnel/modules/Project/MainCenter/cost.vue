@@ -13,20 +13,20 @@
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84">
         <!-- 合同账 -->
-        <router-link tag="div" exact :to="routerPath('costDetailThreeHT?index='+1+'')" class="analyItem anItemBor" active-class="anItemBor-active">
+        <router-link tag="div" exact :to="{path:routerPath('costDetailThreeHT'), query:{item:workorder}}" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">合同账</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="合同金额= 与甲方（客户）签订合同金额">合同金额</span><br>
-                    <span>480,000.00</span>
+                    <span>{{workorder.contract_fee | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="成本金额（发包金额） = 与丙方（项目经理）实际的发包发包额">成本金额</span><br>
-                    <span>425,000.00</span>
+                    <span>{{workorder.actual_publish_money | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">毛利</span><br>
-                    <span>55,000.00</span>
+                    <span>{{workorder.gross_profit | toFixed()}}</span>
                 </p>
                     <span class="circlemark circlemark-green">完</span>
             </div>
@@ -37,15 +37,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="发包金额 = 实际发包给项目经理的发包额">发包金额</span><br>
-                    <span>425,000.00</span>
+                    <span>{{workorder.actual_publish_money | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="计划总人工 = 来源工人联盟系统人工计划总额接口">计划人工</span><br>
-                    <span>157,109.58</span>
+                    <span>{{workorder.workerPlaneMoney | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="计划材料 = 来源材料系统材料计划总额">计划材料</span><br>
-                    <span>267,890.42</span>
+                    <span>{{workorder.materialplanMoney | toFixed()}}</span>
                 </p>
                     <span class="circlemark circlemark-green">完</span>
             </div>
@@ -56,15 +56,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="计划总人工 = 来源工人联盟系统人工计划总额接口">计划总人工</span><br>
-                    <span>157,109.58</span>
+                    <span>{{workorder.workerPlaneMoney | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                         <span class="cLightGray pr8" data-title="人工可用 =（发包金额 - 材料计划总额）* 0.7 * 回款比例（不包含增项） - 已付人工 - 待付人工 ">人工可用</span><br>
-                        <span>-59,016.31</span>
+                        <span>--</span>
                 </p>
                 <p class="col-md-4">
                         <span class="cLightGray pr8" data-title="未用人工 =人工计划总额 - 已付人工 - 待付人工 ">未用人工</span><br>
-                        <span>21,109.58</span>
+                        <span>{{workorder.workerUnusedMoney | toFixed()}}</span>
                 </p>
                 <span class="circlemark circlemark-green">完</span>
             </div>
@@ -75,15 +75,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="计划总材料 = 发包金额 - 计划总人工">计划总材料</span><br>
-                    <span>267,890.42</span>
+                    <span>{{workorder.materialplanMoney | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                         <span class="cLightGray pr8" data-title="材料可用 = 项目可用 - 人工可用">材料可用</span><br>
-                        <span>-7,225.41</span>
+                        <span>--</span>
                 </p>
                 <p class="col-md-4">
                         <span class="cLightGray pr8" data-title="未用材料 = 材料计划总额 - 已付/待付材料 - 未付材料款">未用材料</span><br>
-                        <span>217,681.32</span>
+                        <span>{{workorder.materialUnusedMoney | toFixed()}}</span>
                 </p>
                 <span class="circlemark circlemark-green">完</span>
             </div>
@@ -94,15 +94,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8">待办罚款</span><br>
-                    <span>0.00</span>
+                    <span>{{workorder.pendingFine | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">地方罚款</span><br>
-                    <span>0.00</span>
+                    <span>{{workorder.localFine | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">集团罚款</span><br>
-                    <span>0.00</span>
+                    <span>{{workorder.groupFine | toFixed()}}</span>
                 </p>
 
             </div>
@@ -113,11 +113,11 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8">分项总额</span>
-                    <span>0.00</span>
+                    <span>--</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="发包日期 = 项目实际的发包日期">发包日期</span>
-                        <span>2019-12-25</span>
+                        <span>{{workorder.publish_time == null ? '--':formatDate(workorder.publish_time)}}</span>
                 </p>
                     <span class="circlemark circlemark-green">完</span>
             </div>
@@ -128,15 +128,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title=" 盈余总额 =发包金额 - 计划总人工（来源工人联盟人工计划总额） - 计划总材料（来源材料业务材料计划总额） - 夜间施工费 - 远程施工费">盈余总额</span>
-                        <span class="cRed layerui-title" data-title="【预警】 = 盈余总额大于10000或者盈余总额小于 -10000都属于问题，否则属于正常">-35,662.07</span>
+                        <span class="cRed layerui-title" data-title="【预警】 = 盈余总额大于10000或者盈余总额小于 -10000都属于问题，否则属于正常">--</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">重审金额</span>
-                    <span>0.00</span>
+                    <span>--</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8">预警</span>
-                    <span class="cRed">问题</span>
+                    <span class="cRed">--</span>
                 </p>
                 <span class="circlemark circlemark-green">完</span>
                 <div class="fixedTrangle">
@@ -150,7 +150,7 @@
             </div>
         </router-link>
     </div>
-    <div class="pr10">
+    <!-- <div class="pr10">
         <router-link tag="div" exact :to="routerPath('costDetailThreeHandel?index='+index+'')" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item,index) in qualityList" :key="index">
             <p class="analyItemTit tx-center">处理</p>
             <div class="analyItemCon">
@@ -181,47 +181,25 @@
                     <span class="circlemark circlemark-green">完</span>
         </div>
         </router-link>
-    </div>
+    </div> -->
 </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { getCostSharingSecond } from '../Resources/Api'
 export default {
     data () {
         return {
-            qualityList: [{
-                src: 'https://proj01.oss-cn-beijing.aliyuncs.com/common/1558084186pbTTM587f3.png',
-                isShow: false,
-                name: '开槽修补',
-                qualityNumber: null,
-                worker: null,
-                area: '电器工程',
-                local: '其他',
-                content: '修补采用1:3-1:4的水泥砂浆将孔洞、线管槽回填处理'
-            },
-            {
-                src: 'https://proj01.oss-cn-beijing.aliyuncs.com/common/1558084186pbTTM587f3.png',
-                isShow: false,
-                name: '明装灯具',
-                qualityNumber: null,
-                worker: null,
-                area: '电器工程',
-                local: '其他',
-                content: '据图纸安装位置，画出灯具固定位置，将电源线与灯具接线端子连接，用螺丝将灯具与挂件连接，用自攻螺丝将灯具底座安装在顶面，面罩卡扣与底座连接紧密，保持横平竖直，灯具安装牢固、无松动后通电调试。'
-            },
-            {
-                src: 'https://proj01.oss-cn-beijing.aliyuncs.com/common/1558084186pbTTM587f3.png',
-                isShow: false,
-                name: '轻钢龙骨双面单层石膏板隔墙',
-                qualityNumber: null,
-                worker: null,
-                area: '间隔工程',
-                local: '其他',
-                content: '根据施工方案进行放线定位，清理基层，用电锤安装12ø钻头打眼，其深度不小于60mm，将眼内灰尘清理干净，塞入10ø膨胀螺栓，将螺栓拧紧固定，固定点间距应不大于600mm，固定点至两端距离不大于100mm。竖向龙骨间距不超过400mm,与天地龙骨拉铆钉连接处理，单面封板进行岩棉填充，隐蔽验收后进行双面封板。'
-            }]
+            workorder: {}, // 二段数据
+            qualityList: []
         }
     },
+    computed: {
+        ...mapGetters(['leftInfo'])
+    },
     created () {
-
+        console.info(this.leftInfo)
+        this.load()
     },
     methods: {
         // 路由跳转路径拼接
@@ -231,6 +209,41 @@ export default {
         // 直接进行路由跳转路径
         routerPush (path) {
             this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        // 查询回款二段数据
+        load () {
+            let param = {
+                orderNo: this.leftInfo.orderno // this.leftInfo.orderno
+            }
+            getCostSharingSecond(param).then(results => {
+                if (Number(results.data.StatusCode) === 0) {
+                    this.workorder = results.data.Body.workorder
+                }
+            }).catch(() => {})
+        },
+        // 时间转换
+        formatDate (value) {
+            let date = new Date(value)
+            let y = date.getFullYear()
+            let MM = date.getMonth() + 1
+            MM = MM < 10 ? ('0' + MM) : MM
+            let d = date.getDate()
+            d = d < 10 ? ('0' + d) : d
+            return y + '-' + MM + '-' + d
+        }
+    },
+    watch: {
+        leftInfo () {
+            this.load()
+        }
+    },
+    filters: {
+        toFixed (value) {
+            if (value !== undefined) {
+                return typeof Number(value) === 'number' ? value.toFixed(2) : '--'
+            } else {
+                return '--'
+            }
         }
     }
 }
