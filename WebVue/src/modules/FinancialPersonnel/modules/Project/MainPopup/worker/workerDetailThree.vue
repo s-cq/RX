@@ -54,11 +54,11 @@
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">计划总额</span>
-                    <span>{{workerOtherList.planMoney.toFixed(2)}}</span>
+                    <span>{{totalmoney ()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">实际总额</span>
-                    <span>{{workerOtherList.projectMoney.toFixed(2)}}</span>
+                    <span>{{totalPayMoney ()}}</span>
                 </p>
             </div>
             <!-- 预留 -->
@@ -94,6 +94,7 @@ export default {
     },
     created () {
         this.getWorkerQCOrderByCondition()
+        console.info(this.$route.query.workerOtherList)
         this.workerTypeIdTwo = this.$route.query.workerOtherList
     },
     methods: {
@@ -111,7 +112,7 @@ export default {
         // 计算总计划金额
         totalmoney () {
             let sum = 0
-            this.workerOtherList.forEach(item => {
+            this.workerListThree.forEach(item => {
                 sum += item.workMoney
             })
             return sum.toFixed(2)
@@ -119,7 +120,7 @@ export default {
         // 计算总实际
         totalPayMoney () {
             let money = 0
-            this.workerOtherList.forEach(item => {
+            this.workerListThree.forEach(item => {
                 money += item.activeWorkMoney
             })
             return money.toFixed(2)
@@ -172,10 +173,8 @@ export default {
             return prssName
         }
     },
-
     watch: {
         $route () {
-            console.log(this.leftInfo)
             this.workerTypeIdTwo = this.$route.query.workerOtherList
             this.getWorkerQCOrderByCondition()
             this.flg = 0

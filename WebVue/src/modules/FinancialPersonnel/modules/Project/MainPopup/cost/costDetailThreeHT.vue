@@ -1,6 +1,6 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【施尾_合同账】详情'}"></three-title>
+    <three-title :title="{name:'【合同账】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <div class="plr10">
                 <div class="analyItem">
@@ -63,7 +63,6 @@ export default {
         }
     },
     created () {
-        console.log(this.$route)
     },
     methods: {
         clickFourShow (index) {

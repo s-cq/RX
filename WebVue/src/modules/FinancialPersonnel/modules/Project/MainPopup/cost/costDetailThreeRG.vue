@@ -1,21 +1,21 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【施尾_人工】详情'}"></three-title>
-    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
+    <three-title :title="{name:'【人工】详情'}"></three-title>
+    <div class="layerRtb-scroll thinScroll" v-if="worker !=={} && workorder!=={}" v-scrollHeight = "137" v-loading="loading">
         <div class="analyItem">
             <p class="analyItemTit tx-center">项目可用</p>
             <div class="analyItemCon">
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="项目总用= 发包已收（来源投资财务交易平台系统分账）* 0.8">项目总用</span>
-                    <span>{{(workorder.packAmount*0.8).toFixed(2)}}</span>
+                    <span>{{workorder.packAmount === null ? '--' : (workorder.packAmount*0.8)| toFixed()}}</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="项目可用 = 发包已收（来源投资财务交易平台系统分账）* 0.8 - 已付人工款 - 已付材料款 - 待付人工款 - 待付材料款">项目可用</span>
-                    <span>{{workorder.availableMoney.toFixed(2)}}</span>
+                    <span>{{workorder.availableMoney | toFixed()}}</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="计划总人工 = 发包金额 - 计划总材料">计划总人工</span>
-                    <span>{{workorder.workerPlaneSumMoney.toFixed(2)}}</span>
+                    <span>{{workorder.workerPlaneSumMoney | toFixed()}}</span>
                 </p>
             </div>
         </div>
@@ -24,15 +24,15 @@
             <div class="analyItemCon">
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="人工计划总额 = 发包金额  - 材料计划总额">人工计划总</span>
-                    <span>{{workorder.workerPlaneSumMoney.toFixed(2)}}</span>
+                    <span>{{workorder.workerPlaneSumMoney | toFixed()}}</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">修改人工</span>
-                    <input type="text" class="jm_tab_inp width80 xgMoney" placeholder="计划人工" data-payable="425000.0000" value="157109.58" :data-summoney="workorder.workerPlaneMoney.toFixed(2)">
+                    <input type="text" class="jm_tab_inp width80 xgMoney" placeholder="计划人工" data-payable="425000.0000" value="157109.58" :data-summoney="workorder.workerPlaneMoney | toFixed()">
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">差额</span>
-                    <span id="rgceMoney">{{(workorder.workerPlaneSumMoney - workorder.workerPlaneMoney).toFixed(2)}}</span>
+                    <span id="rgceMoney">{{(workorder.workerPlaneSumMoney - workorder.workerPlaneMoney) | toFixed()}}</span>
                 </p>
             </div>
         </div>
@@ -45,11 +45,11 @@
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="已付人工 =出纳已支付的人工凭证">已付人工</span>
-                    <span>{{worker.workerPayMoney.toFixed(2)}}</span>
+                    <span>{{worker.workerPayMoney | toFixed()}}</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="待付人工 =出纳待支付的人工凭证">待付人工</span>
-                    <span>{{worker.workerWaitPayMoney.toFixed(2)}}</span>
+                    <span>{{worker.workerWaitPayMoney | toFixed()}}</span>
                 </p>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8" data-title="未用人工 =人工计划总额 - 已付人工 - 待付人工 ">未用人工</span>
-                    <span>{{(workorder.workerPlaneSumMoney-worker.workerPayMoney-worker.workerWaitPayMoney).toFixed(2)}}</span>
+                    <span>{{(workorder.workerPlaneSumMoney-worker.workerPayMoney-worker.workerWaitPayMoney) | toFixed()}}</span>
                 </p>
             </div>
         </div>
@@ -91,15 +91,15 @@ import { getCostSharingThree } from '../../Resources/Api'
 export default {
     data () {
         return {
-            workorder: null,
-            worker: null
+            loading: false,
+            workorder: {},
+            worker: {}
         }
     },
     computed: {
         ...mapGetters(['leftInfo'])
     },
     created () {
-        console.info(this.leftInfo)
         this.load()
     },
     methods: {
@@ -113,6 +113,7 @@ export default {
         },
         // 查询回款二段数据
         load () {
+            this.loading = true
             let param = {
                 orderNo: this.leftInfo.orderno, // this.leftInfo.orderno
                 type: 3
@@ -121,6 +122,7 @@ export default {
                 if (Number(results.data.StatusCode) === 0) {
                     this.workorder = results.data.Body.workorder
                     this.worker = results.data.Body.worker
+                    this.loading = false
                 }
             }).catch(() => {})
         },
@@ -145,6 +147,14 @@ export default {
                 return '--'
             } else {
                 return this.$utils.format('yyyy-MM-dd', date)
+            }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '--'
+            } else {
+                return value.toFixed(2)
             }
         }
     }

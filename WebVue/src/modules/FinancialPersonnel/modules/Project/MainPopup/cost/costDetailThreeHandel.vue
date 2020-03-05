@@ -1,6 +1,6 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【审计_处理版块】详情'}"></three-title>
+    <three-title :title="{name:'【处理版块】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <div class="analyItem">
             <p class="analyItemTit tx-center">合同</p>

@@ -1,22 +1,22 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【施尾_材料】详情'}"></three-title>
-    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
+    <three-title :title="{name:'【材料】详情'}"></three-title>
+    <div class="layerRtb-scroll thinScroll" v-if="workorder !=={} || material !=={}" v-scrollHeight = "137">
         <div class="">
             <div class="analyItem">
                 <p class="analyItemTit tx-center">项目可用</p>
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="项目总用= 发包已收（来源投资财务交易平台系统分账）* 0.8">项目总用</span>
-                        <span>{{(workorder.packAmount*0.8).toFixed(2)}}</span>
+                        <span>{{(workorder.packAmount*0.8) | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="项目可用 = 发包已收（来源投资财务交易平台系统分账）* 0.8 - 已付人工款 - 已付材料款 - 待付人工款 - 待付材料款">项目可用</span>
-                        <span>{{workorder.availableMoney.toFixed(2)}}</span>
+                        <span>{{workorder.availableMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="计划总材料 = 发包金额 - 计划总人工">计划总材料</span>
-                        <span>{{workorder.materialplanSumMoney.toFixed(2)}}</span>
+                        <span>{{workorder.materialplanSumMoney | toFixed()}}</span>
                     </p>
                 </div>
             </div>
@@ -29,11 +29,11 @@
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="已付材料  = 出纳已支付的材料凭证">已付材料</span>
-                        <span>{{material.materialPayMoney.toFixed(2)}}</span>
+                        <span>{{material.materialPayMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="待付人材料 = 出纳待支付的材料凭证">待付材料</span>
-                        <span>{{material.materialWaitPayMoney.toFixed(2)}}</span>
+                        <span>{{material.materialWaitPayMoney | toFixed()}}</span>
                     </p>
                 </div>
             </div>
@@ -42,15 +42,15 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="材料计划总额 = 发包金额 - 计划总人工">材料计划总</span>
-                        <span>{{workorder.materialplanSumMoney.toFixed(2)}}</span>
+                        <span>{{workorder.materialplanSumMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">修改材料</span>
-                        <input type="text" class="jm_tab_inp width100 xgMoney" placeholder="计划材料" data-payable="425000.0000" value="267890.42" :data-summoney="workorder.materialplanMoney.toFixed(2)">
+                        <input type="text" class="jm_tab_inp width100 xgMoney" placeholder="计划材料" data-payable="425000.0000" value="267890.42" :data-summoney="workorder.materialplanMoney | toFixed()">
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">余额</span>
-                        <span>{{(workorder.materialplanSumMoney-workorder.materialplanMoney).toFixed(2)}}</span>
+                        <span>{{(workorder.materialplanSumMoney-workorder.materialplanMoney) | toFixed()}}</span>
                     </p>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="剩余材料 = 材料计划总额 - 已付材料 - 待付材料 ">剩余材料</span>
-                        <span>{{workorder.materialplanSumMoney-material.materialPayMoney-material.materialWaitPayMoney.toFixed(2)}}</span>
+                        <span>{{workorder.materialplanSumMoney-material.materialPayMoney-material.materialWaitPayMoney | toFixed()}}</span>
                     </p>
                 </div>
             </div>
@@ -152,15 +152,14 @@ import { getCostSharingThree } from '../../Resources/Api'
 export default {
     data () {
         return {
-            workorder: null,
-            material: null
+            workorder: {},
+            material: {}
         }
     },
     computed: {
         ...mapGetters(['leftInfo'])
     },
     created () {
-        console.info(this.leftInfo)
         this.load()
     },
     methods: {
@@ -207,7 +206,16 @@ export default {
             } else {
                 return this.$utils.format('yyyy-MM-dd', date)
             }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '--'
+            } else {
+                return value.toFixed(2)
+            }
         }
+
     }
 }
 </script>

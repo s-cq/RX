@@ -1,6 +1,6 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【施尾_盈余账】详情'}"></three-title>
+    <three-title :title="{name:'【盈余账】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <div class="analyItem">
             <p class="analyItemTit tx-center">盈余总额</p>
@@ -34,7 +34,6 @@ export default {
         }
     },
     created () {
-        console.log(this.$route)
     },
     methods: {
         clickFourShow (index) {

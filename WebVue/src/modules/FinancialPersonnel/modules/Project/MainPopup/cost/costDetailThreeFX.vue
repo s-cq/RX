@@ -1,6 +1,6 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【施尾_分项账】详情'}"></three-title>
+    <three-title :title="{name:'【分项账】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
         <div class="plr10">
             <div class="analyItem">
@@ -52,7 +52,6 @@ export default {
         ...mapGetters(['leftInfo'])
     },
     created () {
-        console.info(this.leftInfo)
         this.load()
     },
     methods: {

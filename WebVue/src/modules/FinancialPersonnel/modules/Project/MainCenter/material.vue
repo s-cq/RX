@@ -204,7 +204,6 @@ export default {
     watch: {
         leftInfo () {
             this.load()
-            console.log('111')
         }
     }
 }

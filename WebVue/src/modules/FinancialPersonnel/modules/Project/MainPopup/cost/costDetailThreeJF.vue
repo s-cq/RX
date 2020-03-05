@@ -1,6 +1,6 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【审计_项目奖罚】详情'}"></three-title>
+    <three-title :title="{name:'【项目奖罚】详情'}"></three-title>
     <ul class="clearfix uiTab3 pl10 mb10">
         <li class="uiTab3-active"><a href="javascript:">记录</a></li>
     </ul>
@@ -72,7 +72,6 @@ export default {
         }
     },
     created () {
-        console.log(this.$route)
     },
     methods: {
         clickFourShow (index) {

@@ -125,7 +125,6 @@ export default {
         this.GetProductDetailItemsToFinanceByShopID()
         this.qualityListItem = this.$route.query.qualityListItem
         this.totalMoney = this.$route.query.totalMoney
-        console.log(this.leftInfo)
     },
     computed: {
         ...mapGetters(['leftInfo'])
@@ -138,7 +137,6 @@ export default {
             }).then(results => {
                 if (Number(results.data.statusCode) === 1) {
                     this.marStageThree = results.data.body
-                    console.log(this.marStageThree)
                 }
             }).catch(() => {})
         },

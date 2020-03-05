@@ -106,27 +106,6 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 4">
-        <!-- <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
-            <p class="analyItemTit tx-center">合计</p>
-            <div class="analyItemCon">
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">实人</span>
-                    <span class="cGreen">{{totalWorker}}个</span>
-                </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">应付</span>
-                    <span class="cGreen">{{totalProjectMoney}}元</span>
-                </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">已付</span>
-                    <span class="cGreen">{{totalPayMoney}}元</span>
-                </p>
-                <p class="col-md-3">
-                    <span class="pr8 cLightGray">未付</span>
-                    <span class="cGreen">{{totalNoPayMoney}}元</span>
-                </p>
-            </div>
-        </router-link> -->
         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
@@ -150,23 +129,6 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-if="leftInfo.AfterMarketState === 5">
-        <!-- <router-link tag="div" exact :to="routerPath('workerDetailThree?index= '+index+'')" class="analyItem anItemBor" active-class="anItemBor-active">
-            <p class="analyItemTit tx-center">合计</p>
-            <div class="analyItemCon">
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">应付</span>
-                    <span class="cGreen">{{totalProjectMoney}}元</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">已付</span>
-                    <span class="cGreen">{{totalPayMoney}}元</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">未付</span>
-                    <span class="cGreen">{{totalNoPayMoney}}元</span>
-                </p>
-            </div>
-        </router-link> -->
         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
@@ -186,23 +148,6 @@
         </router-link>
     </div>
     <div class="thinScroll pr10" v-scrollHeight="84" v-else>
-         <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active">
-            <p class="analyItemTit tx-center">合计</p>
-            <div class="analyItemCon">
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">应付</span><br>
-                    <span class="cGreen">{{totalProjectMoney}}元</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">已付</span><br>
-                    <span class="cGreen">{{totalPayMoney}}元</span>
-                </p>
-                <p class="col-md-4">
-                    <span class="pr8 cLightGray">未付</span><br>
-                    <span class="cGreen">{{totalNoPayMoney}}元</span>
-                </p>
-            </div>
-        </router-link>
          <router-link tag="div" exact :to="{path:routerPath('workerDetailThree'), query:{workerOtherList:item,index:index}}" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item, index) in workerOtherList" :key="index">
             <p class="analyItemTit tx-center">{{item.workerTypeName}}</p>
             <div class="analyItemCon">
@@ -486,7 +431,6 @@ export default {
         }
     },
     created () {
-        console.info(this.leftInfo)
         this.load()
     },
     methods: {
@@ -512,7 +456,6 @@ export default {
     watch: {
         leftInfo () {
             this.load()
-            console.log('111')
         }
     }
 }

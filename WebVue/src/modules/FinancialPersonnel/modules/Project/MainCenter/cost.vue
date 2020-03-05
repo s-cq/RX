@@ -198,7 +198,6 @@ export default {
         ...mapGetters(['leftInfo'])
     },
     created () {
-        console.info(this.leftInfo)
         this.load()
     },
     methods: {

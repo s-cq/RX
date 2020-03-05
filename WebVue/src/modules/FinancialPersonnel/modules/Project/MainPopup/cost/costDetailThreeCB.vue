@@ -1,6 +1,6 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
-    <three-title :title="{name:'【施尾_成本账】详情'}"></three-title>
+    <three-title :title="{name:'【成本账】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137" v-if="workorder !== {}">
         <div class="plr10">
             <div class="analyItem">
@@ -8,7 +8,7 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="发包金额= 承包给项目经理的总金额">发包金额</span>
-                        <span>{{workorder.actual_publish_money.toFixed(2)}}</span>
+                        <span>{{workorder.actual_publish_money | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">项目经理</span>
@@ -16,7 +16,7 @@
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="项目总用= 发包已收（来源投资财务交易平台系统分账）* 0.8">项目总用</span>
-                        <span>{{(workorder.packAmount*0.8).toFixed(2)}}</span>
+                        <span>{{workorder.packAmount ===null ? '--' : (workorder.packAmount*0.8)| toFixed()}}</span>
                     </p>
                 </div>
             </div>
@@ -24,16 +24,16 @@
                  <p class="analyItemTit tx-center">其他费</p>
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
-                        <span class="cLightGray pr8" data-title="夜间施工费 = 来源审计报价的夜间施工费">夜间施工费</span><br>
-                        <span>{{workorder.nightwork_fee.toFixed(2)}}</span>
+                        <span class="cLightGray pr8" data-title="夜间施工费 = 来源审计报价的夜间施工费">夜间施工费</span>
+                        <span>{{workorder.nightwork_fee| toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
-                        <span class="cLightGray pr8" data-title="远程施工费 = 来源审计报价的远程施工费">远程施工费</span><br>
-                        <span>{{workorder.distance_fee.toFixed(2)}}</span>
+                        <span class="cLightGray pr8" data-title="远程施工费 = 来源审计报价的远程施工费">远程施工费</span>
+                        <span>{{workorder.distance_fee | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
-                        <span class="cLightGray pr8" data-title="合计 = 夜间施工费 + 远程施工费">合计</span><br>
-                        <span>{{(workorder.nightwork_fee+workorder.distance_fee).toFixed(2)}}</span>
+                        <span class="cLightGray pr8" data-title="合计 = 夜间施工费 + 远程施工费">合计</span>
+                        <span>{{(workorder.nightwork_fee+workorder.distance_fee) | toFixed()}}</span>
                     </p>
                 </div>
             </div>
@@ -42,19 +42,19 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="计划总人工 = 发包金额 - 计划总材料">计划总人工</span><br>
-                        <span>{{workorder.workerPlaneSumMoney.toFixed(2)}}</span>
+                        <span>{{workorder.workerPlaneSumMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="核算总人工 = 工种应付金额合计（总工时 / 8 * 每天工资）">核算总人工</span><br>
-                        <span>{{workorder.workerPlaneMoney.toFixed(2)}}</span>
+                        <span>{{workorder.workerPlaneMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="差额 = 计划总人工 - 核算总人工 - 夜间施工费 - 远程施工费">差额</span><br>
-                        <span>{{workorder.workerDifference.toFixed(2)}}</span>
+                        <span>{{workorder.workerDifference | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="占比 = 核算总人工 / 发包金额">占比</span><br>
-                        <span>{{(workorder.workerProportion*100)}}%</span>
+                        <span>{{(workorder.workerProportion*100) | toFixed()}}%</span>
                     </p>
                 </div>
             </div>
@@ -63,19 +63,19 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="计划总材料 = 发包金额 - 计划总人工">计划总材料</span><br>
-                        <span>{{workorder.workerPlaneSumMoney.toFixed(2)}}</span>
+                        <span>{{workorder.workerPlaneSumMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="核算总材料 = 计划材料总额">核算总材料</span><br>
-                        <span>{{workorder.materialplanMoney.toFixed(2)}}</span>
+                        <span>{{workorder.materialplanMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="差额 = 计划总材料 - 核算总材料">差额</span><br>
-                        <span>{{workorder.materialDifference.toFixed(2)}}</span>
+                        <span>{{workorder.materialDifference | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="占比 = 计划总材料 / 发包金额">占比</span><br>
-                        <span>{{(workorder.materialProportion*100).toFixed(2)}}%</span>
+                        <span>{{(workorder.materialProportion*100) | toFixed()}}%</span>
                     </p>
                 </div>
             </div>
@@ -104,7 +104,7 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="项目可用= 发包已收（来源投资财务交易平台系统分账）* 0.8 - 已付人工款 - 已付材料款 - 待付人工款 - 待付材料款">项目可用</span>
-                    <span>51,790.90</span>
+                    <span>{{workorder.availableMoney | toFixed()}}</span>
                 </p>
                 <span class="circlemark circlemark-green">完</span>
             </div>
@@ -125,7 +125,6 @@ export default {
         ...mapGetters(['leftInfo'])
     },
     created () {
-        console.info(this.leftInfo)
         this.load()
     },
     methods: {
@@ -170,6 +169,14 @@ export default {
                 return '--'
             } else {
                 return this.$utils.format('yyyy-MM-dd', date)
+            }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '--'
+            } else {
+                return value.toFixed(2)
             }
         }
     }

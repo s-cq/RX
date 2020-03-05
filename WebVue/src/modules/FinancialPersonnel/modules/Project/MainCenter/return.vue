@@ -15,7 +15,7 @@
                      </p>
                      <p class="col-md-4 fl">
                          <span class="c999 pr8">未收</span><br>
-                         <span>{{getReceive.notReceived.toFixed(2)}}</span>
+                         <span>{{getReceive.notReceived | toFixed()}}</span>
                      </p>
                      <span class="circlemark circlemark-lightRed">未</span>
             </div>
@@ -50,7 +50,7 @@
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">金额</span>
-                    <span>{{item.receivable.toFixed(2)}}</span>
+                    <span>{{item.receivable | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">进度</span>
@@ -62,7 +62,7 @@
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">金额</span>
-                    <span>{{item.received.toFixed(2)}}</span>
+                    <span>{{item.received | toFixed()}}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="pr8 cLightGray">天数</span>
@@ -93,15 +93,15 @@
             <div class="analyItemCon">
                  <p class="col-md-4">
                         <span class="cLightGray pr8" data-title="应收总额 = 所有期数的应收-减项金额 合计">应总</span><br>
-                        <span class="cGreen">{{(getReceive.receivables).toFixed(2)}}</span>
+                        <span class="cGreen">{{(getReceive.receivables) | toFixed()}}</span>
                     </p>
                     <p class="col-md-4">
                         <span class="cLightGray pr8" data-title="已收总额 = 所有期数的已收合计">已总</span><br>
-                        <span class="cGreen">{{(getReceive.sumReceived).toFixed(2)}}</span>
+                        <span class="cGreen">{{(getReceive.sumReceived) | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="差额 = 应收总额 - 已收总额">差额 </span><br>
-                        <span class="cGreen">{{(getReceive.notReceived).toFixed(2)}}</span>
+                        <span class="cGreen">{{(getReceive.notReceived) | toFixed()}}</span>
                     </p>
             </div>
         </router-link>
@@ -217,12 +217,20 @@ export default {
             var df = Y + M + D
             //   var df = Y+M+D+h+m+s;
             return df
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '--'
+            } else {
+                return value.toFixed(2)
+            }
         }
+
     },
     watch: {
         leftInfo () {
             this.getReceiveMoney()
-            console.log('111')
         }
     }
 }
