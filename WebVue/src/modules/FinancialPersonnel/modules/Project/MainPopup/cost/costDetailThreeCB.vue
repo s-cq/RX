@@ -9,6 +9,7 @@
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="发包金额= 承包给项目经理的总金额">发包金额</span>
                         <span>{{workorder.actual_publish_money | toFixed()}}</span>
+
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">项目经理</span>
