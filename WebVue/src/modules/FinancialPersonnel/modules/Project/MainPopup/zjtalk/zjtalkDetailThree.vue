@@ -140,7 +140,7 @@
                 </p>
                 <p class="fl col-md-3">
                     <!-- <span class="cLightGray pr8"> <a href="javascript:" class="jm_table_btn btn_bg999999 fl uiBtn-normal uiBtn-blue mr10 Add_zjx" style="position: relative; z-index: 1;">分账</a></span> -->
-                    <span class="cLightGray pr8"> <a @click="detailClick()" href="javascript:" class="jm_table_btn btn_bg999999 fl uiBtn-normal uiBtn-blue mr10 Add_zjx" style="position: relative; z-index: 1;">详细</a></span>
+                    <span class="cLightGray pr8"> <a @click="detailClick" href="javascript:" class="jm_table_btn btn_bg999999 fl uiBtn-normal uiBtn-blue mr10 Add_zjx" style="position: relative; z-index: 1;">详细</a></span>
                 </p>
             </div>
         </div>
@@ -151,11 +151,23 @@
             <div class="analyItemCon"></div>
         </div>
     </div>
+        <!-- 四段渲染容器 -->
+    <transition-group class="animated faster" enter-active-class="animated faster slideInRight" leave-active-class="animated faster slideOutRight">
+        <!-- 客户评价 -->
+        <rx-zhuang v-if="fourIndex === 1" :key="0" ></rx-zhuang>
+        <rx-fen v-if="fourIndex === 3" :key="1" ></rx-fen>
+    </transition-group>
 </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import rxZhuang from './four/zhuangFour'
+import rxFen from './four/fenFour'
 export default {
+    components: {
+        rxZhuang,
+        rxFen
+    },
     data () {
         return {
             imgList: [],
@@ -173,6 +185,7 @@ export default {
     },
     methods: {
         detailClick () {
+            this.fourIndex = Number(this.flg)
         },
         successUpload (value) {
             this.imgList.push(value.src)
