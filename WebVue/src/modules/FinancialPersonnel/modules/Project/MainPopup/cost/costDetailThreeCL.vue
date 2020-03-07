@@ -46,7 +46,7 @@
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">修改材料</span>
-                        <input type="text" class="jm_tab_inp width100 xgMoney" placeholder="计划材料" data-payable="425000.0000" value="267890.42" :data-summoney="workorder.materialplanMoney | toFixed()">
+                        <input type="text" class="jm_tab_inp width100 xgMoney" :value="workorder.materialplanMoney | toFixed()" />
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8">余额</span>
@@ -210,7 +210,7 @@ export default {
         // 金额过滤
         toFixed (value) {
             if (value == null || isNaN(value) || value === undefined) {
-                return '--'
+                return '0.00'
             } else {
                 return value.toFixed(2)
             }

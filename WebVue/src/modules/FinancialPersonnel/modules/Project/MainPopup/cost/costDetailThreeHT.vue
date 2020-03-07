@@ -8,7 +8,7 @@
                     <div class="analyItemCon">
                         <p class="fl col-md-4">
                             <span class="cLightGray pr8">合同金额</span>
-                            <span class="cGreen">{{$route.query.item.contract_fee.toFixed(2)}}</span>
+                            <span class="cGreen">{{$route.query.item.contract_fee | toFixed()}}</span>
                         </p>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                     <div class="analyItemCon">
                         <p class="fl col-md-4">
                             <span class="cLightGray pr8" data-title="发包金额= 承包给项目经理的总金额">发包金额</span>
-                            <span class="cGreen">{{$route.query.item.actual_publish_money.toFixed(2)}}</span>
+                            <span class="cGreen">{{$route.query.item.actual_publish_money | toFixed()}}</span>
                         </p>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <div class="analyItemCon">
                         <p class="fl col-md-4">
                             <span class="cLightGray pr8" data-title="毛利金额 = 合同金额 - 发包金额">毛利金额</span>
-                            <span class="cGreen">{{$route.query.item.gross_profit.toFixed(2)}}</span>
+                            <span class="cGreen">{{$route.query.item.gross_profit | toFixed()}}</span>
                         </p>
                     </div>
                 </div>
@@ -68,7 +68,26 @@ export default {
         clickFourShow (index) {
             this.fourIndex = index
         }
+    },
+    filters: {
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '0.00'
+            } else {
+                return value.toFixed(2)
+            }
+        }
     }
+
 }
 </script>
 <style lang="scss" scoped>

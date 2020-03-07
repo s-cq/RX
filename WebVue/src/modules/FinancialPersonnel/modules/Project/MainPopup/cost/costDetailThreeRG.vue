@@ -28,7 +28,7 @@
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">修改人工</span>
-                    <input type="text" class="jm_tab_inp width80 xgMoney" placeholder="计划人工" data-payable="425000.0000" value="157109.58" :data-summoney="workorder.workerPlaneMoney | toFixed()">
+                    <input type="text" class="jm_tab_inp width80 xgMoney" :value="workorder.workerPlaneMoney | toFixed()">
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">差额</span>
@@ -152,7 +152,7 @@ export default {
         // 金额过滤
         toFixed (value) {
             if (value == null || isNaN(value) || value === undefined) {
-                return '--'
+                return '0.00'
             } else {
                 return value.toFixed(2)
             }

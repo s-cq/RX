@@ -55,7 +55,7 @@
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="占比 = 核算总人工 / 发包金额">占比</span><br>
-                        <span>{{(workorder.workerProportion*100) | toFixed()}}%</span>
+                        <span>{{(workorder.workerProportion*100)}}%</span>
                     </p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 <div class="analyItemCon">
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="计划总材料 = 发包金额 - 计划总人工">计划总材料</span><br>
-                        <span>{{workorder.workerPlaneSumMoney | toFixed()}}</span>
+                        <span>{{workorder.materialplanSumMoney | toFixed()}}</span>
                     </p>
                     <p class="fl col-md-4">
                         <span class="cLightGray pr8" data-title="核算总材料 = 计划材料总额">核算总材料</span><br>
@@ -76,7 +76,7 @@
                     </p>
                     <p class="fl col-md-2">
                         <span class="cLightGray pr8" data-title="占比 = 计划总材料 / 发包金额">占比</span><br>
-                        <span>{{(workorder.materialProportion*100) | toFixed()}}%</span>
+                        <span>{{(workorder.materialProportion*100)}}%</span>
                     </p>
                 </div>
             </div>
@@ -175,7 +175,7 @@ export default {
         // 金额过滤
         toFixed (value) {
             if (value == null || isNaN(value) || value === undefined) {
-                return '--'
+                return '0.00'
             } else {
                 return value.toFixed(2)
             }

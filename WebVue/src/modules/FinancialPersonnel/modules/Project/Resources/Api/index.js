@@ -125,3 +125,13 @@ export function getCostSharingSecond (params) {
 export function getCostSharingThree (params) {
     return Request.http.get('/pro/getCostSharingThree', params, 102)
 }
+/** ******************  查询成本三段段接口  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-03-05
+ * 参数: orderNo 项目单号
+ * 描述: 查询成本三段段接口
+ */
+export function getNegotiateSecond (params) {
+    return Request.http.get('/pro/getNegotiateSecond', params, 102)
+}

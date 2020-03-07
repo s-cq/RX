@@ -221,7 +221,7 @@ export default {
         // 金额过滤
         toFixed (value) {
             if (value == null || isNaN(value) || value === undefined) {
-                return '--'
+                return '0.00'
             } else {
                 return value.toFixed(2)
             }

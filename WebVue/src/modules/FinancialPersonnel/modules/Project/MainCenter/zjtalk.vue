@@ -26,15 +26,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减合同（装饰 +分项）= 与甲方（客户）新签订增减项合同金额">增减合同</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{(negotiate.ZJXHTM + negotiateZJXFXHTM) | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减发包（装饰 +分项）= 与丙方（项目经理）新签订增减发包金额">增减发包</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{(negotiate.ZJXFBM + negotiate.ZJXFXFBM) | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减利润（装饰 +分项） = （增减合同 - 增减发包 - 增项代购主材 - 增项税金）">增减利润</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{(negotiate.ChangesProfit + negotiate.FXChangesProfit) | toFixed() }}</span>
                 </p>
             </div>
         </router-link>
@@ -43,15 +43,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="与甲方（客户）新签订增项合同金额">增项合同</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.ZXHTMoney | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="与甲方（客户）新签订减项合同金额">减项合同</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.JXHTMoney | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="与甲方（客户）新签订增减项合同金额">增减合同</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.ZJXHTM | toFixed() }}</span>
                 </p>
             </div>
         </router-link>
@@ -60,15 +60,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增项发包（装饰）= 与丙方（项目经理）新签订增项发包金额">增项发包</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.ZXFBMoney | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="减项发包（装饰）= 与丙方（项目经理）新签订减项发包金额">减项发包</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.JXFBMoney | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减发包（装饰）= 与丙方（项目经理）新签订增减发包金额">增减发包</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.ZJXFBM | toFixed() }}</span>
                 </p>
             </div>
         </router-link>
@@ -77,15 +77,15 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减合同（分项）= 与甲方（客户）新签订增减合同金额">增减合同</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.ZJXFXHTM | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减发包（分项）= 与丙方（项目经理）新签订增减发包金额">增减发包</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.ZJXFXFBM | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减利润（分项）= （增减合同 - 增减发包 - 增项代购主材 - 增项税金）">增减利润</span><br>
-                    <span class="cGreen">0.00</span>
+                    <span class="cGreen">{{negotiate.FXChangesProfit | toFixed() }}</span>
                 </p>
             </div>
         </router-link>
@@ -100,16 +100,19 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { getNegotiateSecond } from '../Resources/Api'
 export default {
-    name: '',
     data () {
         return {
-
-
+            negotiate: {} // 二段数据
         }
     },
     computed: {
         ...mapGetters(['leftInfo'])
+    },
+    created () {
+        console.info(this.leftInfo)
+        this.load()
     },
     methods: {
         // 路由跳转路径拼接
@@ -119,7 +122,51 @@ export default {
         // 直接进行路由跳转路径
         routerPush (path) {
             this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        // 查询回款二段数据
+        load () {
+            let param = {
+                orderNo: this.leftInfo.orderno, // this.leftInfo.orderno
+                type: 0
+            }
+            getNegotiateSecond(param).then(results => {
+                if (Number(results.data.StatusCode) === 0) {
+                    this.negotiate = results.data.Body.negotiate
+                }
+            }).catch(() => {})
+        },
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        }
+    },
+    watch: {
+        leftInfo () {
+            this.load()
+        }
+    },
+    filters: {
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '0.00'
+            } else {
+                return value.toFixed(2)
+            }
         }
     }
 }
 </script>
+

@@ -4,39 +4,39 @@
     <ul class="clearfix uiTab3 pl10 mb10">
         <li class="uiTab3-active"><a href="javascript:">记录</a></li>
     </ul>
-    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
-        <div class="analyItem">
-            <p class="analyItemTit tx-center" title="24196">罚款1</p>
+    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137" v-loading="loading">
+        <div class="analyItem" v-for="(item, index) in rewardList" :key="index" >
+            <p class="analyItemTit tx-center" title="24196">罚款{{index+1}}</p>
             <div class="analyItemCon">
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">申请日期</span><span>2020-02-22</span>
+                    <span class="cLightGray pr8">申请日期</span><span>{{item.FineTime}}</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">罚款人</span><span>彭秀林</span>
+                    <span class="cLightGray pr8">罚款人</span><span>{{item.FineName}}</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">罚款来源</span>
-                    <span>地方监理</span>
+                    <span>{{item.FineSourceType}}</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">来源</span><span>集团罚款</span>
+                    <span class="cLightGray pr8">来源</span><span>{{item.FineSource}}</span>
                 </p>
                 <p class="fl col-md-4">
-                    <span class="cLightGray pr8">金额</span><span>2,000.00</span>
+                    <span class="cLightGray pr8">金额</span><span>{{item.FineMoney}}</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">罚款状态</span>
-                    <span><span style="color:red">未扣除</span></span>
+                    <span v-html="ZH_FKState(item.FineState,item.FineJinCheng)"></span>
                 </p>
                 <p class="fl col-md-4 layerui-title" data-title="">
-                    <span class="cLightGray pr8">审批时间</span><span>2020-02-22</span>
+                    <span class="cLightGray pr8">审批时间</span><span>{{item.FineCheckime}}</span>
                 </p>
                 <p class="fl col-md-4">
                     <span class="cLightGray pr8">审核状态</span>
-                            <span style="color:green">已审核</span>
+                    <span v-html="status(item.FineCheckime,item.FineJinCheng)"></span>
                 </p>
-                <p class="fl col-md-4 layerui-title" data-title="罚款备注说明：从任务单号【111-1500】下处理项目经理【彭秀林】罚款金额：【2000.00】元 【项目罚款】地区：金水，任务单号：111-1500，项目名称：河南省同建建筑设计有限公司装饰工程，项目经理：彭秀林，本次罚款：2000.0元；罚款类型：奖罚-自查；罚款原因：未操作系统， 未上传延期单，按照通知下发罚款2000，操作人：系统自动 操作人：00000079  罚款系统来源：集团巡检  已罚金额：0.0000">
-                    <span class="cLightGray pr8">罚款备注</span><span class="alertTitle">从任务单号【11...</span>
+                <p class="fl col-md-4 layerui-title" :data-title="item.FineMark">
+                    <span class="cLightGray pr8">罚款备注</span><span class="alertTitle">{{item.FineRemark.substr(0,8)}}...</span>
                 </p>
             </div>
         </div>
@@ -47,10 +47,10 @@
                <div class="analyItemCon">
                 <div class="clearfix">
                     <p class="fl col-md-4">
-                        <span class="cLightGray pr8">个数</span><span>0</span><!--正常/待处理/紧急-->
+                        <span class="cLightGray pr8">个数</span><span>{{rewardList.length}}</span><!--正常/待处理/紧急-->
                     </p>
                     <p class="fl col-md-4">
-                        <span class="cLightGray pr8">罚款合计</span><span>0.00</span><!--正常/待处理/紧急-->
+                        <span class="cLightGray pr8">罚款合计</span><span>{{totalMoney()}}</span><!--正常/待处理/紧急-->
                     </p>
                     <p class="col-md-4 lh28">
                         <span class="c999 pr10"></span>
@@ -64,22 +64,116 @@
 </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import { getCostSharingThree } from '../../Resources/Api'
 export default {
     data () {
         return {
-            fourIndex: undefined,
-            src: 'https://proj01.oss-cn-beijing.aliyuncs.com/common/1556070802NRnhKTB5GG.png'
+            workorder: {}, // 项目基本数据
+            rewardList: [] // 罚款记录
         }
     },
+    computed: {
+        ...mapGetters(['leftInfo'])
+    },
     created () {
+        this.load()
     },
     methods: {
-        clickFourShow (index) {
-            this.fourIndex = index
+        // 路由跳转路径拼接
+        routerPath (path) {
+            return this.$route.matched[1].path + '/' + path
+        },
+        // 直接进行路由跳转路径
+        routerPush (path) {
+            this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        // 罚款合计
+        totalMoney () {
+            let sumMoney = 0.00
+            this.rewardList.forEach((item) => {
+                sumMoney += item.FineMoney
+            })
+            return sumMoney.toFixed(2)
+        },
+        // 查询回款二段数据
+        load () {
+            this.loading = true
+            let param = {
+                orderNo: '19-750899', // this.leftInfo.orderno
+                type: 5
+            }
+            getCostSharingThree(param).then(results => {
+                if (Number(results.data.StatusCode) === 0) {
+                    this.workorder = results.data.Body.workorder
+                    this.rewardList = results.data.Body.rewardList
+                    this.loading = false
+                }
+            }).catch(() => {})
+        },
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        },
+        ZH_FKState (fkState, jincheng) {
+            let result = '--'
+            if (fkState === 1) {
+                if (jincheng === 1) {
+                    result = '<span style="color:red">未扣除</span>'
+                } else {
+                    result = '<span style="color:red">已作废</span>'
+                }
+            } else if (fkState === 2) {
+                result = '处理中'
+            } else if (fkState === 3) {
+                result = '<span style="color:green">已扣除</span>'
+            }
+            return result
+        },
+        status (FineCheckime, FineJinCheng) {
+            let result = '--'
+            if (FineCheckime != null) {
+                if (FineJinCheng === 2) {
+                    result = '<span style="color:red">已作废</span>'
+                } else {
+                    result = '<span style="color:green">已审核</span>'
+                }
+            } else {
+                result = '<span style="color:red">未审核</span>'
+            }
+            return result
+        }
+    },
+    watch: {
+        leftInfo () {
+            this.load()
+        }
+    },
+    filters: {
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '0.00'
+            } else {
+                return value.toFixed(2)
+            }
         }
     }
 }
 </script>
+
 <style lang="scss" scoped>
     .orderDetailBtn {
        background: #43ccec;

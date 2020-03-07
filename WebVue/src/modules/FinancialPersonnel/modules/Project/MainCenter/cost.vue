@@ -237,11 +237,12 @@ export default {
         }
     },
     filters: {
+
         toFixed (value) {
-            if (value !== undefined) {
-                return typeof Number(value) === 'number' ? value.toFixed(2) : '--'
+            if (value == null || isNaN(value) || value === undefined) {
+                return '0.00'
             } else {
-                return '--'
+                return value.toFixed(2)
             }
         }
     }

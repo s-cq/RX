@@ -1,30 +1,30 @@
 <template>
 <div class="layerRtb layerRtb-threecolumn">
     <three-title :title="{name:'【分项账】详情'}"></three-title>
-    <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
+    <div class="layerRtb-scroll thinScroll" v-loading="loading" v-scrollHeight = "137">
         <div class="plr10">
             <div class="analyItem">
                 <p class="analyItemTit tx-center">空调款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' : workorderSpecial.KT_publish_fee}}</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? 0.00 : workorderSpecial.KT_publish_fee | toFixed() }}</span></p>
                 </div>
             </div>
             <div class="analyItem">
                 <p class="analyItemTit tx-center">消防款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' :workorderSpecial.XF_publish_fee}}</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? 0.00 :workorderSpecial.XF_publish_fee | toFixed() }}</span></p>
                 </div>
             </div>
             <div class="analyItem">
                 <p class="analyItemTit tx-center">钢结构款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' :workorderSpecial.GJG_publish_fee}}</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? 0.00 :workorderSpecial.GJG_publish_fee | toFixed()}}</span></p>
                 </div>
             </div>
             <div class="analyItem">
                 <p class="analyItemTit tx-center">客户代购款</p>
                 <div class="analyItemCon">
-                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? '0.00' :workorderSpecial.QT_publish_fee}}</span></p>
+                    <p class="fl col-md-4"><span class="cLightGray pr8">应付</span><span class="cGreen">{{workorderSpecial===null? 0.00 :workorderSpecial.QT_publish_fee | toFixed() }}</span></p>
                 </div>
             </div>
         </div>
@@ -45,6 +45,7 @@ import { getCostSharingThree } from '../../Resources/Api'
 export default {
     data () {
         return {
+            loading: false,
             workorderSpecial: null
         }
     },
@@ -65,6 +66,7 @@ export default {
         },
         // 查询回款二段数据
         load () {
+            this.loading = true
             let param = {
                 orderNo: this.leftInfo.orderno, // this.leftInfo.orderno
                 type: 6
@@ -72,6 +74,7 @@ export default {
             getCostSharingThree(param).then(results => {
                 if (Number(results.data.StatusCode) === 0) {
                     this.workorderSpecial = results.data.Body.workorderSpecial
+                    this.loading = false
                 }
             }).catch(() => {})
         },
@@ -97,7 +100,16 @@ export default {
             } else {
                 return this.$utils.format('yyyy-MM-dd', date)
             }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '0.00'
+            } else {
+                return value.toFixed(2)
+            }
         }
+
     }
 }
 </script>
