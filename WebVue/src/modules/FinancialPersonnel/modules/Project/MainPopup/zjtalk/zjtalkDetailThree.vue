@@ -102,7 +102,7 @@
                     <p class="col-md-4 mb10">
                         <a href="javascript:" class="jm_table_btn btn_bg999999 uiBtn-normal uiBtn-blue Add_zjx dis-il-block mt10">分账</a>
                     </p>
-                    <p class="col-md-12" >
+                    <!-- <p class="col-md-12" >
                         <rx-upload  :data="{id: 11}" :init="{class: 1, mime: 1}"  class="fl ml10"
                             :elStyle="{width:'90px', height: '80px'}"
                             @success="successUpload">
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                         </rx-viewer>
-                    </p>
+                    </p> -->
                 </div>
         </div>
         <div class="analyItem">
@@ -200,6 +200,7 @@ export default {
         },
         $route () {
             this.flg = this.$route.query.index
+            this.clickFourShow()
         }
     }
 }

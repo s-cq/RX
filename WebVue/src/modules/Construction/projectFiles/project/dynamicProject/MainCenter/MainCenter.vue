@@ -97,6 +97,9 @@ export default {
         }
     },
     mounted () {
+
+    },
+    created () {
         this.stage(this.leftInfo.AfterMarketState)
     },
     computed: {
@@ -107,37 +110,28 @@ export default {
             let value = ''
             switch (parone) {
             case 0:
-            case 10:
+            case 1:
                 value = '审计'
                 break
-            case 20:
+            case 2:
                 value = '准备'
                 break
-            case 30:
+            case 3:
                 value = '在施'
                 break
-            case 31:
-                value = '施前'
-                break
-            case 32:
-                value = '施中'
-                break
-            case 33:
-                value = '施尾'
-                break
-            case 40:
+            case 4:
                 value = '竣工'
                 break
-            case 50:
+            case 5:
                 value = '完工'
                 break
-            case 60:
+            case 6:
                 value = '历史'
                 break
-            case 70:
+            case 7:
                 value = '坏账'
                 break
-            case 80:
+            case 8:
                 value = '退单'
                 break
             }

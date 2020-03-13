@@ -135,3 +135,46 @@ export function getCostSharingThree (params) {
 export function getNegotiateSecond (params) {
     return Request.http.get('/pro/getNegotiateSecond', params, 102)
 }
+/** ******************  查询增减历史数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-03-07
+ * 参数: orderNo 项目单号
+ * 描述: 查询增减历史数据v1.0
+ */
+export function getNegotiateFour (params) {
+    return Request.http.get('/pro/getNegotiateFour', params, 102)
+}
+
+/** ******************  查询绩效数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-03-09
+ * 参数: orderNo 项目单号
+ * 描述: 查询绩效数据
+ */
+export function getPerformanceSecond (params) {
+    return Request.http.get('/pro/getPerformanceSecond', params, 102)
+}
+
+/** ******************  其他款项二段数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-03-11
+ * 参数: orderNo 项目单号
+ * 描述: 其他款项二段数据
+ */
+export function getOtherPaymentSecond (params) {
+    return Request.http.get('/pro/getOtherPaymentSecond', params, 102)
+}
+
+/** ******************  查询现场订单数据  ********************/
+/**
+ * 创建: hwx
+ * 时间: 2020-03-12
+ * 参数: orderNo 项目单号
+ * 描述: 查询现场订单数据
+ */
+export function getProjectOrder (params) {
+    return Request.http.get('/pro/getProjectOrder', params, 102)
+}

@@ -2,20 +2,34 @@
 <div class="layerRtb layerRtb-threecolumn">
     <three-title :title="{name:'【订单_项目订单】详情'}"></three-title>
     <div class="layerRtb-scroll thinScroll" v-scrollHeight = "137">
-        <div class="analyItem" v-for="(item,index) in drawList" :key="index">
+        <div class="analyItem" v-for="(item,index) in entityList" :key="index">
             <p class="analyItemTit tx-center">订单{{index+1}}</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="cLightGray pr8">单号</span><br>
-                    <span>{{item.orderno}}</span>
+                    <span class="cLightGray pr8">单号</span>
+                    <span :data-title="item.code">{{item.order_number}}</span>
                 </p>
                 <p class="col-md-4">
-                    <span class="cLightGray pr8">状态</span><br>
-                    <span>{{item.stage === 0 ? '已完成' : '执行中'}}</span>
+                    <span class="cLightGray pr8">订单名称</span>
+                    <span>{{item.name}}</span>
                 </p>
                  <p class="col-md-4">
-                   <span class="cLightGray pr8">金额</span><br>
-                   <span>0</span>
+                   <span class="cLightGray pr8">创建时间</span>
+                   <span>{{item.create_time}}</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8">状态</span>
+                    <span v-if="item.statusName=='超期'" class="cRed">{{item.statusName}}</span>
+                    <span v-else-if="item.statusName=='已完成'" class="cGreen">{{item.statusName}}</span>
+                    <span v-else >{{item.statusName}}</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8">完成时间</span>
+                    <span>{{item.execution_completed===1 ? item.execution_completed_time:'暂无'}}</span>
+                </p>
+                <p class="col-md-4">
+                    <span class="cLightGray pr8">金额</span>
+                    <span>{{item.price}}</span>
                 </p>
                 <!-- <span><span :class="['circlemark', item.stage === 0 ? 'circlemark-lightGreen' : 'circlemark-lightRed' ]">{{item.stage === 0 ? '完' : '执'}}</span></span> -->
             </div>
@@ -34,39 +48,15 @@ import { mapGetters } from 'vuex'
 export default {
     data () {
         return {
-            drawList: [
-                {
-                    name: '始结构图',
-                    type: '原始结构图',
-                    orderno: '80-5555-YS-1',
-                    stage: 0
-                },
-                {
-                    name: '分区构图',
-                    type: '分区构图',
-                    orderno: '80-5555-FQ-1',
-                    stage: 0
-                },
-                {
-                    name: '功能构图',
-                    type: '功能构图',
-                    orderno: '80-5555-GN-1',
-                    stage: 0
-                },
-                {
-                    name: '色彩构图',
-                    type: '色彩构图',
-                    orderno: '80-5555-SC-1',
-                    stage: 0
-                }
-            ]
+            entityList: [] // 页面实体集合
         }
     },
     computed: {
         ...mapGetters(['leftInfo'])
     },
     created () {
-        console.log(this.$route)
+        this.entityList = this.$route.query.entityList
+        console.log(this.entityList)
     },
     methods: {
         clickFourShow (index) {

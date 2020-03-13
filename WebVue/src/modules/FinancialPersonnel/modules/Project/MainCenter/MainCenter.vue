@@ -111,10 +111,41 @@ export default {
         ...mapGetters(['leftInfo'])
     },
     created () {
-        this.title = ['状', '项', '阶', this.leftInfo.stage, '人', '材', '成', '收', '支', '洽', '绩', '其', '订', '资']
-        this.datatitle = ['状态', '项目', '阶段', this.leftInfo.stage, '人工', '材料', '成本分账', '回款批次', '支款账务', '增减项洽商', '项目绩效核算', '其他分项支出', '项目订单', '项目资料']
+        this.stage(this.leftInfo.AfterMarketState)
     },
     methods: {
+        stage (parone) {
+            let value = ''
+            switch (parone) {
+            case 0:
+            case 1:
+                value = '审计'
+                break
+            case 2:
+                value = '准备'
+                break
+            case 3:
+                value = '在施'
+                break
+            case 4:
+                value = '竣工'
+                break
+            case 5:
+                value = '完工'
+                break
+            case 6:
+                value = '历史'
+                break
+            case 7:
+                value = '坏账'
+                break
+            case 8:
+                value = '退单'
+                break
+            }
+            this.title = ['状', '项', '阶', value, '人', '材', '成', '收', '支', '洽', '绩', '其', '订', '资']
+            this.datatitle = ['状态', '项目', '阶段', value, '人工', '材料', '成本分账', '回款批次', '支款账务', '增减项洽商', '项目绩效核算', '其他分项支出', '项目订单', '项目资料']
+        },
         subSwitch (index) {
             this.subIndex = index
             // 关闭弹窗
@@ -123,8 +154,7 @@ export default {
     },
     watch: {
         leftInfo () {
-            this.title = ['状', '项', '阶', this.leftInfo.stage, '人', '材', '成', '收', '支', '洽', '绩', '其', '订', '资']
-            this.datatitle = ['状态', '项目', '阶段', this.leftInfo.stage, '人工', '材料', '成本分账', '回款批次', '支款账务', '增减项洽商', '项目绩效核算', '其他分项支出', '项目订单', '项目资料']
+            this.stage(this.leftInfo.AfterMarketState)
         }
     }
 }

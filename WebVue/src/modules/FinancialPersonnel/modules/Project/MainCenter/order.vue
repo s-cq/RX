@@ -43,16 +43,16 @@
                 <span><span :class="['circlemark', item.stage === 0 ? 'circlemark-lightGreen' : 'circlemark-lightRed' ]">{{item.stage === 0 ? '完' : '执'}}</span></span>
             </div>
         </router-link> -->
-        <router-link tag="div" exact :to="routerPath('ordertDetailThree?index='+index)" class="analyItem anItemBor" active-class="anItemBor-active" v-for="(item,index) in drawList" :key="index">
+        <router-link tag="div" exact  :to="{path:routerPath('ordertDetailThree'), query: {entityList: entityList}}" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">订单</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
-                    <span class="cLightGray pr8">订单个数</span><br>
-                    <span>0</span>
+                    <span class="cLightGray pr8">订单个数</span>
+                    <span>{{entityList.length}}</span>
                 </p>
                  <p class="col-md-4">
-                   <span class="cLightGray pr8">金额</span><br>
-                   <span>0</span>
+                   <span class="cLightGray pr8">金额</span>
+                   <span>{{totalMoney()}}</span>
                 </p>
                 <!-- <span><span :class="['circlemark', item.stage === 0 ? 'circlemark-lightGreen' : 'circlemark-lightRed' ]">{{item.stage === 0 ? '完' : '执'}}</span></span> -->
             </div>
@@ -69,54 +69,21 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import { getProjectOrder } from '../Resources/Api'
 export default {
-    name: '',
     data () {
         return {
-            drawList: [
-                {
-                    name: '始结构图',
-                    type: '原始结构图',
-                    orderno: '80-5555-YS-1',
-                    stage: 0
-                },
-                {
-                    name: '分区构图',
-                    type: '分区构图',
-                    orderno: '80-5555-FQ-1',
-                    stage: 0
-                },
-                {
-                    name: '功能构图',
-                    type: '功能构图',
-                    orderno: '80-5555-GN-1',
-                    stage: 0
-                },
-                {
-                    name: '色彩构图',
-                    type: '色彩构图',
-                    orderno: '80-5555-SC-1',
-                    stage: 0
-                }
-            ]
+            loading: false,
+            entity: {}, // 页面实体
+            entityList: [] // 页面实体集合
         }
     },
     computed: {
-        ...mapGetters(['leftInfo']),
-        totalProject () {
-            let number = 0
-            this.offerList.forEach(item => {
-                number += item.number
-            })
-            return number
-        },
-        totalMoney () {
-            let money = 0
-            this.offerList.forEach(item => {
-                money += item.money
-            })
-            return money
-        }
+        ...mapGetters(['leftInfo'])
+    },
+    created () {
+        console.info(this.leftInfo)
+        this.load()
     },
     methods: {
         // 路由跳转路径拼接
@@ -126,6 +93,58 @@ export default {
         // 直接进行路由跳转路径
         routerPush (path) {
             this.$router.push(this.$route.matched[1].path + '/' + path)
+        },
+        totalMoney () {
+            let sumMoney = 0
+            this.entityList.forEach((item, index) => {
+                sumMoney += item.price
+            })
+            return sumMoney
+        },
+        // 查询回款二段数据
+        load () {
+            this.loading = true
+            let param = {
+                orderNo: this.leftInfo.orderno // this.leftInfo.orderno
+            }
+            getProjectOrder(param).then(results => {
+                if (Number(results.data.StatusCode) === 0) {
+                    this.entityList = results.data.Body.projectOrderList
+                    console.log(this.entityList)
+                    this.loading = false
+                }
+            }).catch(() => {})
+        },
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        }
+    },
+    watch: {
+        leftInfo () {
+            this.load()
+        }
+    },
+    filters: {
+        // 时间转换
+        myFormatDate (date) {
+            if (date === null || date === '') {
+                return '--'
+            } else {
+                return this.$utils.format('yyyy-MM-dd', date)
+            }
+        },
+        // 金额过滤
+        toFixed (value) {
+            if (value == null || isNaN(value) || value === undefined) {
+                return '0.00'
+            } else {
+                return value.toFixed(2)
+            }
         }
     }
 }

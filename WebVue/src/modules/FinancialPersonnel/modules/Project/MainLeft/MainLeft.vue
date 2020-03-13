@@ -40,12 +40,12 @@
                     </th>
                     <th width="15%">
                          <select class="theadselect thinScroll" v-model="stageValue" @click="stageClick()">
-                            <option value="0">阶段</option>
-                            <option value="1">审计</option>
-                            <option value="2">准备</option>
-                            <option value="3">在施</option>
-                            <option value="4">竣工</option>
-                            <option value="5">完工</option>
+                            <option value="0" >阶段</option>
+                            <option value="1" >审计</option>
+                            <option value="2" >准备</option>
+                            <option value="3" >在施</option>
+                            <option value="4" >竣工</option>
+                            <option value="5" >完工</option>
                         </select>
                     </th>
                     <th width="15%">管</th>
@@ -62,7 +62,7 @@
                 </tr>
             </thead>
         </table>
-        <div class="scroll-content thinScroll thinScroll-table" v-scrollHeight="36">
+        <div class="scroll-content thinScroll thinScroll-table" v-loading="loading" v-scrollHeight="36">
             <table class="uiTable uiTable-striped uiTable-hover" id="tab1">
                 <tbody>
                      <tr v-for="(item,index) in leftListData" :key="index" :class="{'tractive':index == trIndex}" @click="siderBarTrclick(index,item)">
@@ -77,10 +77,10 @@
             </table>
         </div>
         <div class="j_outerHeight clearfix tj_bottom">
-            <p class="col-md-3" data-title="全部">10</p>
-            <p class="col-md-3 cGreen" data-title="正常" >10</p>
-            <p class="col-md-3 cOrange" data-title="异常" >0</p>
-            <p class="col-md-3 cRed" data-title="问题">0</p>
+            <p class="col-md-3" data-title="全部">{{allCount}}</p>
+            <p class="col-md-3 cGreen" data-title="正常" >--</p>
+            <p class="col-md-3 cOrange" data-title="异常" >--</p>
+            <p class="col-md-3 cRed" data-title="问题">--</p>
         </div>
     </div>
 </div>
@@ -124,6 +124,7 @@ export default {
         // title 栏点击
         titleClick (index) {
             this.stageValue = index
+            this.load()
         },
         stageClick () {
             this.load()
@@ -159,9 +160,9 @@ export default {
         load () {
             this.loading = true
             let param = {
-                afterMarketState: this.stageValue,
+                afterMarketState: Number(this.stageValue),
                 keyWord: this.searcValue,
-                logUserNo: '01011826'
+                logUserNo: ''
             }
             getWorkorderList(param).then(results => {
                 this.leftListData = this.leftListDataClone = results.data.Body.workorderList
@@ -170,6 +171,7 @@ export default {
                 if (this.leftListData.length > 0) {
                     this.siderBarTrclick(0, this.leftListData[0])
                 }
+                this.updateBottom()
             }).catch(() => {})
         },
         /**

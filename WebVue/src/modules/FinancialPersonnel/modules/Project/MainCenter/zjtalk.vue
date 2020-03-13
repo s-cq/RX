@@ -26,7 +26,7 @@
             <div class="analyItemCon">
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减合同（装饰 +分项）= 与甲方（客户）新签订增减项合同金额">增减合同</span><br>
-                    <span class="cGreen">{{(negotiate.ZJXHTM + negotiateZJXFXHTM) | toFixed() }}</span>
+                    <span class="cGreen">{{(negotiate.ZJXHTM + negotiate.ZJXFXHTM) | toFixed() }}</span>
                 </p>
                 <p class="col-md-4">
                     <span class="cLightGray pr8" data-title="增减发包（装饰 +分项）= 与丙方（项目经理）新签订增减发包金额">增减发包</span><br>
@@ -38,7 +38,7 @@
                 </p>
             </div>
         </router-link>
-        <router-link tag="div" exact :to="routerPath('zjtalkDetailThree?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
+        <router-link tag="div" @click="clickon()" exact :to="routerPath('zjtalkDetailThree?index=1')" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">装饰增减</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -72,7 +72,7 @@
                 </p>
             </div>
         </router-link>
-        <router-link tag="div" exact :to="routerPath('zjtalkDetailThree?index=3')" class="analyItem anItemBor" active-class="anItemBor-active">
+        <router-link tag="div" @click="clickon()" exact :to="routerPath('zjtalkDetailThree?index=3')" class="analyItem anItemBor" active-class="anItemBor-active">
             <p class="analyItemTit tx-center">分项增减</p>
             <div class="analyItemCon">
                 <p class="col-md-4">
@@ -142,7 +142,11 @@ export default {
             } else {
                 return this.$utils.format('yyyy-MM-dd', date)
             }
+        },
+        clickon () {
+
         }
+
     },
     watch: {
         leftInfo () {
